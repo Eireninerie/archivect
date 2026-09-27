@@ -1,0 +1,9 @@
+SELECT 
+Company,
+
+    IF(COUNT(*)=1,1,IF (COUNT(*)<5,2,3)) AS Size,
+    IF (COUNT(CASE WHEN addresses.Postcode != "Overseas" THEN 1 END) > COUNT(*)*0.4, 
+        "UK", "IN") As `Location`
+FROM addresses 
+JOIN firms ON addresses.CompanyID=firms.ID
+GROUP BY `CompanyID`,`Company`;

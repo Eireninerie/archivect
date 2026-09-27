@@ -1,0 +1,54 @@
+<head>
+<script>
+$(document).ready(function(){
+let jsonString = '{"arrays":[]}';
+
+$(".add-row").on("click", function(){
+    let input1 = $("#input1").val();
+    let input2 = $("#input2").val();
+
+    let obj=JSON.parse(jsonString);
+    obj['arrays'].push({"ID":input1+""+input2,"field1":input1,"field2":input2);
+    jsonString = JSON.stringify(obj);
+
+    let text = "";
+    for (let i in obj.arrays) {
+        text += "<tr><td><button class='delete-row' value='"+obj.arrays[i].ID"+'> x </button></td><td>"+ obj.arrays[i].field1 +"</td><td>"+ obj.arrays[i].field2 +"</td></tr>" }
+    document.getElementById("table1").innerHTML = text;
+    
+
+    $(".delete-row").on("click", function (){
+
+        let thisID = $(this).attr('value');
+        let obj = JSON.parse(jsonString);
+        let index = obj['arrays'].findIndex(function(item, i){
+            return item.ID === thisID
+        });
+        obj['arrays'].splice(index,1);
+        jsonString = JSON.stringify(obj);
+        let text = "";
+        text += "<tr><td><button class='delete-row' value='"obj.arrays[i].ID"'> x </button></td><td>"+ obj.arrays[i].field1 +"</td></tr>" }
+        document.getElementById("table1").innerHTML = text;
+    });
+});
+});
+</script>
+</head>
+<body>
+	<table id=fullTable>
+        <thead>
+            <tr>
+                <th></th>
+                <th>Input1</th>
+                <th>Input2</th>
+            </tr>
+        </thead>
+		<tbody id="JSONtest"> </tbody>
+		<thead>
+            <tr>
+			<td><input type="button" class="add-row" value="+"/></td>
+			<td><input type="text" id="input1" placeholder="eg 1"  /></td>
+			<td><input type="text" id="input2" placeholder="eg 2"  /></td>
+        </thead>
+    </table>
+</body>

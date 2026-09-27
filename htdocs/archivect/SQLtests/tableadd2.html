@@ -1,0 +1,66 @@
+
+
+    <table id="outputTable">
+        <tr>
+          <th></th>  
+          <th>Starting Postcode</th>
+            <th>Furthest Radius Postcode</th>
+            <th>Distance</th>
+            <th>Rating</th>
+            
+        </tr>
+      <tr>
+        <td><button onclick="addData()">+</button></td>
+      	<td><input type="text" id="postStartInput" maxLength="4" placeholder="eg. B77" required></td>
+        <td><input type="text" id="postEndInput" maxLength="4" placeholder="eg. EN6" required></td>
+
+    </table>
+
+    <script>
+        function addData() {
+            // Get input values
+            let postStart = document.getElementById("postStartInput").value;
+            let postEnd = document.getElementById("postEndInput").value;
+            
+            //Validate
+
+
+            // Get the table and insert a new row at the end
+            $table = document.getElementById("outputTable");
+            $newRow = table.insertRow(1);
+            function ratingButton()
+              {return "hi"}
+
+            // Insert data into cells of the new row
+            newRow.insertCell(0).innerHTML =
+                '<button onclick="deleteData(this)">-</button>';
+            newRow.insertCell(1).innerHTML = postStart;
+            newRow.insertCell(2).innerHTML = postEnd;
+            newRow.insertCell(3).innerHTML = ' km';
+            newRow.insertCell(4).innerHTML = ratingButton;
+
+            // Clear input fields
+            clearInputs();
+            
+
+        }
+
+
+        function deleteData(button) {
+
+            // Get the parent row of the clicked button
+            let row = button.parentNode.parentNode;
+
+            // Remove the row from the table
+            row.parentNode.removeChild(row);
+        }
+
+        function clearInputs() {
+
+            // Clear input fields
+            document.getElementById("nameInput").value = "";
+            document.getElementById("emailInput").value = "";
+            document.getElementById("numberInput").value = "";
+            document.getElementById("addressInput").value = "";
+        }
+    </script>

@@ -111,20 +111,19 @@ $sizeRatingSET='
 	FROM sizesList
 	';
 	// print query
-//	$sizeRatingSETq = $conn->query($sizeRatingSET);
-//	while($row = $sizeRatingSETq->fetch_assoc()){
-//	echo "<table><tr><td>".$row["ID"]."</td><td>".$row["Rating"]."</td></tr></table>";}
+	$sizeRatingSETq = $conn->query($sizeRatingSET);
+	while($row = $sizeRatingSETq->fetch_assoc()){
+	echo "<table><tr><td>".$row["ID"]."</td><td>".$row["Rating"]."</td></tr></table>";}
 
 $sizeRatingsQuerySQL='
-	SELECT t.CompanyID, weighting.Rating
+	SELECT s.ID, weighting.Rating
 		FROM ('.$sizeRatingSET.') AS s
 		LEFT JOIN weighting ON weighting.ID = s.Rating
-		RIGHT JOIN ('.$sizeTypeSQL.') AS t ON CONCAT(t.Size,t.Location) = s.ID
 	';
 	// print query
-//	$sizeRatingsQuery = $conn->query($sizeRatingsQuerySQL);
-//	while($row = $sizeRatingsQuery>fetch_assoc()){
-//	echo "<table><tr><td>".$row["CompanyID"]."</td><td>".$row["Rating"]."</td></tr></table>";}
+	$sizeRatingsQuery = $conn->query($sizeRatingsQuerySQL);
+	while($row = $sizeRatingsQuery->fetch_assoc()){
+	echo "<table><tr><td>".$row["ID"]."</td><td>".$row["Rating"]."</td></tr></table>";}
 
 //Get sector ratings
 $SectorRatingsQuerySQL = "

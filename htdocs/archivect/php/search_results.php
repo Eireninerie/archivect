@@ -53,7 +53,8 @@ function cardResults(){
 			echo "
 				<div class='card'>		
 				<img class='logo' src='".$row["logo"]."'><p> <a href='https://".$row["website"]."' alt='". $row["Company"]." website link' title='https://".$row["website"]."'>". $row["Company"]. "</a><br>
-			";
+				<p>".$row["totalRating"]."</p>
+				";
 			cardDetails($sectorTable,"sectors",$row["ID"],1);
 			cardDetails($addressTable,"town",$row["ID"],0);
 

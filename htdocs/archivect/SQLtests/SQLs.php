@@ -42,8 +42,7 @@ $postCompanyENSQL = "SELECT    CompanyID,  postcode,    EASTING,    NORTHING
 
 //Attaching coordinates to the rating postcodes
 $distanceInputTable = "temp_table_1";
-$postVarRatingSQL = "
-SELECT ID, Rating, postStart, postEnd,
+$postVarRatingSQL = "SELECT ID, Rating, postStart, postEnd,
 coordStart.EASTING AS coordSE,
 coordStart.Northing AS coordSN,
 ROUND(
@@ -63,13 +62,10 @@ FROM
 //	echo "<table><tr><td>".$row["ID"]."</td><td>".$row["Rating"]."</td><td>".$row["postStart"]."</td><td>".$row["postEnd"]."</td><td>".$row["coordSE"]."</td><td>".$row["totalDistance"]."</td></tr></table>";}
 
 // Attaching Rating to Company ID by comparing the company coordinates to the rating coordinates
-
-$postCompanyRatingSQL = "
-SELECT
+$postCompanyRatingSQL = "SELECT
     CompanyID, MAX(weighting.Rating) AS MaxRating
-FROM
-    (".$postCompanyENSQL.") AS postCompanyEN
-    LEFT JOIN (".$postVarRatingSQL.") AS postVarRating
+FROM (".$postCompanyENSQL.") AS postCompanyEN
+LEFT JOIN (".$postVarRatingSQL.") AS postVarRating
 	ON totalDistance > (
         ROUND(
 		SQRT(
@@ -91,43 +87,44 @@ ORDER BY
 //	echo "<table><tr><td>".$row["CompanyID"]."</td><td>".$row["MaxRating"]."</td></tr></table>";}
 
 //Determine Company size
-$sizeTypeSQL = 'SELECT 
-
-CompanyID, IF(COUNT(*)=1,1,IF (COUNT(*)<5,2,3)) AS Size,
+$sizeTypeSQL = 'SELECT CompanyID, CONCAT(st.Location,st.Size) AS SizeID FROM 
+	(SELECT	CompanyID, 
+	IF(COUNT(*)=1,"1",IF (COUNT(*)<5,"2","3")) AS Size,
     IF (COUNT(CASE WHEN addresses.Postcode != "Overseas" THEN 1 END) > COUNT(*)*0.4, 
         "DO", "IN") As Location
-
-
-FROM '.$addressTable.' 
-GROUP BY CompanyID';
+	FROM '.$addressTable.' 
+	GROUP BY CompanyID) AS st';
 
 	// print query
 //	$sizeType = $conn->query($sizeTypeSQL);
 //	while($row = $sizeType->fetch_assoc()){
-//	echo "<table><tr><td>".$row["CompanyID"]."</td><td>".$row["Location"].$row["Size"]."</td></tr></table>";}
+//	echo "<table><tr><td>".$row["CompanyID"]."</td><td>".$row["SizeID"]."</td></tr></table>";}
 
-$sizeRatingSET='
-	SELECT ID, SUBSTRING('.$SizesListRatings.',ROW_NUMBER() OVER( ORDER BY ID),1) AS Rating 
+//Set size ratings from input
+$sizeRatingSET=' SELECT 
+	ID, SUBSTRING('.$SizesListRatings.',ROW_NUMBER() OVER( ORDER BY ID),1) AS Rating 
 	FROM sizesList
 	';
 	// print query
-	$sizeRatingSETq = $conn->query($sizeRatingSET);
-	while($row = $sizeRatingSETq->fetch_assoc()){
-	echo "<table><tr><td>".$row["ID"]."</td><td>".$row["Rating"]."</td></tr></table>";}
-
-$sizeRatingsQuerySQL='
-	SELECT s.ID, weighting.Rating
+//	$sizeRatingSETq = $conn->query($sizeRatingSET);
+//	while($row = $sizeRatingSETq->fetch_assoc()){
+//	echo "<table><tr><td>".$row["ID"]."</td><td>".$row["Rating"]."</td></tr></table>";}
+	
+// Connect size ratings to weighting and company categorisation
+$sizeRatingsQuerySQL=
+	'SELECT weighting.Rating, t.CompanyID
 		FROM ('.$sizeRatingSET.') AS s
 		LEFT JOIN weighting ON weighting.ID = s.Rating
+		RIGHT JOIN ('.$sizeTypeSQL.') as t ON t.SizeID = s.ID
 	';
 	// print query
-	$sizeRatingsQuery = $conn->query($sizeRatingsQuerySQL);
-	while($row = $sizeRatingsQuery->fetch_assoc()){
-	echo "<table><tr><td>".$row["ID"]."</td><td>".$row["Rating"]."</td></tr></table>";}
+//	$sizeRatingsQuery = $conn->query($sizeRatingsQuerySQL);
+//	while($row = $sizeRatingsQuery->fetch_assoc()){
+//	echo "<table><tr><td>".$row["ID"]."</td><td>".$row["CompanyID"]."</td><td>".$row["Rating"]."</td></tr></table>";}
 
 //Get sector ratings
-$SectorRatingsQuerySQL = "
-	SELECT ID, Name, SUBSTRING('.$SectorListRatings.',ROW_NUMBER() OVER( ORDER BY Name) +1,1) AS Rating 
+$SectorRatingsQuerySQL = 
+	"SELECT ID, Name, SUBSTRING('.$SectorListRatings.',ROW_NUMBER() OVER( ORDER BY Name) +1,1) AS Rating 
 	FROM ".$sectorListTable."
 	ORDER BY Name ASC ";
 
@@ -149,14 +146,13 @@ $SectorRatingsQuerySQL = "
 //	echo "<table><tr><td>".$row["v.ID"]."</td><td>".$row["CompanyID"]."</td><td>".$row["SRating"]."</td><td>".$row["Rating"]."</td></tr></table>";}
 
 //Attach combined ratings to Company details
-$ratingSortSQL = "SELECT ID, Company, logo, website, sizeType.Size, Location,
-	Round(
-        	If(postCompanyRating.MaxRating IS NULL, 0, MaxRating)
-	,2) AS totalRating
+$ratingSortSQL = "SELECT ID, Company, logo, website,
+	If(postCompanyRating.MaxRating IS NULL, 0, ROUND(MaxRating,2))+1
+	AS totalRating
 FROM
        ".$primaryTable."
         LEFT JOIN (".$postCompanyRatingSQL.") AS postCompanyRating ON  ".$primaryTable.".ID = postCompanyRating.CompanyID 
-        LEFT JOIN (".$sizeTypeSQL.") AS sizeType ON ".$primaryTable.".ID = sizeType.CompanyID
+        
 ORDER BY
     totalRating DESC
 LIMIT 50";

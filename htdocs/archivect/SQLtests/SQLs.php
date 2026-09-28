@@ -145,13 +145,19 @@ $SectorRatingsQuerySQL =
 //	while($row = $SectorCompanyRatings->fetch_assoc()){
 //	echo "<table><tr><td>".$row["v.ID"]."</td><td>".$row["CompanyID"]."</td><td>".$row["SRating"]."</td><td>".$row["Rating"]."</td></tr></table>";}
 
+
+
 //Attach combined ratings to Company details
 $ratingSortSQL = "SELECT ID, Company, logo, website,
-	If(postCompanyRating.MaxRating IS NULL, 0, ROUND(MaxRating,2))+1
+	If(postRating.MaxRating IS NULL, 0, ROUND(MaxRating,2))+
+	If(sectorRating.SRating IS NULL, 0, ROUND(sectorRating.SRating,2))+
+	If(sizeRating.Rating IS NULL, 0, ROUND(sizeRating.Rating,2))
 	AS totalRating
 FROM
        ".$primaryTable."
-        LEFT JOIN (".$postCompanyRatingSQL.") AS postCompanyRating ON  ".$primaryTable.".ID = postCompanyRating.CompanyID 
+        LEFT JOIN (".$postCompanyRatingSQL.") AS postRating ON  ".$primaryTable.".ID = postRating.CompanyID 
+        LEFT JOIN (".$SectorCompanyRatingsSQL.") AS sectorRating ON  ".$primaryTable.".ID = sectorRating.CompanyID 
+        LEFT JOIN (".$sizeRatingsQuerySQL.") AS sizeRating ON  ".$primaryTable.".ID = sizeRating.CompanyID 
         
 ORDER BY
     totalRating DESC

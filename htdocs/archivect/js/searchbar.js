@@ -56,8 +56,8 @@ function html2insert() {
       $otArr.push('(' + $itArr.join() + ')');
    })
    $insert = $otArr.join()
-
-   return $insert;
+   if(!$insert){return '("D45","D45","2")';}else{return $insert;}
+   
 }
 
 
@@ -77,7 +77,7 @@ $('#testButton').click(function(){
         ;
 //    $UK0val = $('input[name="SizesUK0"]:checked').val();
     $('#testCont').html(
-    '&'+html2json()
+    '&'+html2insert()
     );
 });
     

@@ -12,6 +12,7 @@ $postcodeRefTable = "postcodeCoordsEN";
 $primaryTable = "firms";
 $addressTable = "addresses";
 $sectorTable = "sectors";
+$ethosTable = "firm_values";
 
 $sectorListTable = "sectorsList";
 $ethosListTable = "firm_valuesList";

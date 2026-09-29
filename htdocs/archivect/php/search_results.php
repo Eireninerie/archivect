@@ -3,17 +3,9 @@
 include('./public_functions.php');
 
 $SectorListRatings = $_POST['SectorList'];
-echo $SectorListRatings.'<p>';
-
 $EthosListRatings = $_POST['EthosList'];
-echo $EthosListRatings.'<p>';
-
 $DistanceListRatings= $_POST['DistanceList'];
-echo $DistanceListRatings.'<p>';
-
 $SizesListRatings= $_POST['SizesList'];
-echo $SizesListRatings.'<p>';
-
 
 include('../SQLtests/SQLs.php'); 
 

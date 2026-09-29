@@ -4,18 +4,16 @@ $username = 'root';
 $password = '';
 $dbname = "test";
 
-//temp inputs
-$distanceInputTable = "Inputs_distance";
-
 //database tables
 $postcodeRefTable = "postcodeCoordsEN";
+
 $primaryTable = "firms";
 $addressTable = "addresses";
 $sectorTable = "sectors";
-$ethosTable = "firm_values";
+$ethosTable = "ethos";
 
 $sectorListTable = "sectorsList";
-$ethosListTable = "firm_valuesList";
+$ethosListTable = "ethosList";
 $socialsListTable = "socialsList";
 
 $conn = new mysqli($host,$username,$password,$dbname);

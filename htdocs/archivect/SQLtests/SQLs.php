@@ -134,7 +134,7 @@ $SectorRatingsQuerySQL =
 //	echo "<table><tr><td>".$row["ID"]."</td><td>".$row["Name"]."</td><td>".$row["Rating"]."</td><td>".$row["Rating"]."</td></tr></table>";}
 
 // weight and average sector ratings
- $SectorCompanyRatingsSQL = " SELECT avg(weighting.rating) AS SRating, CompanyID
+ $SectorCompanyRatingsSQL = " SELECT ROUND(avg(weighting.rating),2) AS SRating, CompanyID
  	FROM ".$sectorTable."
 		LEFT JOIN (".$SectorRatingsQuerySQL.") AS v ON v.ID = ".$sectorTable.".Sectors
 		LEFT JOIN weighting on v.Rating = weighting.ID
@@ -145,19 +145,36 @@ $SectorRatingsQuerySQL =
 //	while($row = $SectorCompanyRatings->fetch_assoc()){
 //	echo "<table><tr><td>".$row["v.ID"]."</td><td>".$row["CompanyID"]."</td><td>".$row["SRating"]."</td><td>".$row["Rating"]."</td></tr></table>";}
 
+$ethosRatings = "SELECT 
+	ID,
+	SUBSTRING('.$EthosListRatings.',ROW_NUMBER() OVER( ORDER BY Name),1) AS Rating
+	FROM ".$ethosListTable."";
 
+$ethosRatingsQuerySQL = "SELECT
+	CompanyID, SUM(weighting.Rating)  AS Rating
+	FROM (".$ethosRatings.") AS e
+	INNER JOIN ".$ethosTable." ON e.ID = ".$ethosTable.".Ethos
+	INNER JOIN weighting on weighting.ID = e.Rating
+	GROUP BY CompanyID ";
+
+// print query
+//	$ethosCompanyRatings = $conn->query($ethosRatingsQuerySQL);
+//	while($row = $ethosCompanyRatings->fetch_assoc()){
+//	echo "<table><tr><td>".$row["CompanyID"]."</td><td>".$row["Rating"]."</td></tr></table>";}
 
 //Attach combined ratings to Company details
 $ratingSortSQL = "SELECT ID, Company, logo, website,
-	If(postRating.MaxRating IS NULL, 0, ROUND(MaxRating,2))+
-	If(sectorRating.SRating IS NULL, 0, ROUND(sectorRating.SRating,2))+
-	If(sizeRating.Rating IS NULL, 0, ROUND(sizeRating.Rating,2))
+	If(postRating.MaxRating IS NULL, 0, MaxRating)+
+	If(sectorRating.SRating IS NULL, 0, sectorRating.SRating)+
+	If(sizeRating.Rating IS NULL, 0, sizeRating.Rating)+
+	If(ethosRating.Rating IS NULL, 0, ethosRating.Rating)
 	AS totalRating
 FROM
        ".$primaryTable."
         LEFT JOIN (".$postCompanyRatingSQL.") AS postRating ON  ".$primaryTable.".ID = postRating.CompanyID 
         LEFT JOIN (".$SectorCompanyRatingsSQL.") AS sectorRating ON  ".$primaryTable.".ID = sectorRating.CompanyID 
         LEFT JOIN (".$sizeRatingsQuerySQL.") AS sizeRating ON  ".$primaryTable.".ID = sizeRating.CompanyID 
+        LEFT JOIN (".$ethosRatingsQuerySQL.") AS ethosRating ON  ".$primaryTable.".ID = ethosRating.CompanyID 
         
 ORDER BY
     totalRating DESC

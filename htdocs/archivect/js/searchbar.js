@@ -70,6 +70,7 @@ $('#addPosts').click(        function() {
             $(this).parent().parent().after($('<tr class="inputs">').load($newRow));
             $("#postEndInput").val("");
             $("#postStartInput").val("");
+            $("#errormsg").parent().remove();
 
         });
 $('#testButton').click(function(){
@@ -82,13 +83,15 @@ $('#testButton').click(function(){
 });
     
 $('#submitButton').click(function(){
-    $results = $( "form" ).serialize();
-    $r1 = joinvalues("#SectorList");
-    $r2 = joinvalues("#EthosList");
-    $r3 = joinvalues("#SizesList");
-    $r4 = html2insert();
-    $("#results").html("...loading ");
-    $("#results").load('./php/search_results.php', {"SectorList":$r1,"EthosList":$r2,"SizesList":$r3,"DistanceList":$r4} );
 
-    });
+   $("#errormsg").parent().remove();
+   $results = $( "form" ).serialize();
+   $r1 = joinvalues("#SectorList");
+   $r2 = joinvalues("#EthosList");
+   $r3 = joinvalues("#SizesList");
+   $r4 = html2insert();
+   $("#results").html("...loading ");
+   $("#results").load('./php/search_results.php', {"SectorList":$r1,"EthosList":$r2,"SizesList":$r3,"DistanceList":$r4} );
+
+   });
 });

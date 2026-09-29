@@ -32,7 +32,7 @@ if ($result = $conn -> query(
   $numR =  $result -> num_rows;
   // Free result set
   $result -> free_result();
-  if ($numR < 2) {echo "<script>alert('CHECK UR POSTCODES LAV xoxox')</script>";}
+  if ($numR < 2) {echo "<script id='errormsg'>alert('CHECK UR POSTCODES LAV xoxox')</script>";}
   else {
 echo "
 	<td><button onclick='deleteData(this)'>-</button></td>
@@ -41,6 +41,6 @@ echo "
 	<td>".distanceKM($postStart,$postEnd)."km</td>
 	<td>";
 rating('Rating',$postEnd.$postStart);
-echo "</td>";}}
+echo "</td>";}};
 
 ?>

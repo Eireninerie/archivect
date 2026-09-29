@@ -15,7 +15,7 @@ include('../SQLtests/SQLs.php');
 
 function cardDetails($tableName,$columnName,$row,$sub){
 
-	echo "	<ul class='c_".$columnName."s'>	";
+	echo "	<ul class='c_".$columnName."'>	";
 	global $conn;
 	if ($sub == 1){
 		$joinclause = "LEFT JOIN ".$columnName."List ON ".$columnName."List.ID = ".$columnName."";
@@ -23,6 +23,7 @@ function cardDetails($tableName,$columnName,$row,$sub){
 	else {
 		$joinclause = null; 
 		$rowvalue=$columnName;}
+
 	$whereclause = "WHERE ". $row ." = ".$tableName.".CompanyID";
 
 	$SQL = "SELECT CompanyID, ".$rowvalue." FROM ".$tableName." ".$joinclause." ".$whereclause." ";
@@ -38,16 +39,16 @@ function cardDetails($tableName,$columnName,$row,$sub){
 }
 
 function cardResults(){
-	global $conn, $addressTable, $ratingSortSQL, $sectorTable,$sizeTypeSQL;
+	global $conn, $addressTable, $ratingSortSQL, $sectorTable,$sizeTypeSQL,$ethosTable;
 	$ratingSort = $conn->query($ratingSortSQL);
 	if ($ratingSort->num_rows > 0){
 		while($row = $ratingSort->fetch_assoc()){
 			echo "
 				<div class='card'>		
 				<img class='logo' src='".$row["logo"]."'><p> <a href='https://".$row["website"]."' alt='". $row["Company"]." website link' title='https://".$row["website"]."'>". $row["Company"]. "</a><br>
-				<p>".$row["totalRating"]."</p>
 				";
 			cardDetails($sectorTable,"sectors",$row["ID"],1);
+			cardDetails($ethosTable,"ethos",$row["ID"],1);
 			cardDetails($addressTable,"town",$row["ID"],0);
 
 			echo "</p></div>

@@ -10,13 +10,21 @@ function theInputs($row,$type,$inputtype){
     </div>
     ";
 }
-function subTable( $subtable){
+function subTable( $subtable,$companyID){
     global $conn;
-    $subtableSQL = "SELECT * FROM ".$subtable."List";
+	$check = "checked='checked'";
+    $subtableSQL = "SELECT ".$subtable."List.ID, ".$subtable."List.Name, checked
+        FROM ".$subtable."List 
+        LEFT JOIN 
+            (SELECT 'checked' AS checked, ".$subtable." FROM ".$subtable." WHERE CompanyID=".$companyID.") AS st
+            ON st.".$subtable." = ".$subtable."List.ID
+        ORDER BY checked DESC, Name ASC
+        ";
     $tablequery = $conn->query($subtableSQL);
     echo "<table style='display: inline; '><tbody style='height:150px; display:inline-block; overflow-y:scroll'>";
 	while($row = $tablequery->fetch_assoc()){
-        echo "<tr><td><input type='checkbox' name='".$row["ID"]."'></td><td>".$row["Name"]."</tr></td>";
+        $check = $row["checked"];
+        echo "<tr><td><input type='checkbox' name='".$row["ID"]."' $check></td><td>".$row["Name"]."</tr></td>";
         }
     echo "</tbody></table>";
 }
@@ -48,8 +56,8 @@ function mainTable(){
             theInputs($row["EST"],"EST","date");
             theInputs($row["Closed"],"Closed","date");
             echo "</form>";
-            subTable( $sectorTable);
-            subTable( $ethosTable);
+            subTable( $sectorTable,$row["ID"]);
+            subTable( $ethosTable,$row["ID"]);
             addressList($addressTable,$row["ID"]);
 
 		}

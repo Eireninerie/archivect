@@ -1,5 +1,5 @@
 <?php
-
+$pos ='.';
 //sudo /opt/lampp/manager-linux-x64.run
 include('../php/header.php');
 

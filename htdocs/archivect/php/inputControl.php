@@ -1,6 +1,7 @@
 <?php
 
 include('../php/public_functions.php');
+echo "<script src='../js/inputs.js'></script>";
 echo $primaryTable;
 
 function theInputs($row,$type,$inputtype){
@@ -24,7 +25,7 @@ function subTable( $subtable,$companyID){
     echo "<table style='display: inline; '><tbody style='height:150px; display:inline-block; overflow-y:scroll'>";
 	while($row = $tablequery->fetch_assoc()){
         $check = $row["checked"];
-        echo "<tr><td><input type='checkbox' name='".$row["ID"]."' $check></td><td>".$row["Name"]."</tr></td>";
+        echo "<tr><td><input type='checkbox' name='".$row["ID"]."' $check></td><td>".$row["Name"]."</td></tr>";
         }
     echo "</tbody></table>";
 }
@@ -33,8 +34,9 @@ function addressList($addressTable,$companyID){
     $addresstblSQL = "SELECT * FROM ".$addressTable." WHERE CompanyID=".$companyID;
     $tablequery = $conn->query($addresstblSQL);
     echo "<table style='display: inline; '><tbody style='height:150px; display:inline-block; overflow-y:auto'>";
+    echo "<tr><td><button type='button' id='addposts'>+</button></td><td><input type='text' id='TownInput' name='Town'></td><td><input type='text' id='PostcodeInput' name='Postcode' value='' style='width:80px'></tr></td>";
     while($row = $tablequery->fetch_assoc()){
-        echo "<tr><td><input type='hidden' value='".$row["ID"]."'><input type='text' name='town' value='".$row["Town"]."'></td><td><input type='text' name='postcode' value='".$row["Postcode"]."' style='width:80px'></tr></td>";
+        echo "<tr><td><button type='button' class='deletebutton' onclick='deleteData(this)'>-</button></td><td><input type='hidden' value='".$row["ID"]."'><input type='text' name='Town' value='".$row["Town"]."'></td><td><input type='text' name='Postcode' value='".$row["Postcode"]."' style='width:80px'></td></tr>";
         }
     echo "</tbody></table>";
 }

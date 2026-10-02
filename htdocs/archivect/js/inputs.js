@@ -22,6 +22,11 @@ $(document).ready(function(){
             $row.find("#TownInput").val("");
             $row.find("#PostcodeInput").val("");}
         });
+    $('.update').click(function(){
+        $CompanyID = $(this).attr('id');
+        $(this).after().text($CompanyID);
+        $(this).closest('.Company').load('../php/inputControl.php',{ 'ID': $CompanyID });
+    });
     $('.deletebutton').click(function(){
         $(this).deladdress();
     });    

@@ -1,15 +1,28 @@
 $(document).ready(function(){
-    $('#addPosts').click(function() {
+    $.fn.deladdress = function () {
+        $classcheck= $(this).closest("tr").attr('class');
+        if($classcheck == 'newaddress')
+            {$(this).closest("tr").remove()}
+        else{
+            $(this).closest("tr").toggleClass('delete');
+            $inner = $(this).text();
+            $endash =  '&ndash;';
+            if($inner != '+' ){$(this).text('+');
+            }else{$(this).html('&ndash;');}
+        }
+        };
+    $('.addposts').click(function() {
             // Get input values
-            $Town = $("#TownInput").val();
-            $Postcode = $("#PostcodeInput").val();
-            $newRow = '<tr class="newaddress"><td><button type="button" onclick="deleteData(this)" class="deletebutton">-</button></td><input type="text" name="Town" value="'+$Town+'"><td><input type="text" name="Postcode" value="'+$Postcode+'"></tr></td>';
-            $(this).parent().parent().after($newRow);
-            $("#Town").val("");
-            $("#Postcode").val("");
+            $row = $(this).closest("tr");
+            $Town = $row.find(".TownInput").val();
+            $Postcode = $row.find(".PostcodeInput").val();
+            if ($Town != "" && $Postcode !=""){
+            $newRow = '<td><button type="button" class="deletebutton" onclick="$(this).deladdress()">&ndash;</button></td><input type="text" class="TownInput" name="Town" value="'+$Town+'"><td><input type="text" class ="PostcodeInput" name="Postcode" value="'+$Postcode+'"></td>';
+            $row.after($('<tr class="newaddress">').html($newRow));
+            $row.find("#TownInput").val("");
+            $row.find("#PostcodeInput").val("");}
         });
     $('.deletebutton').click(function(){
-        $(this).parent().toggleClass('delete');
-        $(this).html('+');
+        $(this).deladdress();
     });    
 });    

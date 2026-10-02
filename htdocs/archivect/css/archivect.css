@@ -1,3 +1,27 @@
+.Company{
+    padding: 0 10px 20px 10px;
+}
+table{
+    display:inline
+}
+tbody{
+    height:150px; 
+    display:inline-block; 
+    overflow-y:scroll;
+}
+.theInputs{
+    display: inline; 
+    white-space: nowrap;
+}
+.PostcodeInput{
+    width:80px;
+}
+.newaddress{
+    background-color:green;
+}
+.delete{
+    background-color:red;
+}
 .delete input{
-    color:#ccc;
+    color:#aaa;
 }

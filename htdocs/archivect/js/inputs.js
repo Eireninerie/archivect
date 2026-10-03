@@ -25,7 +25,7 @@ $(document).ready(function(){
     $('.update').click(function(){
         $CompanyID = $(this).attr('id');
         $(this).after().text($CompanyID);
-        $(this).closest('.Company').load('../php/inputControl.php',{ 'ID': $CompanyID });
+        $(this).closest('.Company').wrap('<div></div>').parent().load('../php/inputControl.php',{ 'ID': $CompanyID }).unwrap();
     });
     $('.deletebutton').click(function(){
         $(this).deladdress();

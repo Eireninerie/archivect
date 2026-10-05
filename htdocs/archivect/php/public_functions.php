@@ -52,7 +52,7 @@ function subTable( $subtable,$companyID){
         ORDER BY checked DESC, Name ASC
         ";
     $tablequery = $conn->query($subtableSQL);
-    echo "<div class='table'><h3>$subtable</h3><table><tbody>";
+    echo "<div class='table'><h3>$subtable</h3><table class=$subtable><tbody>";
 	while($row = $tablequery->fetch_assoc()){
         $check = $row["checked"];
         echo "<tr><td><input type='checkbox' name='".$row["ID"]."' $check></td><td>".$row["Name"]."</td></tr>";
@@ -90,8 +90,6 @@ function Companydeets($whereclause,$limits){
             theInputs($row["CompanySimple"],"aka","text");
             theInputs($row["website"],"website","url");
             theInputs($row["logo"],"logo","url");
-            theInputs($row["EST"],"EST","date");
-            theInputs($row["Closed"],"Closed","date");
             echo "</form>";
             subTable( $sectorTable,$row["ID"]);
             subTable( $ethosTable,$row["ID"]);

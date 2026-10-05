@@ -23,9 +23,18 @@ $(document).ready(function(){
             $row.find("#PostcodeInput").val("");}
         });
     $('.update').click(function(){
-        $CompanyID = $(this).attr('id');
-        $(this).after().text($CompanyID);
-        $(this).closest('.Company').wrap('<div></div>').parent().load('../php/inputControl.php',{ 'ID': $CompanyID }).unwrap();
+        var ID = $(this).attr('id');
+        $maininputs = $(this).siblings('.theInputs')
+        var main = $maininputs.find('input').map(function(){return $(this).val();}).get().join();
+        $sectortbl = $(this).parent().siblings().find('.sectors');
+        var sectorskeep = $sectortbl.find('input:checked').map(function(){return $(this).attr('name');}).get().join(",");
+        var sectorsdel = $sectortbl.find('input:not(:checked)').map(function(){return $(this).attr('name');}).get().join(",");
+        var sectorskeep = $sectortbl.find('input:checked').map(function(){return $(this).attr('name');}).get().join(",");
+        var sectorsdel = $sectortbl.find('input:not(:checked)').map(function(){return $(this).attr('name');}).get().join(",");
+        $(this).closest('.Company').wrap('<div></div>').parent().load(
+            '../php/inputControl.php',
+            {ID,main,sectorskeep,sectorsdel}
+            ).unwrap();
     });
     $('.deletebutton').click(function(){
         $(this).deladdress();

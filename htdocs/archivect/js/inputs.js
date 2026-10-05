@@ -25,17 +25,17 @@ $(document).ready(function(){
     $('.update').click(function(){
         var ID = $(this).attr('id');
         $maininputs = $(this).siblings('.theInputs')
-        var main = $maininputs.find('input').map(function(){return $(this).val();}).get().join();
+        var main = ID+','+$maininputs.find('input').map(function(){return $(this).val();}).get().join();
         $sectortbl = $(this).parent().siblings().find('.sectors');
-        var sectorskeep = $sectortbl.find('input:checked').map(function(){return $(this).attr('name');}).get().join();
-        var sectorsdel = $sectortbl.find('input:not(:checked)').map(function(){return $(this).attr('name');}).get().join();
+        var sectorskeep = '('+$sectortbl.find('input:checked').map(function(){return $(this).attr('name');}).get().join()+')';
+        var sectorsdel = '('+$sectortbl.find('input:not(:checked)').map(function(){return $(this).attr('name');}).get().join()+')';
         $ethostbl = $(this).parent().siblings().find('.ethos');
-        var ethoskeep = $ethostbl.find('input:checked').map(function(){return $(this).attr('name');}).get().join();
-        var ethosdel = $ethostbl.find('input:not(:checked)').map(function(){return $(this).attr('name');}).get().join();
+        var ethoskeep = '('+$ethostbl.find('input:checked').map(function(){return $(this).attr('name');}).get().join()+')';
+        var ethosdel = '('+$ethostbl.find('input:not(:checked)').map(function(){return $(this).attr('name');}).get().join()+')';
         $addresstbl = $(this).parent().siblings().find('.addresses');
         var addressnew = '('+$addresstbl.find('.newaddress').map(function(){
             return ID+',,'+$(this).find('input').map(function(){return $(this).val();}).get().join();}).get().join('),(')+')';
-        var addressdel = $addresstbl.find('.delete').find('input:hidden').map(function(){ return $(this).val();}).get().join();
+        var addressdel = '('+$addresstbl.find('.delete').find('input:hidden').map(function(){ return $(this).val();}).get().join()+')';
         var addressupdate = '(,'+$addresstbl.find('.existaddr').map(function(){
             return $(this).find('input').map(function(){return $(this).val();}).get().join();}).get().join('),(,')+')';
 

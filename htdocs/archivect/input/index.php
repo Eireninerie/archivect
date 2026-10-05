@@ -21,13 +21,10 @@ if (isset($_GET['page'])) {
 $precs = 64;
 $offset = ($page-1) * $precs; 
 
-echo $offset;
-
 $pageSQL = "SELECT * FROM ".$primaryTable;
 	$pagequery = $conn->query($pageSQL);
 	$pages = ceil($pagequery->num_rows / $precs);
 
-echo $pages;
 ?>
 <ul class="pagination">
     <li><a href="?page=1">First</a></li>
@@ -44,7 +41,18 @@ echo $pages;
 $limits = "LIMIT $offset,$precs";
 Companydeets('',$limits);
 ?>
-
+<ul class="pagination">
+    <li><a href="?page=1">First</a></li>
+    <li class="<?php if($page <= 1){ echo 'disabled'; } ?>">
+        <a href="<?php if($page <= 1){ echo '#'; } else { echo "?page=".($page - 1); } ?>">Prev</a>
+    </li>
+    <li><?php echo $page; ?> <li>
+    <li class="<?php if($page >= $pages){ echo 'disabled'; } ?>">
+        <a href="<?php if($page >= $pages){ echo '#'; } else { echo "?page=".($page + 1); } ?>">Next</a>
+    </li>
+    <li><a href="?page=<?php echo $pages; ?>">Last</a></li>
+</ul>
+<div style="height:50px">
 <?php
 include('../php/footer.php');
 ?>

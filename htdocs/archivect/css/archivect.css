@@ -37,6 +37,9 @@ tbody{
     height:150px; 
     overflow-y:scroll;
 }
+.url{
+    width:300px;
+}
 .theInputs{
     display: inline; 
     white-space: nowrap;

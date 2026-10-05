@@ -37,7 +37,7 @@ function rating($ID,$Name){
 function theInputs($row,$type,$inputtype){
     echo "
     <div class='theInputs'><label for='".$type."'>".$type.":</label>
-    <input type='$inputtype' name ='".$type."' value='".$row."'></input>
+    <input type='$inputtype' class ='$inputtype' name ='".$type."' value='".$row."'></input>
     </div>
     ";
 }
@@ -89,7 +89,7 @@ function Companydeets($whereclause,$limits){
             echo "<br>";
             theInputs($row["CompanySimple"],"aka","text");
             theInputs($row["website"],"website","url");
-            theInputs($row["logo"],"logo","url");
+            theInputs($row["Logo"],"logo","url");
             echo "</form>";
             subTable( $sectorTable,$row["ID"]);
             subTable( $ethosTable,$row["ID"]);

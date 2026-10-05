@@ -5,11 +5,6 @@ include('../php/header.php');
 
 
 ?>
-	
-
-
-
-
 
 <?php
 

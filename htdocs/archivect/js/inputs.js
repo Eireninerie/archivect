@@ -4,7 +4,7 @@ $(document).ready(function(){
         if($classcheck == 'newaddress')
             {$(this).closest("tr").remove()}
         else{
-            $(this).closest("tr").toggleClass('delete');
+            $(this).closest("tr").toggleClass('delete').toggleClass('existaddr');
             $inner = $(this).text();
             $endash =  '&ndash;';
             if($inner != '+' ){$(this).text('+');
@@ -19,21 +19,33 @@ $(document).ready(function(){
             if ($Town != "" && $Postcode !=""){
             $newRow = '<td><button type="button" class="deletebutton" onclick="$(this).deladdress()">&ndash;</button></td><input type="text" class="TownInput" name="Town" value="'+$Town+'"><td><input type="text" class ="PostcodeInput" name="Postcode" value="'+$Postcode+'"></td>';
             $row.after($('<tr class="newaddress">').html($newRow));
-            $row.find("#TownInput").val("");
-            $row.find("#PostcodeInput").val("");}
+            $row.find(".TownInput").val("");
+            $row.find(".PostcodeInput").val("");}
         });
     $('.update').click(function(){
         var ID = $(this).attr('id');
         $maininputs = $(this).siblings('.theInputs')
         var main = $maininputs.find('input').map(function(){return $(this).val();}).get().join();
         $sectortbl = $(this).parent().siblings().find('.sectors');
-        var sectorskeep = $sectortbl.find('input:checked').map(function(){return $(this).attr('name');}).get().join(",");
-        var sectorsdel = $sectortbl.find('input:not(:checked)').map(function(){return $(this).attr('name');}).get().join(",");
-        var sectorskeep = $sectortbl.find('input:checked').map(function(){return $(this).attr('name');}).get().join(",");
-        var sectorsdel = $sectortbl.find('input:not(:checked)').map(function(){return $(this).attr('name');}).get().join(",");
+        var sectorskeep = $sectortbl.find('input:checked').map(function(){return $(this).attr('name');}).get().join();
+        var sectorsdel = $sectortbl.find('input:not(:checked)').map(function(){return $(this).attr('name');}).get().join();
+        $ethostbl = $(this).parent().siblings().find('.ethos');
+        var ethoskeep = $ethostbl.find('input:checked').map(function(){return $(this).attr('name');}).get().join();
+        var ethosdel = $ethostbl.find('input:not(:checked)').map(function(){return $(this).attr('name');}).get().join();
+        $addresstbl = $(this).parent().siblings().find('.addresses');
+        var addressnew = '('+$addresstbl.find('.newaddress').map(function(){
+            return ID+',,'+$(this).find('input').map(function(){return $(this).val();}).get().join();}).get().join('),(')+')';
+        var addressdel = $addresstbl.find('.delete').find('input:hidden').map(function(){ return $(this).val();}).get().join();
+        var addressupdate = '(,'+$addresstbl.find('.existaddr').map(function(){
+            return $(this).find('input').map(function(){return $(this).val();}).get().join();}).get().join('),(,')+')';
+
         $(this).closest('.Company').wrap('<div></div>').parent().load(
             '../php/inputControl.php',
-            {ID,main,sectorskeep,sectorsdel}
+            {ID,main,
+                sectorskeep,sectorsdel,
+                ethoskeep,ethosdel,
+                addressnew,addressdel,addressupdate
+            }
             ).unwrap();
     });
     $('.deletebutton').click(function(){

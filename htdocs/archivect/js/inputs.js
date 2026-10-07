@@ -11,27 +11,16 @@ $(document).ready(function(){
             }else{$(this).html('&ndash;');}
         }
         };
-    $('.addposts').click(function() {
-            // Get input values
-            $row = $(this).closest("tr");
-            $Town = $row.find(".TownInput").val();
-            $Postcode = $row.find(".PostcodeInput").val();
-            if ($Town != "" && $Postcode !=""){
-            $newRow = '<td><button type="button" class="deletebutton" onclick="$(this).deladdress()">&ndash;</button></td><input type="text" class="TownInput" name="Town" value="'+$Town+'"><td><input type="text" class ="PostcodeInput" name="Postcode" value="'+$Postcode+'"></td>';
-            $row.after($('<tr class="newaddress">').html($newRow));
-            $row.find(".TownInput").val("");
-            $row.find(".PostcodeInput").val("");}
-        });
-    $('.update').click(function(){
+    $.fn.updateinputs = function(){
         var ID = $(this).attr('id');
         $maininputs = $(this).siblings('.theInputs')
         var main = ID+','+$maininputs.find('input').map(function(){return $(this).val();}).get().join();
         $sectortbl = $(this).parent().siblings().find('.sectors');
-        var sectorskeep = '('+$sectortbl.find('input:checked').map(function(){return $(this).attr('name');}).get().join()+')';
-        var sectorsdel = '('+$sectortbl.find('input:not(:checked)').map(function(){return $(this).attr('name');}).get().join()+')';
+        var sectorskeep = $sectortbl.find('input.updated:checked').map(function(){return '('+ID+','+$(this).attr('name')+')';}).get().join();
+        var sectorsdel = '('+$sectortbl.find('input.updated:not(:checked)').map(function(){return $(this).attr('name');}).get().join()+')';
         $ethostbl = $(this).parent().siblings().find('.ethos');
-        var ethoskeep = '('+$ethostbl.find('input:checked').map(function(){return $(this).attr('name');}).get().join()+')';
-        var ethosdel = '('+$ethostbl.find('input:not(:checked)').map(function(){return $(this).attr('name');}).get().join()+')';
+        var ethoskeep = '('+$ethostbl.find('input.updated:checked').map(function(){return $(this).attr('name');}).get().join()+')';
+        var ethosdel = '('+$ethostbl.find('input.updated:not(:checked)').map(function(){return $(this).attr('name');}).get().join()+')';
         $addresstbl = $(this).parent().siblings().find('.addresses');
         var addressnew = '('+$addresstbl.find('.newaddress').map(function(){
             return ID+',,'+$(this).find('input').map(function(){return $(this).val();}).get().join();}).get().join('),(')+')';
@@ -47,8 +36,28 @@ $(document).ready(function(){
                 addressnew,addressdel,addressupdate
             }
             ).unwrap();
+        };
+    
+    $('.addposts').click(function() {
+        // Get input values
+        $row = $(this).closest("tr");
+        $Town = $row.find(".TownInput").val();
+        $Postcode = $row.find(".PostcodeInput").val();
+        if ($Town != "" && $Postcode !=""){
+            $newRow = '<td><button type="button" class="deletenewbutton" >&ndash;</button></td><input type="text" class="TownInput" name="Town" value="'+$Town+'"><td><input type="text" class ="PostcodeInput" name="Postcode" value="'+$Postcode+'"></td>';
+            $row.after($('<tr class="newaddress">').html($newRow));
+            $row.find(".TownInput").val("");
+            $row.find(".PostcodeInput").val("");}
+        $('.deletenewbutton').click(function(){
+            $(this).deladdress();
+        });
+    });
+    $("input").change(function(){
+        $(this).toggleClass('updated');
+        $('.update').click(function(){$(this).updateinputs();});
     });
     $('.deletebutton').click(function(){
         $(this).deladdress();
+        $('.update').click(function(){$(this).updateinputs();});
     });    
 });    

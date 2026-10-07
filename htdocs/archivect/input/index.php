@@ -17,7 +17,7 @@ if (isset($_GET['page'])) {
 } else {
     $page = 1;
 }
-
+echo $pages;
 $precs = 64;
 $offset = ($page-1) * $precs; 
 

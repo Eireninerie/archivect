@@ -11,7 +11,7 @@ $addressnew = htmlspecialchars($_POST['addressnew']);
 $addressdel = htmlspecialchars($_POST['addressdel']);
 $addressupdate = htmlspecialchars($_POST['addressupdate']);
 
-//echo '<br>'.$mainupdate[4];
+echo '<br>'.$sectorskeep;
 
 $mainupdateSQL = "UPDATE ".$primaryTable." SET
 Company = '".$mainupdate[1]."',
@@ -20,6 +20,11 @@ website = '".$mainupdate[3]."',
 Logo = '".$mainupdate[4]."'
 WHERE ID=".$mainupdate[0];
 $conn->query($mainupdateSQL);
+
+$sectorskeepSQL = "INSERT INTO $sectorTable (CompanyID, Sector) VALUES $sectorskeep;";
+$addressdelSQL = "DELETE FROM $addressTable WHERE ID=$addressdel";
+
+//$conn->query($sectorskeepSQL);
 
 echo "<script class ='javarefresh' src='../js/inputs.js'></script>";
 $whereclause = ' WHERE ID= "'.$ID.'"';

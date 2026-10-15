@@ -21,8 +21,14 @@ Logo = '".$mainupdate[4]."'
 WHERE ID=".$mainupdate[0];
 $conn->query($mainupdateSQL);
 
-$sectorskeepSQL = "INSERT INTO $sectorTable (CompanyID, Sector) VALUES $sectorskeep;";
-$addressdelSQL = "DELETE FROM $addressTable WHERE ID=$addressdel";
+
+if ($sectorskeep <> NULL){
+    $sectorskeepSQL = "INSERT INTO ".$sectorTable." (CompanyID, Sectors) VALUES ".$sectorskeep;
+    $conn->query($sectorskeepSQL);};
+$sectorsdelSQL = "DELETE FROM $sectorTable WHERE ID IN $sectorsdelSQL";
+$ethoskeepSQL = "INSERT INTO $ethosTable (CompanyID, Sector) VALUES $sectorskeep;";
+$ethosdelSQL = "DELETE FROM $ethosTable WHERE ID IN $sectorsdelSQL";
+$addressdelSQL = "DELETE FROM $addressTable WHERE ID IN $addressdel";
 
 //$conn->query($sectorskeepSQL);
 

@@ -10,35 +10,36 @@ $(document).ready(function(){
             if($inner != '+' ){$(this).text('+');
             }else{$(this).html('&ndash;');}
         }
-        };
+        }
     $.fn.updateinputs = function(){
-        var ID = $(this).attr('id');
+        let ID = $(this).attr('id');
         $maininputs = $(this).siblings('.theInputs')
-        var main = ID+','+$maininputs.find('input').map(function(){return $(this).val();}).get().join();
+        let main = ID+','+$maininputs.find('input').map(function(){return $(this).val();}).get().join();
         $sectortbl = $(this).parent().siblings().find('.sectors');
-        var sectorskeep = $sectortbl.find('input.updated:checked').map(function(){return '('+ID+','+$(this).attr('name')+')';}).get().join();
-        var sectorsdel = '('+$sectortbl.find('input.updated:not(:checked)').map(function(){return $(this).attr('name');}).get().join()+')';
+        let sectorskeep = $sectortbl.find('input.updated:checked').map(function(){return '('+ID+','+$(this).attr('name')+')';}).get().join();
+        let sectorsdel = '('+$sectortbl.find('input.updated:not(:checked)').map(function(){return $(this).attr('name');}).get().join()+')';
         $ethostbl = $(this).parent().siblings().find('.ethos');
-        var ethoskeep = '('+$ethostbl.find('input.updated:checked').map(function(){return $(this).attr('name');}).get().join()+')';
-        var ethosdel = '('+$ethostbl.find('input.updated:not(:checked)').map(function(){return $(this).attr('name');}).get().join()+')';
+        let ethoskeep = $ethostbl.find('input.updated:checked').map(function(){return '('+ID+','+$(this).attr('name')+')';}).get().join();
+        let ethosdel = '('+$ethostbl.find('input.updated:not(:checked)').map(function(){return $(this).attr('name');}).get().join()+')';
         $addresstbl = $(this).parent().siblings().find('.addresses');
-        var addressnew = '('+$addresstbl.find('.newaddress').map(function(){
+        let addressnew = '('+$addresstbl.find('.newaddress').map(function(){
             return ID+',,'+$(this).find('input').map(function(){return $(this).val();}).get().join();}).get().join('),(')+')';
-        var addressdel = '('+$addresstbl.find('.delete').find('input:hidden').map(function(){ return $(this).val();}).get().join()+')';
-        var addressupdate = '(,'+$addresstbl.find('.existaddr').map(function(){
+        let addressdel = '('+$addresstbl.find('.delete').find('input:hidden').map(function(){ return $(this).val();}).get().join()+')';
+        let addressupdate = '(,'+$addresstbl.find('.existaddr').map(function(){
             return $(this).find('input').map(function(){return $(this).val();}).get().join();}).get().join('),(,')+')';
-
-        $(this).closest('.Company').wrap('<div></div>').parent().load(
+        $(this).closest('.Company').wrap('<div class="temp"></div>').parent().load(
             '../php/inputControl.php',
             {ID,main,
                 sectorskeep,sectorsdel,
                 ethoskeep,ethosdel,
                 addressnew,addressdel,addressupdate
             }
-            ).unwrap();
-        };
-    
-    $('.addposts').click(function() {
+            ).addListenersnow();
+        $('.temp').children().unwrap();
+        
+
+        }
+    $.fn.addposts = function(){
         // Get input values
         $row = $(this).closest("tr");
         $Town = $row.find(".TownInput").val();
@@ -51,13 +52,21 @@ $(document).ready(function(){
         $('.deletenewbutton').click(function(){
             $(this).deladdress();
         });
+    }
+    $.fn.addListenersnow = function(){
+    $(this).find('.addposts').click(function() {
+        $(this).addposts();
     });
-    $("input").change(function(){
+    $(this).find("input").change(function(){
         $(this).toggleClass('updated');
-        $('.update').click(function(){$(this).updateinputs();});
     });
+    
+    $(this).find('.update').click(function(){
+        $(this).updateinputs();
+    });
+    }
+    $('body').addListenersnow();
     $('.deletebutton').click(function(){
         $(this).deladdress();
-        $('.update').click(function(){$(this).updateinputs();});
-    });    
+    });  
 });    

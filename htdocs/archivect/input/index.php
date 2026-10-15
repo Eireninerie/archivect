@@ -10,7 +10,7 @@ include('../php/header.php');
 
 
 include('../php/public_functions.php');
-echo "<script src='../js/inputs.js'></script>";
+echo "<script src='../js/inputs.js?v=0.1'></script>";
 
 if (isset($_GET['page'])) {
     $page = $_GET['page'];

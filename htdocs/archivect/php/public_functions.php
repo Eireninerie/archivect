@@ -66,7 +66,7 @@ function addressList($addressTable,$companyID){
     echo "<div class='table'><h3>Addresses</h3><table class='addresses'><tbody>";
     echo "<tr><td><button type='button' class='addposts'>+</button></td><td><input type='text' class='TownInput' name='Town'></td><td><input type='text' class='PostcodeInput' name='Postcode' value=''></tr></td>";
     while($row = $tablequery->fetch_assoc()){
-        echo "<tr class='existaddr'><td><button type='button' class='deletebutton' >&ndash;</button>
+        echo "<tr class='keepaddr'><td><button type='button' class='deletebutton' >&ndash;</button>
         </td><td><input type='hidden' value='".$row["ID"]."'>
         <input type='text' name='Town' class='TownInput' value='".$row["Town"]."'></td>
         <td><input type='text' name='Postcode' class='PostcodeInput' value='".$row["Postcode"]."'></td></tr>";

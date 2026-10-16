@@ -34,8 +34,7 @@ $(document).ready(function(){
                 ethoskeep,ethosdel,
                 addressnew,addressdel,addressupdate
             }
-            ).addListenersnow();
-        $('.temp').children().unwrap();
+            ).unwrap();
         
 
         }

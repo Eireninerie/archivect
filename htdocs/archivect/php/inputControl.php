@@ -1,21 +1,27 @@
 <?php
 include('../php/public_functions.php');
-// print_r($GLOBALS);
+print_r($GLOBALS);
 
-function validatesubs($string){
-    $invalid = preg_match("/[^\d\x{002c}\x{0028}\x{0029}]/u",htmlspecialchars($string));
-    if ($invalid == 0){return $string;};
+function sanitisesubs($string){
+    return preg_replace("/[^\d\,\(\)]/u","",$string);
+}
+function sanitiseaddress($string){
+    return preg_replace('/[a-zA-Z]+[\s\d]*/', '"$0"', preg_replace('/[^a-zA-Z\d\(\)\,\s]/',"", $string));
 }
 
 $ID = filter_var($_POST['ID'], FILTER_SANITIZE_NUMBER_INT);
-$mainupdate = explode(",",htmlspecialchars($_POST['main']));
-$sectorskeep = validatesubs($_POST['sectorskeep']);
-$sectorsdel = validatesubs($_POST['sectorsdel']);
-$ethoskeep = validatesubs($_POST['ethoskeep']);
-$ethosdel = validatesubs($_POST['ethosdel']);
-$addressnew = htmlspecialchars($_POST['addressnew']);
-$addressdel = validatesubs($_POST['addressdel']);
-$addressupdate = htmlspecialchars($_POST['addressupdate']);
+$mainupdate = explode(",",$_POST['main']);
+$sectorskeep = sanitisesubs($_POST['sectorskeep']);
+$sectorsdel = sanitisesubs($_POST['sectorsdel']);
+$ethoskeep = sanitisesubs($_POST['ethoskeep']);
+$ethosdel = sanitisesubs($_POST['ethosdel']);
+$addressnew = sanitiseaddress($_POST['addressnew']);
+$addressdel = sanitisesubs($_POST['addressdel']);
+$addressupdate = sanitiseaddress($_POST['addressupdate']);
+
+
+$addresstest = $addressupdate;
+echo '<p> oop '.sanitiseaddress($addresstest).'</p>';
 
 echo '<p>'.$ethoskeep.'</p>';
 

@@ -16,7 +16,7 @@ function sanitiseaddress($string){
 
 $mainupdate = explode(",",$_POST['main']);
 $ID = filter_var($mainupdate[0], FILTER_SANITIZE_NUMBER_INT);
-$mainupdate[1] = preg_replace('/[^\dA-Za-z\&\+\/\x{00C0}-\x{024F}]+/',"",$mainupdate[1]);
+$Company = preg_replace('/[^A-Za-z\d\+\&\x{002F}\x{00C0}-\x{024F}]/u',"",$mainupdate[1]);
 $mainupdate[2] = preg_replace('/[^A-Za-z\+]+/',"",$mainupdate[2]);
 $mainupdate[3] = filter_var($mainupdate[3], FILTER_SANITIZE_URL);
 $mainupdate[4] = filter_var($mainupdate[4], FILTER_SANITIZE_URL);
@@ -28,14 +28,13 @@ $addressdel = sanitisesubs($_POST['addressdel']);
 $addressupdate = sanitiseaddress($_POST['addressupdate']);
 
 
-$addresstest = $_POST['addressnew'];
-echo '<p>'.$addresstest.' oop '.sanitiseaddress( $addresstest).'</p>';
+echo '<p>'.$mainupdate[1].' oop '
+    .preg_replace('/[^A-Za-z\d\+\&\x{002F}\x{00C0}-\x{024F}]/u',"",$mainupdate[1]).'</p>';
 
-echo '<p>'.$ethoskeep.'</p>';
 
 
 $mainupdateSQL = "UPDATE ".$primaryTable." SET
-Company = '".$mainupdate[1]."',
+Company = '".$Company."',
 CompanySimple = '".$mainupdate[2]."',
 website = '".$mainupdate[3]."',
 Logo = '".$mainupdate[4]."'

@@ -25,50 +25,50 @@ $(document).ready(function(){
         let addressdel = '('+$addresstbl.find('.delete').find('input:hidden').map(function(){ return $(this).val();}).get().join()+')';
         let addressupdate = $addresstbl.find('.keepaddr').map(function(){
             return ID+','+$(this).find('input').map(function(){return $(this).val();}).get().join();}).get().join('),(');
-        $(this).closest('.Company').wrap('<div class="temp"></div>').parent().load(
+        //load refresh
+        $(this).closest('.Company').wrap('<div id="temp"></div>').parent().load(
             '../php/inputControl.php',
             {   main,
                 sectorskeep,sectorsdel,
                 ethoskeep,ethosdel,
                 addressdel,addressupdate
+            },
+            //wait for refresh to load
+            function(){
+                $('#temp').addListenersnow();
+                $('#temp').find('.Company').unwrap();
             }
-            );
-        $('.temp').addListenersnow();
-        $('.temp').find('.deletebutton').click(function(){
-            $(this).deladdress();
-        });
-//        $('.temp').children('.Company').unwrap();
-        
-
+        );
         }
     $.fn.addposts = function(){
         // Get input values
         $row = $(this).closest("tr");
         $Town = $row.find(".TownInput").val();
         $Postcode = $row.find(".PostcodeInput").val();
+        // create new row
         if ($Town != "" && $Postcode !=""){
             $newRow = '<td><button type="button" class="deletenewbutton" >&ndash;</button></td><td><input type="hidden" value=""><input type="text" class="TownInput" name="Town" value="'+$Town+'"><td><input type="text" class ="PostcodeInput" name="Postcode" value="'+$Postcode+'"></td>';
             $row.after($('<tr class="keepaddr newaddress">').html($newRow));
             $row.find(".TownInput").val("");
             $row.find(".PostcodeInput").val("");}
+        //create new listener
         $('.deletenewbutton').click(function(){
             $(this).deladdress();
         });
     }
     $.fn.addListenersnow = function(){
-    $(this).find('.addposts').click(function() {
-        $(this).addposts();
-    });
-    $(this).find("input").change(function(){
-        $(this).toggleClass('updated');
-    });
-    
-    $(this).find('.update').click(function(){
-        $(this).updateinputs();
-    });
-    $(this).find('.deletebutton').click(function(){
-        $(this).deladdress();
-    });
+        $(this).find('.addposts').click(function() {
+            $(this).addposts();
+        });
+        $(this).find("input").change(function(){
+            $(this).toggleClass('updated');
+        });
+        $(this).find('.update').click(function(){
+            $(this).updateinputs();
+        });
+        $(this).find('.deletebutton').click(function(){
+            $(this).deladdress();
+        });
     }
     $('body').addListenersnow();
       

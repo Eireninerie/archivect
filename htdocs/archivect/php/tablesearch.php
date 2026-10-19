@@ -2,12 +2,12 @@
 
 function xList($type,$table){
 	global $conn;
-	$QuerySQL = "SELECT ID, Name FROM ".$table." ORDER BY Name ASC";
+	$QuerySQL = "SELECT ID, Name, Description FROM ".$table." ORDER BY Name ASC";
 //	echo $QuerySQL;
 	$Query = $conn->query($QuerySQL);
 	while($row = $Query->fetch_assoc()){
 
-	echo "<label for=".$type.$row["ID"].">".$row["Name"]."</label>";
+	echo '<label for='.$type.$row["ID"].' title="'.$row["Description"].'">'.$row["Name"].'</label>';
 	rating($type,$type.$row["ID"]);
 	echo "</br>";}
 }
@@ -35,23 +35,23 @@ global $sectorListTable;
 
 echo "
 <script src='./js/searchbar.js'></script>
-<form id='Search'><h3>Sectors</h3><div id='SectorList'>";
+<form id='Search'><h3><b>Sectors</b></h3><div id='SectorList'>";
 echo xList("Sector",$sectorListTable);
 echo '</div>';
 echo '
-    <table id="DistanceTable"><h3>Search Radius</h3>
+    <table id="DistanceTable"><h3><b>Search Radius</b></h3>
         <tr>
-          <th></th>  
+           
           <th>Centre</th>
             <th>Radius</th>
-            <th>Distance</th>
+            <th style="width:70px"></th>
             <th>Rating</th>
             
         </tr>
       <tr>
-        <td><button id="addPosts" type="button">+</button></td>
-      	<td><input type="text" id="postStartInput" maxLength="4" placeholder="eg. B77" required></td>
+              	<td><input type="text" id="postStartInput" maxLength="4" placeholder="eg. B77" required></td>
         <td><input type="text" id="postEndInput" maxLength="4" placeholder="eg. EN6" required></td>
+		<td><button id="addPosts" type="button">+</button></td>
 
     </table>
 
@@ -59,11 +59,11 @@ echo '
     ';
 
 
-echo "<h3>Ethos</h3><div id='EthosList'>";
+echo "<h3><b>Ethos</b></h3><div id='EthosList'>";
 echo xList("EthosList",$ethosListTable);
 echo "</div>";
 
-echo "<h3>Size</h3><div id='SizesList'>";
+echo "<h3><b>Size</b></h3><div id='SizesList'>";
 function Bands($y,$z){
 	echo '<label>'.$y.'</label>';
 	rating("Sizes",$z);
@@ -80,5 +80,5 @@ echo "</div>";
 ?>
 <button id="testButton" type="button">test</button>
 <div id="testCont">test container</div>
-<center><button id="submitButton" type="button">Submit Search</button></center>
+<button id="submitButton" type="button">Search</button>
 </form>

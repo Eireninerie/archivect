@@ -14,7 +14,8 @@ body{
     background: #F0F3F1;
     color: #212531;
     font-family:'Titillium', sans-serif;
-    font-size:11pt
+    font-size:11pt;
+    scrollbar-color: #F9BCA4;
 }
 input{
     font-family: inherit;
@@ -38,7 +39,10 @@ button {
     background-color: #F9BCA4;
     border: 1px solid #a63;
     border-radius:2px;
-
+    cursor: pointer;
+}
+button:hover{
+    transform: scale(1.1);
 }
 #header{
     position:fixed;
@@ -50,16 +54,50 @@ button {
 h1 {
     font-family: 'Rock Salt', sans-serif;
     font-size: 23 pt;
-
+    text-transform: uppercase;
 }
 
 h1, #header li, #Search, .card{
     padding:20px 40px;
-    border: 1pt solid #223;
+    border: 2pt solid #212531;
     background: #FAFAFA;
     box-shadow: 15px 15px rgba(0, 0, 0, 0.2);
     margin: 5px 0;
-    z-index: 2;
+    z-index: 0;
+    border-image: ul('../assets/corners.png') 30%;
+}
+.frame{
+    beckground-color:blue;
+    height:300px;
+}
+.corners{
+    position:absolute;
+    border: 2pt solid green;
+    width:20px;
+    height:20px;
+    z-index:1;
+    background-color: #314EFF;
+}
+.trc{
+    border-width: 0 1pt 1pt 0;
+    right:-20px;
+    top:-20px;
+}
+.tlc{
+    border-width: 0 0 1pt 1pt;
+    left:-20px;
+    top:-20px;
+}
+.brc{
+    border-width: 1pt 1pt 0 0;
+    right:-20px;
+    bottom:-20px;
+}
+.brc{
+    border-width: 1pt 0 0 1pt;
+    left:-20px;
+    bottom:-20px;
+    
 }
 
 th, h3, #header a{
@@ -74,9 +112,9 @@ th, h3, #header a{
 }
 h3 ::after { 
 	float: right;
-    display:inline-block;
   content: ".";
 }
+
 th{
     border-bottom:none;
 }
@@ -97,9 +135,9 @@ ul{
     transition: ease-in-out .3s;
     margin: 5px 5px;
 }
-div .c{
-    xcolor: #314EFF;
-    xcolor: #F9BCA4;
+.palette{
+    color: #314EFF;
+    color: #F9BCA4;
 }
 #header a, .card a {
     
@@ -160,6 +198,22 @@ form {
     width: 80px;
 }
 
+#submitButton{
+    position:absolute;
+    bottom:0;
+    left: calc( 50% - 60px );
+    height:60px;
+    width:120px;
+    border-radius: 60px 60px 0 0;
+    padding: 5px 0 0 0;
+    transform-origin: bottom;
+    text-transform: uppercase;
+    font-family: 'Rock Salt';
+    font-size: 17pt;
+}
+#submitButton:hover{
+    text-shadow:3px 3px rgba(0, 0, 0, 0.2);
+}
 .Company tbody{
     display:inline-block; 
     height:150px; 
@@ -178,6 +232,7 @@ form {
 #Search label {
     display:inline-block;
     width: 130px;
+    cursor:help;
 }
 .url{
     width:300px;

@@ -9,7 +9,6 @@ $SizesListRatings= filter_var($_POST['SizesList'], FILTER_SANITIZE_NUMBER_INT);
 
 include('../SQLtests/SQLs.php'); 
 
-echo '<p>'.$DistanceListRatings.'</p>';
 
 //  temp table construction for distance ratings
 
@@ -45,7 +44,7 @@ function cardResults(){
 		while($row = $ratingSort->fetch_assoc()){
 			echo "
 				<div class='card'>		
-				<img class='logo' src='".$row["logo"]."'><p> <a href='https://".$row["website"]."' alt='". $row["Company"]." website link' title='https://".$row["website"]."'>". $row["Company"]. "</a><br>
+				<img class='logo' src='".$row["logo"]."'><h3> <a href='https://".$row["website"]."' alt='". $row["Company"]." website link' title='https://".$row["website"]."'>". $row["Company"]. "</a></h3>
 				";
 			cardDetails($sectorTable,"sectors",$row["ID"],1);
 			cardDetails($ethosTable,"ethos",$row["ID"],1);

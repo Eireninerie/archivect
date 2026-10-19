@@ -7,9 +7,9 @@ function xList($type,$table){
 	$Query = $conn->query($QuerySQL);
 	while($row = $Query->fetch_assoc()){
 
-	echo "<tr><td><label for=".$type.$row["ID"].">".$row["Name"]."</label></td><td>";
+	echo "<label for=".$type.$row["ID"].">".$row["Name"]."</label>";
 	rating($type,$type.$row["ID"]);
-	echo "</td></tr>";}
+	echo "</br>";}
 }
 function distanceSQL(){
 	return 'SELECT';
@@ -35,16 +35,15 @@ global $sectorListTable;
 
 echo "
 <script src='./js/searchbar.js'></script>
-<form ><table id='SectorList'>";
+<form id='Search'><h3>Sectors</h3><div id='SectorList'>";
 echo xList("Sector",$sectorListTable);
-echo "</table>";
-
+echo '</div>';
 echo '
-    <table id="DistanceTable">
+    <table id="DistanceTable"><h3>Search Radius</h3>
         <tr>
           <th></th>  
-          <th>Starting Postcode</th>
-            <th>Furthest Radius Postcode</th>
+          <th>Centre</th>
+            <th>Radius</th>
             <th>Distance</th>
             <th>Rating</th>
             
@@ -60,24 +59,24 @@ echo '
     ';
 
 
-echo "<table id='EthosList'>";
+echo "<h3>Ethos</h3><div id='EthosList'>";
 echo xList("EthosList",$ethosListTable);
-echo "</table>";
+echo "</div>";
 
-echo "<table id='SizesList'>";
+echo "<h3>Size</h3><div id='SizesList'>";
 function Bands($y,$z){
-	echo "<tr><td>".$y."</td><td>";
+	echo '<label>'.$y.'</label>';
 	rating("Sizes",$z);
-	echo "</td></tr>";
+	echo "</br>";
 }
 
 Bands("One Office","UK1");
-Bands("2-4 Offices: UK Primarily","UK2");
-Bands("5+ Offices: UK Primarily","UK3");
-Bands("2-4 Offices: International Primarily","IN2");
-Bands("5+ Offices: International Primarily","IN3");
+Bands("2-4 Offices: UK","UK2");
+Bands("5+ Offices: UK","UK3");
+Bands("2-4 Offices: International","IN2");
+Bands("5+ Offices: International","IN3");
 
-echo "</table>";
+echo "</div>";
 ?>
 <button id="testButton" type="button">test</button>
 <div id="testCont">test container</div>

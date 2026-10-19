@@ -24,7 +24,7 @@ echo '
 
 	<ul><li><a href="'.$pos.'./">Archidex</a></li>
 	<li><a href="'.$pos.'../projects">wiki</a></li>
-	<li><a href="'.$pos.'../calendar">diary<a></li>
+	<li><a href="'.$pos.'../calendar">diary</a></li>
 	<li><a href="'.$pos.'../digital">digital</a></li>
 	<li><a href="'.$pos.'../about">about</a></li>
 	</ul>

@@ -24,6 +24,12 @@ input{
     border:1px solid #aaa;
     border-radius: 2px;
 }
+input[type=radio] {
+  cursor: pointer;
+}
+input[type=radio]:hover {
+  transform: scale(1.2);
+}
 label {
     margin: 0 5px 0 8px;
 }
@@ -53,6 +59,7 @@ h1, #header li, #Search, .card{
     background: #FAFAFA;
     box-shadow: 15px 15px rgba(0, 0, 0, 0.2);
     margin: 5px 0;
+    z-index: 2;
 }
 
 th, h3, #header a{
@@ -63,6 +70,12 @@ th, h3, #header a{
     font-weight: 300;
     color:#314EFF;
     border-bottom: 1pt solid black;
+    margin: 10px 0 10px 0;
+}
+h3 ::after { 
+	float: right;
+    display:inline-block;
+  content: ".";
 }
 th{
     border-bottom:none;
@@ -94,17 +107,18 @@ div .c{
     width: 100%;
     text-decoration: none;
     color:#314EFF;
-    weight: 400;
+    font-weight: 400;
 }
 
 #footer{
     position:fixed;
     bottom:0;
-    background: #223;
+    background: #314EFF;
     color: #aaa;
     left:0;
     width:100%;
     padding:5px;
+    font-weight: 900;
 }
 #footer a{
     color: #a63;
@@ -123,6 +137,7 @@ div .c{
     display:inline-block; 
     padding:2px;
     color:#F0F3F1;
+    font-weight:bold;
 
 }
 form {
@@ -152,7 +167,10 @@ form {
 }
 #Search {
     width: 450px;
-
+    position:fixed;
+    top:20px;
+    max-height: calc(100% - 110px);
+    overflow-y: auto;
 }
 #Search div{
     column-count: 2;
@@ -180,11 +198,20 @@ form {
 .delete input{
     color:#aaa;
 }
+#results{
+    position: absolute;
+    left: 600px;
+    top: 40px;
+    right: 40px;
+    z-index:-2;
+}
 .card{
     display:inline-block;
     width:250px;
     height:200px;
     box-shadow: none;
+    padding:0 20px 0 20px;
+    overflow:hidden;
 
 }
 

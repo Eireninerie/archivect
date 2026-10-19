@@ -80,5 +80,5 @@ echo "</div>";
 ?>
 <button id="testButton" type="button">test</button>
 <div id="testCont">test container</div>
-<button id="submitButton" type="button">Submit Search</button>
+<center><button id="submitButton" type="button">Submit Search</button></center>
 </form>

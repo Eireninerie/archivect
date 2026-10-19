@@ -1,18 +1,63 @@
+@font-face {
+    font-family: 'Titillium';
+    src: url(../assets/TitilliumWeb-Regular.ttf);
+}
+@font-face {
+    font-family: 'Rock Salt';
+    src: url(../assets/RockSalt-Regular.ttf);
+}
+@font-face {
+    font-family: 'Playpen Sans';
+    src: url(../assets/PlaypenSans-VariableFont_wght.ttf);
+}
 body{
     background: #F0F3F1;
     color: #212531;
     font-family:'Titillium', sans-serif;
     font-size:11pt
 }
-h1 {
-    font-family: 'Ink-Free', sans-serif;
-    font-size: 23 pt;
+input{
+    font-family: inherit;
+    margin: 5px 0;;
+    padding: 1px 3px 1px 3px;
+    background: #FAFAFA;
+    border:1px solid #aaa;
+    border-radius: 2px;
+}
+label {
+    margin: 0 5px 0 8px;
+}
+button {
+    font-family: inherit;
+    background-color: #F9BCA4;
+    border: 1px solid #a63;
+    border-radius:2px;
 
+}
+#header{
+    position:fixed;
+    top: 20px;
+    right: 50px;
+    color:inherit;
+    
+}
+h1 {
+    font-family: 'Rock Salt', sans-serif;
+    font-size: 23 pt;
+    padding:20px 40px;
+    border: 1pt solid #223;
+    background: #FAFAFA;
+    box-shadow: 15px 15px rgba(0, 0, 0, 0.2);
+}
+#header li {
+    margin: 0 20px;
+    list-style-type: none;
+    text-align: right;
 }
 h2 {
     font-family: 'Playpen Sans', sans-serif;
 }
-div {
+div .c{
     xcolor: #314EFF;
     xcolor: #F9BCA4;
 }
@@ -39,6 +84,7 @@ form {
 }
 .Company{
     padding: 0 10px 20px 10px;
+    border-bottom: 1px solid #aaa;
 }
 .table{
     display:inline-block; 
@@ -51,11 +97,15 @@ h3{
 }
 table{
 }
-tbody{
+.Company tbody{
     display:inline-block; 
     height:150px; 
-    overflow-y:scroll;
+    overflow-y:auto;
 }
+#SectorList{
+    column-count: 3;
+}
+
 .url{
     width:300px;
 }

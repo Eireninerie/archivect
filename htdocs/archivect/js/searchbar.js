@@ -86,12 +86,12 @@ $('#submitButton').click(function(){
 
    $("#errormsg").parent().remove();
    $results = $( "form" ).serialize();
-   $r1 = joinvalues("#SectorList");
-   $r2 = joinvalues("#EthosList");
-   $r3 = joinvalues("#SizesList");
-   $r4 = html2insert();
+   let SectorList = joinvalues("#SectorList");
+   let EthosList = joinvalues("#EthosList");
+   let SizesList = joinvalues("#SizesList");
+   let DistanceList = html2insert();
    $("#results").html("...loading ");
-   $("#results").load('./php/search_results.php', {"SectorList":$r1,"EthosList":$r2,"SizesList":$r3,"DistanceList":$r4} );
+   $("#results").load('./php/search_results.php', {SectorList,EthosList,SizesList,DistanceList} );
 
    });
 });

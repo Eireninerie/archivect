@@ -16,12 +16,15 @@ $sectorListTable = "sectorsList";
 $ethosListTable = "ethosList";
 $socialsListTable = "socialsList";
 
+
 $conn = new mysqli($host,$username,$password,$dbname);
 if (!$conn) {
 	die('Connection failed: '.mysqli_connect_error());
 	}
 //echo 'Connected successfully';
 	
+
+
 function rB($x,$y,$z,$w,$v)
               {echo '<input type="radio" class="'.$x.'" name="'.$y.'" value="'.$z.'" title="'.$w.'" '.$v.'>';}
              

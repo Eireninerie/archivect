@@ -13,7 +13,7 @@ include('./php/header.php');
 
 <div id='results'>
 </div>
-
+<p></br></br></br></br></p>
 <?php
 include('./php/footer.php');
 ?>

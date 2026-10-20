@@ -1,3 +1,14 @@
+:root{
+    --colour-01:#F0F3F1;
+    --colour-01-light:#FAFAFA;
+    --colour-02:#212531;
+    --colour-03:#F9BCA4;
+    --colour-03-dark:#a63;
+    --colour-04:#314EFF;
+    --colour-05:#aaa;
+    --shadow:rgba(0,0,0,0.15);
+	--bd:1px;
+}
 @font-face {
     font-family: 'Titillium';
     src: url(../assets/TitilliumWeb-Regular.ttf);
@@ -11,18 +22,18 @@
     src: url(../assets/PlaypenSans-VariableFont_wght.ttf);
 }
 body{
-    background: #F0F3F1;
-    color: #212531;
+    background: var(--colour-01);
+    color: var(--colour-02);
     font-family:'Titillium', sans-serif;
     font-size:11pt;
-    scrollbar-color: #F9BCA4;
+    scrollbar-color: var(--colour-03);
 }
 input{
     font-family: inherit;
     margin: 5px 0;;
     padding: 1px 3px 1px 3px;
-    background: #FAFAFA;
-    border:1px solid #aaa;
+    background: var(--colour-01-light);
+    border:1px solid var(--colour-05);
     border-radius: 2px;
 }
 input[type=radio] {
@@ -36,8 +47,8 @@ label {
 }
 button {
     font-family: inherit;
-    background-color: #F9BCA4;
-    border: 1px solid #a63;
+    background-color: var(--colour-03);
+    border: 1px solid var(--colour-03-dark);
     border-radius:2px;
     cursor: pointer;
 }
@@ -56,65 +67,58 @@ h1 {
     font-size: 23 pt;
     text-transform: uppercase;
 }
-
-h1, #header li, #Search, .card{
-    padding:20px 40px;
-    border: 2pt solid #212531;
-    background: #FAFAFA;
-    box-shadow: 15px 15px rgba(0, 0, 0, 0.2);
-    margin: 5px 0;
+/* corner style applied by js*/
+.corners {
+  display: grid;
+  grid-template-areas: '. t . ''l myArea r''. b .';
+  grid-template-rows: 16px auto 16px;
+    grid-template-columns: 16px auto 16px;
+}
+.corners > div {
+    border-style: solid;
+    border-color: green;
+}
+.gridt{
+    grid-area:t;
+    border-width: 0 var(--bd) 0 var(--bd);
+}
+.gridl{
+    grid-area:l;
+    border-width: var(--bd) 0 var(--bd) 0;
+}
+.gridcontent {
+    grid-area:myArea;
+    box-shadow: 10px 10px rgba(0,0,0,0.15);
+    background-color: var(--colour-01-light);
+    border: var(--bd);
+    color:#000;
     z-index: 0;
-    border-image: ul('../assets/corners.png') 30%;
 }
-.frame{
-    beckground-color:blue;
-    height:300px;
+.gridr{
+    grid-area:r;
+    border-width: var(--bd) 0 var(--bd) 0;
 }
-.corners{
-    position:absolute;
-    border: 2pt solid green;
-    width:20px;
-    height:20px;
-    z-index:1;
-    background-color: #314EFF;
+.gridb{
+    grid-area:b;
+    border-width: 0 var(--bd) 0 var(--bd);
 }
-.trc{
-    border-width: 0 1pt 1pt 0;
-    right:-20px;
-    top:-20px;
-}
-.tlc{
-    border-width: 0 0 1pt 1pt;
-    left:-20px;
-    top:-20px;
-}
-.brc{
-    border-width: 1pt 1pt 0 0;
-    right:-20px;
-    bottom:-20px;
-}
-.brc{
-    border-width: 1pt 0 0 1pt;
-    left:-20px;
-    bottom:-20px;
-    
-}
-
+/* consistent styles*/
 th, h3, #header a{
     font-family: 'Playpen-Sans';
     font-size:11pt;
     text-transform: uppercase;    
     padding: 0;
     font-weight: 300;
-    color:#314EFF;
-    border-bottom: 1pt solid black;
-    margin: 10px 0 10px 0;
+    color:var(--colour-04);
+    border-bottom: 1pt solid var(--colour-02);
 }
 h3 ::after { 
 	float: right;
   content: ".";
 }
-
+#Search h3::after{
+    content:'i';
+}
 th{
     border-bottom:none;
 }
@@ -126,19 +130,18 @@ ul{
 #header li {
     list-style-type: none;
     float: right;
-    margin: 5px 0;
-    padding: 5px;
     width:fit-content;
     transition: ease-in-out .3s;
+
+}
+#header li div{
+    padding:10px;
 }
 #header li:hover{
     transition: ease-in-out .3s;
-    margin: 5px 5px;
+    margin-right: 5px;
 }
-.palette{
-    color: #314EFF;
-    color: #F9BCA4;
-}
+
 #header a, .card a {
     
     display:inline-block;
@@ -159,12 +162,12 @@ ul{
     font-weight: 900;
 }
 #footer a{
-    color: #a63;
+    color: var(--colour-03-dark);
 }
 .pagination{
 
     position:fixed;
-    background-color: #314EFF;
+    background-color: var(--colour-04);
     left: 25%;
     top: 10px;
     width:max-content;
@@ -174,17 +177,19 @@ ul{
     list-style:none;
     display:inline-block; 
     padding:2px;
-    color:#F0F3F1;
+    color:var(--colour-01);
     font-weight:bold;
 
 }
-form {
-    padding:5px;
-}
-
+/* Input update UI page*/
 .Company{
     padding: 0 10px 20px 10px;
-    border-bottom: 1px solid #aaa;
+    border-bottom: 1px solid var(--colour-05);
+}
+.Company tbody{
+    display:inline-block; 
+    height:150px; 
+    overflow-y:auto;
 }
 #Companies{
     margin:90px 0 0 0;
@@ -193,15 +198,17 @@ form {
     display:inline-block; 
 
 }
-
+.url{
+    width:300px;
+}
+/* main search */
 #DistanceTable input[type=text]{
     width: 80px;
 }
 
 #submitButton{
-    position:absolute;
-    bottom:0;
-    left: calc( 50% - 60px );
+  
+    margin-left: calc( 50% - 60px );
     height:60px;
     width:120px;
     border-radius: 60px 60px 0 0;
@@ -212,21 +219,21 @@ form {
     font-size: 17pt;
 }
 #submitButton:hover{
-    text-shadow:3px 3px rgba(0, 0, 0, 0.2);
+    text-shadow:3px 3px var(--shadow);
 }
-.Company tbody{
-    display:inline-block; 
-    height:150px; 
-    overflow-y:auto;
-}
+
 #Search {
-    width: 450px;
+    width: 520px;
     position:fixed;
     top:20px;
-    max-height: calc(100% - 110px);
-    overflow-y: auto;
+    overflow-y: hidden;
 }
-#Search div{
+#Search .gridcontent{
+    padding: 20px 20px 0 20px;
+    max-height: calc(100vh - 100px);
+    overflow-y: scroll;
+}
+#Search >div >div{
     column-count: 2;
 }
 #Search label {
@@ -234,9 +241,7 @@ form {
     width: 130px;
     cursor:help;
 }
-.url{
-    width:300px;
-}
+
 .theInputs{
     display: inline; 
     white-space: nowrap;
@@ -251,7 +256,7 @@ form {
     background-color:red;
 }
 .delete input{
-    color:#aaa;
+    color:var(--colour-05);
 }
 #results{
     position: absolute;
@@ -262,12 +267,26 @@ form {
 }
 .card{
     display:inline-block;
-    width:250px;
-    height:200px;
+    width:282px;
+    height:232px;
     box-shadow: none;
-    padding:0 20px 0 20px;
-    overflow:hidden;
 
+}
+.card .gridcontent{
+
+    padding:0 20px 0 20px;
+    height:200px;
+    overflow:hidden;
+}
+img {
+    display:none;
+}
+.card h3{
+    height: 44px;
+  display: flex;
+}
+.card h3 a{
+  align-self: flex-end;
 }
 
 .card ul{

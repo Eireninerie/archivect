@@ -1,4 +1,7 @@
+$.fn.addcorners = function(){
+    $prepended = '<div class="gridt"></div>  <div class="gridl"></div><div class="gridr"></div>  <div class="gridb"></div>';
+    $(this).addClass('corners').wrapInner('<div class="gridcontent">').prepend($prepended);
+    }
 $(document).ready(function(){
-
-    $('#Search').wrap('<div class="frame" >').parent().css({width:$('#Search').width()+'px'}).append('<div class="corners trc">o</div>');
+    $('h1, #header li, #Search, .card').addcorners();
 });

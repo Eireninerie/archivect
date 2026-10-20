@@ -62,6 +62,7 @@ function html2insert() {
 
 
 $(document).ready(function(){
+
 $('#addPosts').click(        function() {
             // Get input values
             $postStart = $("#postStartInput").val();
@@ -91,7 +92,11 @@ $('#submitButton').click(function(){
    let SizesList = joinvalues("#SizesList");
    let DistanceList = html2insert();
    $("#results").html("...loading ");
-   $("#results").load('./php/search_results.php', {SectorList,EthosList,SizesList,DistanceList} );
-
+   $("#results").load('./php/search_results.php', {SectorList,EthosList,SizesList,DistanceList},
+      function(){
+      $('.card').wrapInner('<div>').find('div').addcorners() 
+      }
+   );
+         
    });
 });

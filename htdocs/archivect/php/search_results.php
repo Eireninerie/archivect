@@ -43,14 +43,19 @@ function cardResults(){
 	if ($ratingSort->num_rows > 0){
 		while($row = $ratingSort->fetch_assoc()){
 			echo "
-				<div class='card'>		
-				<img class='logo' src='".$row["logo"]."'><h3> <a href='https://".$row["website"]."' alt='". $row["Company"]." website link' title='https://".$row["website"]."'>". $row["Company"]. "</a></h3>
+				<div class='card' id='".$row["ID"]."'>		
+				<h3> <a href='https://".$row["website"]."' alt='". $row["Company"]." website link' title='https://".$row["website"]."'>". $row["Company"]. "</a></h3>
+				<img class='logo' src='".$row["logo"]."'>
+				<div class='cardDetails hiddenClass' id='".$row["ID"]."'>
+				<h3> ". $row["Company"]. "<button type='button' class='exitcard'>x</button></h3>
+				<img class='logo' src='".$row["logo"]."'>
+				
 				";
 			cardDetails($sectorTable,"sectors",$row["ID"],1);
 			cardDetails($ethosTable,"ethos",$row["ID"],1);
 			cardDetails($addressTable,"town",$row["ID"],0);
 
-			echo "</p></div>
+			echo "</div></div>
 			";
 		}
 	} else {

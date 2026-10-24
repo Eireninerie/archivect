@@ -9,6 +9,9 @@
     --shadow:rgba(0,0,0,0.15);
 	--bd:1px;
 }
+.hiddenClass{
+    display: none;
+}
 @font-face {
     font-family: 'Titillium';
     src: url(../assets/TitilliumWeb-Regular.ttf);
@@ -26,7 +29,8 @@ body{
     color: var(--colour-02);
     font-family:'Titillium', sans-serif;
     font-size:11pt;
-    scrollbar-color: var(--colour-03);
+    
+  scrollbar-color: var(--colour-03) var(--colour-01-light);
 }
 input{
     font-family: inherit;
@@ -71,8 +75,10 @@ h1 {
 .corners {
   display: grid;
   grid-template-areas: '. t . ''l myArea r''. b .';
-  grid-template-rows: 16px auto 16px;
+  grid-template-rows: 16px 2fr 16px;
     grid-template-columns: 16px auto 16px;
+
+  transition: grid-template-rows 0.5s ease-out;
 }
 .corners > div {
     border-style: solid;
@@ -112,17 +118,43 @@ th, h3, #header a{
     color:var(--colour-04);
     border-bottom: 1pt solid var(--colour-02);
 }
-h3 ::after { 
+.card h2 ::after { 
 	float: right;
   content: ".";
 }
-#Search h3::after{
+.info{
+	float: right;
     content:'i';
+    height: 20px;
+    width: 20px;
+    border: 1px solid var(--colour-03-dark);
+    border-radius:50%;
+    text-align: center;
+    margin: 0 0 2px;
+    text-transform: lowercase;
+    background-color: var(--colour-03);
+    cursor: pointer;
+    anchor-name: --info;
+}
+.info + .infobox{
+    visibility: hidden;
+    position-anchor: --info;
+    text-transform: none;
+    position:fixed;
+    width:400px;
+    color:var(--colour-01-light);
+    background-color: var(--colour-02);
+    left: anchor(right);
+    top: anchor(bottom);
+    padding: 5px 20px;
+}
+.info:hover + .infobox{
+    visibility: visible;
 }
 th{
     border-bottom:none;
 }
-ul{
+#header ul{
     position:absolute;
     right:0;
     width:min-content;
@@ -207,10 +239,11 @@ ul{
 }
 
 #submitButton{
-  
+    margin-top:8px;
     margin-left: calc( 50% - 60px );
     height:60px;
     width:120px;
+    border-width: 0;
     border-radius: 60px 60px 0 0;
     padding: 5px 0 0 0;
     transform-origin: bottom;
@@ -230,17 +263,12 @@ ul{
 }
 #Search .gridcontent{
     padding: 20px 20px 0 20px;
-    max-height: calc(100vh - 100px);
-    overflow-y: scroll;
+    overflow-y: auto;
 }
-#Search >div >div{
+#Search >div >div:not(.cardDetails){
     column-count: 2;
 }
-#Search label {
-    display:inline-block;
-    width: 130px;
-    cursor:help;
-}
+
 
 .theInputs{
     display: inline; 
@@ -262,7 +290,7 @@ ul{
     position: absolute;
     left: 600px;
     top: 40px;
-    right: 40px;
+    right: 140px;
     z-index:-2;
 }
 .card{
@@ -270,6 +298,7 @@ ul{
     width:282px;
     height:232px;
     box-shadow: none;
+    margin:3px 1px;
 
 }
 .card .gridcontent{
@@ -292,3 +321,33 @@ img {
 .card ul{
     position:relative;
 }
+.cardDetails{
+    margin:0;
+    column-count:1;
+}
+.exitcard{
+    float: right;
+}
+fieldset{
+    border:0;
+    position:relative;
+    display:inline-block;
+    unicode-bidi: inherit;
+    min-inline-size: initial;
+    padding:0;
+}
+legend{
+    width: 130px;
+    cursor:help;
+    padding:0;
+    position:relative;
+    unicode-bidi: inherit;
+    float:left;
+}
+.setheight{
+    max-height: 841px;
+    transition: ease-in-out .3s;
+}
+.autoheight{
+  grid-template-rows: 16px 1fr 16px;
+  transition: grid-template-rows 0.5s ease-out;

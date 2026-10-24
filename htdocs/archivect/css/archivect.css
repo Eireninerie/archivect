@@ -6,8 +6,13 @@
     --colour-03-dark:#a63;
     --colour-04:#314EFF;
     --colour-05:#aaa;
+    --colour-border:green;
     --shadow:rgba(0,0,0,0.15);
 	--bd:1px;
+    --righthead:100px;
+    --font-title:'Rock Salt';
+    --font-headings:'Playpen-Sans';
+    --font-text:'Titillium';
 }
 .hiddenClass{
     display: none;
@@ -27,17 +32,16 @@
 body{
     background: var(--colour-01);
     color: var(--colour-02);
-    font-family:'Titillium', sans-serif;
+    font-family:var(--font-text), sans-serif;
     font-size:11pt;
-    
-  scrollbar-color: var(--colour-03) var(--colour-01-light);
+    scrollbar-color: var(--colour-03) var(--colour-01-light);
 }
 input{
     font-family: inherit;
     margin: 5px 0;;
     padding: 1px 3px 1px 3px;
     background: var(--colour-01-light);
-    border:1px solid var(--colour-05);
+    border:1px solid var(--colour-border);
     border-radius: 2px;
 }
 input[type=radio] {
@@ -62,61 +66,66 @@ button:hover{
 #header{
     position:fixed;
     top: 20px;
-    right: 50px;
+    right:var(--righthead);
     color:inherit;
+    z-index: 2;
     
 }
 h1 {
-    font-family: 'Rock Salt', sans-serif;
+    font-family: var(--font-title), sans-serif;
     font-size: 23 pt;
     text-transform: uppercase;
+    anchor-name: --title;
 }
 /* corner style applied by js*/
 .corners {
   display: grid;
   grid-template-areas: '. t . ''l myArea r''. b .';
-  grid-template-rows: 16px 2fr 16px;
+  grid-template-rows: 16px 1fr 16px;
     grid-template-columns: 16px auto 16px;
 
   transition: grid-template-rows 0.5s ease-out;
 }
 .corners > div {
-    border-style: solid;
-    border-color: green;
+    border-width: var(--bd);
+    border-color: var(--colour-border);
+
+}
+.gridt, .gridb{
+    border-style: none solid;
+}
+.gridl, .gridr{
+    border-style: solid none;
 }
 .gridt{
     grid-area:t;
-    border-width: 0 var(--bd) 0 var(--bd);
 }
-.gridl{
+.gridl {
     grid-area:l;
-    border-width: var(--bd) 0 var(--bd) 0;
 }
 .gridcontent {
     grid-area:myArea;
     box-shadow: 10px 10px rgba(0,0,0,0.15);
     background-color: var(--colour-01-light);
-    border: var(--bd);
+    border-style:solid;
     color:#000;
     z-index: 0;
 }
 .gridr{
     grid-area:r;
-    border-width: var(--bd) 0 var(--bd) 0;
 }
 .gridb{
     grid-area:b;
-    border-width: 0 var(--bd) 0 var(--bd);
 }
 /* consistent styles*/
 th, h3, #header a{
-    font-family: 'Playpen-Sans';
+    font-family: var(--font-headings);
     font-size:11pt;
     text-transform: uppercase;    
     padding: 0;
     font-weight: 300;
     color:var(--colour-04);
-    border-bottom: 1pt solid var(--colour-02);
+    border-bottom: 1pt solid var(--colour-border);
 }
 .card h2 ::after { 
 	float: right;
@@ -124,12 +133,10 @@ th, h3, #header a{
 }
 .info{
 	float: right;
-    content:'i';
-    height: 20px;
-    width: 20px;
     border: 1px solid var(--colour-03-dark);
     border-radius:50%;
     text-align: center;
+    min-width:20px;
     margin: 0 0 2px;
     text-transform: lowercase;
     background-color: var(--colour-03);
@@ -144,9 +151,11 @@ th, h3, #header a{
     width:400px;
     color:var(--colour-01-light);
     background-color: var(--colour-02);
-    left: anchor(right);
+    right: anchor(center);
     top: anchor(bottom);
     padding: 5px 20px;
+    z-index: 3;
+    font:normal 11pt var(--font-headings);
 }
 .info:hover + .infobox{
     visibility: visible;
@@ -154,28 +163,55 @@ th, h3, #header a{
 th{
     border-bottom:none;
 }
-#header ul{
-    position:absolute;
-    right:0;
+#nav{
+    position-anchor: --title;
+    position: fixed;
+    right: calc(anchor(right) - 60px);
+    top: calc(anchor(bottom) - 60px);
+    z-index: -1;
+    height:min-content;
+    background: #314EFF;
+    padding:16px;
+    display: block;
     width:min-content;
 }
+#nav button{
+    float:right;
+    background-color:transparent;
+    border: none;
+    border-radius:0;
+}
+#nav ul{
+    width:min-content;
+    position:relative;
+    padding:0;
+    right:0px;
+    margin:0;
+    max-height:0;
+    overflow:hidden;
+    float:right;
+    transition: max-height ease-in-out .5s;
+}
+#nav:hover ul{
+    max-height:300px;
+}
+
 #header li {
     list-style-type: none;
+    display:block;
     float: right;
-    width:fit-content;
-    transition: ease-in-out .3s;
-
-}
-#header li div{
+    width:80%;
+    text-align:right;
     padding:10px;
+    margin-left:5px;
 }
+
 #header li:hover{
-    transition: ease-in-out .3s;
+    margin-left:0;
     margin-right: 5px;
 }
 
 #header a, .card a {
-    
     display:inline-block;
     width: 100%;
     text-decoration: none;
@@ -183,18 +219,19 @@ th{
     font-weight: 400;
 }
 
+
 #footer{
     position:fixed;
     bottom:0;
     background: #314EFF;
     color: #aaa;
     left:0;
-    width:100%;
-    padding:5px;
+    right:0;
+    padding:5px 10px;
     font-weight: 900;
 }
 #footer a{
-    color: var(--colour-03-dark);
+    color: var(--colour-03);
 }
 .pagination{
 
@@ -248,7 +285,7 @@ th{
     padding: 5px 0 0 0;
     transform-origin: bottom;
     text-transform: uppercase;
-    font-family: 'Rock Salt';
+    font-family: var(--font-title);
     font-size: 17pt;
 }
 #submitButton:hover{
@@ -259,6 +296,7 @@ th{
     width: 520px;
     position:fixed;
     top:20px;
+    max-height: calc(100vh - 60px);
     overflow-y: hidden;
 }
 #Search .gridcontent{
@@ -266,7 +304,7 @@ th{
     overflow-y: auto;
 }
 #Search >div >div:not(.cardDetails){
-    column-count: 2;
+    column-width:200px;
 }
 
 
@@ -344,10 +382,36 @@ legend{
     unicode-bidi: inherit;
     float:left;
 }
-.setheight{
-    max-height: 841px;
-    transition: ease-in-out .3s;
+
+@media screen and (max-width:1010px) {
+    #Search{
+            width: calc(100% - 20px);
+        max-height: calc(100vh - 150px);
+        top:100px;
+        transition:all ease-in-out .3s;
+    }
+    #results{
+        left: 7px;
+        top: 200px;
+        right: 0px;
+    }
+    #header{
+        position:fixed;
+        top: 5px;
+    }
+    #header h1{
+        margin: 15px 0;
+    }
+    #Search.collapse{
+        grid-template-rows: 16px 65px 16px;
+    }
+    #Search.collapse .gridcontent{
+        overflow-y: hidden;
+    }
+    #Search.collapse:hover{
+        grid-template-rows: 16px 1fr 16px;
+    }
+    #Search.collapse:hover .gridcontent{
+        overflow-y: auto;
+    }
 }
-.autoheight{
-  grid-template-rows: 16px 1fr 16px;
-  transition: grid-template-rows 0.5s ease-out;

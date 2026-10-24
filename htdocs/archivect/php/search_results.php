@@ -47,7 +47,8 @@ function cardResults(){
 				<h3> <a href='https://".$row["website"]."' alt='". $row["Company"]." website link' title='https://".$row["website"]."'>". $row["Company"]. "</a></h3>
 				<img class='logo' src='".$row["logo"]."'>
 				<div class='cardDetails hiddenClass' id='".$row["ID"]."'>
-				<h3> ". $row["Company"]. "<button type='button' class='exitcard'>x</button></h3>
+				
+				<h3><button type='button' class='exitcard'>x</button> ". $row["Company"]. "</h3>
 				<img class='logo' src='".$row["logo"]."'>
 				
 				";

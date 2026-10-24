@@ -15,19 +15,27 @@ echo '
 	<script src="'.$pos.'./js/php.js"></script>
 
 <style></style>
-
+'
+?>
 </head>
 
 <body>
 
-<div id="header"><h1>Archivect</h1>
+<div id="header"><h1>Archivect<sub class="info">.beta</sub><div class="infobox">I'm working on it. It's only a personal project. Head to the about page to see some goals.</div></h1>
 
-	<ul><li><a href="'.$pos.'./">Archidex</a></li>
-	<li><a href="'.$pos.'./projects">wiki</a></li>
-	<li><a href="'.$pos.'./calendar">diary</a></li>
-	<li><a href="'.$pos.'./digital">digital</a></li>
+<div id="nav">
+	<button>Event</button>
+	<ul>
+		<?php
+
+echo '
+	<li><a href="'.$pos.'./">Search</a></li>
+	<li><a href="'.$pos.'./projects"><s title="under construction">wiki</s></a></li>
+	<li><a href="'.$pos.'./calendar"><s title="under construction">diary</s></a></li>
+	<li><a href="'.$pos.'./digital"><s title="under construction">digital</s></a></li>
 	<li><a href="'.$pos.'./about">about</a></li>
 	</ul>
-</div>
-'
+	'
 ?>
+</div>
+</div>

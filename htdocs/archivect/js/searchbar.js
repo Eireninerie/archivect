@@ -84,7 +84,10 @@ $('#testButton').click(function(){
 });
     
 $('#submitButton').click(function(){
-
+   $searchheight = $('#Search').height();
+   if (window.matchMedia("(min-width: 1010px)").matches) {
+   $('#Search').height($searchheight);
+   }
    $("#errormsg").parent().remove();
    $results = $( "form" ).serialize();
    let SectorList = joinvalues("#SectorList");
@@ -94,21 +97,20 @@ $('#submitButton').click(function(){
    $("#results").html("...loading ");
    $("#results").load('./php/search_results.php', {SectorList,EthosList,SizesList,DistanceList},
       function(){
-      $('.card').wrapInner('<div>').children('div').addcorners()
+      $('#Search').addClass('collapse');
+      $('.card').wrapInner('<div>').children('div').addcorners();
       $('.card .gridcontent').hover(function(){
          $('#Search').find('.cardDetails ').remove();
          $content = $(this).find('.cardDetails').clone(); 
          $('#Search').find('.gridcontent').wrapInner('<div class="wrapped">').find('.wrapped').addClass('hiddenClass');
          $('#Search').find('.gridcontent').prepend($content);
          $('#Search').find('.cardDetails').removeClass('hiddenClass');
-         $('#Search').addClass('autoheight');
-         },function(){
          $('.exitcard').click(function(){
-         $('#Search').find('.gridcontent').removeClass('autoheight');
-            $('#Search').find('.cardDetails ').remove();
-            $('#Search').find('.wrapped').children().unwrap();
-//            $(this).prepend('<h3>'+$ID+'</h3>');
+               $('#Search').find('.cardDetails ').remove();
+               $('#Search').find('.wrapped').children().unwrap();
          });
+         },function(){
+          
          }); 
       }
    );

@@ -39,7 +39,7 @@ global $sectorListTable;
 <h3><b>Sectors</b>
 <b class="info">i</b><div class='infobox'>
 <p>Hover over some sectors for their description.</p>
-<p>Give a rating for each sector: default is 'apathetic'. The result each firm receives is on an average of the sectors it has. "avoid" weighs very strongly.
+<p>Give a rating for each sector: default is 'ambivalent', ie. no feelings. The result each firm receives is on an average of the sectors it has. "avoid" weighs very strongly.
 </p><p>For example, if you selected "avoid" for transport and "best" for hospitality, you'd get the following result:
 	<ol><li>firms with hospitality and no transport</li><li>firms with neither hospitality nor transport</li><li>firms with hospitality and transport</li><li>firms with transport but no hospitality</li></ol>
 </div>

@@ -30,11 +30,11 @@ function rB($x,$y,$z,$w,$v)
              
            
 function rating($ID,$Name){
-	rB($ID,$Name,"1","avoid","").	
-	rB($ID,$Name,"2","ambivalent","checked='checked'").
-	rB($ID,$Name,"3","fine","").
-	rB($ID,$Name,"4","like","").
-	rB($ID,$Name,"5","best","");
+	rB($ID,$Name,1,"avoid","").	
+	rB($ID,$Name,2,"ambivalent","checked='checked'").
+	rB($ID,$Name,3,"fine","").
+	rB($ID,$Name,4,"like","").
+	rB($ID,$Name,5,"best","");
 }
 
 function theInputs($row,$type,$inputtype){

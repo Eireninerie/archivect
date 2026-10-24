@@ -151,10 +151,10 @@ th, h3, #header a{
     cursor: pointer;
     anchor-name: --info;
 }
-input[type=radio]{
+input[type=radio],legend{
     anchor-name: --info;
 }
-.info + .infobox, input[type=radio] + .infobox{
+.info + .infobox, input[type=radio] + .infobox, legend + .infobox{
     max-height:0;
     overflow:hidden;
     position-anchor: --info;
@@ -163,17 +163,26 @@ input[type=radio]{
     max-width:400px;
     color:var(--colour-01-light);
     background-color: var(--colour-02);
-    right: anchor(center);
+
     top: anchor(bottom);
     padding: 0px 20px;
     z-index: 3;
     font:normal 11pt var(--font-headings);
-    transition: all ease-in-out .5s;
+
 }
-.info:hover + .infobox, input[type=radio]:hover + .infobox{
+.info + .infobox{
+    right: anchor(right);
+     transition: all ease-in-out .5s;
+}
+input[type=radio] + .infobox, legend{
+    left: anchor(right);
+
+}
+.info:hover + .infobox, input[type=radio]:hover + .infobox,legend:hover + .infobox{
     max-height:100vh;
     padding:5px 20px;
 }
+
 th{
     border-bottom:none;
 }
@@ -406,11 +415,12 @@ fieldset{
 }
 legend{
     width: 130px;
-    cursor:help;
+    cursor:pointer;
     padding:0;
     position:relative;
     unicode-bidi: inherit;
     float:left;
+    user-select: none;
 }
 
 @media screen and (max-width:1010px) {

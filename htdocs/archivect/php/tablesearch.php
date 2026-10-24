@@ -7,7 +7,8 @@ function xList($type,$table){
 	$Query = $conn->query($QuerySQL);
 	while($row = $Query->fetch_assoc()){
 
-	echo '<fieldset><legend for='.$type.$row["ID"].' title="'.$row["Description"].'" >'.$row["Name"].'</legend>';
+	echo '<fieldset><legend for='.$type.$row["ID"].' title="" >'.$row["Name"].'</legend>
+	<div class="infobox"><p>'.$row["Description"].'</p></div>';
 	rating($type,$type.$row["ID"]);
 	echo "</fieldset></br>";}
 }

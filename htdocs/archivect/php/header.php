@@ -23,7 +23,10 @@ echo '
 
 <div id="header">
 	<h1>Archivect<sub class="info">.beta</sub>
-	<div class="infobox">I'm working on it. It's only a personal project. I'm not using any AI cause I dun wanna, I'm having fun, slowly. Head to the about page to see some goals.</div>
+	<div class="infobox">
+		<p>I'm working on it. It's only a personal project. I'm not using any AI cause I dun wanna, I'm having fun, slowly. Head to the about page to see some goals.</p>
+		<p>Disclaimer: lots of this info may be inaccurate as it's just what I've found manually. There will be guaranteed gaps.</p>
+	</div>
 </h1>
 
 <div id="nav">

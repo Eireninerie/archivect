@@ -21,10 +21,13 @@ echo '
 
 <body>
 
-<div id="header"><h1>Archivect<sub class="info">.beta</sub><div class="infobox">I'm working on it. It's only a personal project. Head to the about page to see some goals.</div></h1>
+<div id="header">
+	<h1>Archivect<sub class="info">.beta</sub>
+	<div class="infobox">I'm working on it. It's only a personal project. I'm not using any AI cause I dun wanna, I'm having fun, slowly. Head to the about page to see some goals.</div>
+</h1>
 
 <div id="nav">
-	<button>Event</button>
+	<button>Menu</button>
 	<ul>
 		<?php
 

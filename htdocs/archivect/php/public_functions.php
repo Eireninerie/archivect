@@ -26,7 +26,7 @@ if (!$conn) {
 
 
 function rB($x,$y,$z,$w,$v)
-              {echo '<input type="radio" class="'.$x.'" name="'.$y.'" value="'.$z.'" title="'.$w.'" '.$v.'>';}
+              {echo '<input type="radio" class="'.$x.'" name="'.$y.'" value="'.$z.'" '.$v.'><label class="infobox">'.$w.'</label>';}
              
            
 function rating($ID,$Name){

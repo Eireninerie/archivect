@@ -82,7 +82,7 @@ h1 {
   display: grid;
   grid-template-areas: '. t . ''l myArea r''. b .';
   grid-template-rows: 16px 1fr 16px;
-    grid-template-columns: 16px auto 16px;
+    grid-template-columns: 16px 1fr 16px;
 
   transition: grid-template-rows 0.5s ease-out;
 }
@@ -105,11 +105,15 @@ h1 {
 }
 .gridcontent {
     grid-area:myArea;
-    box-shadow: 10px 10px rgba(0,0,0,0.15);
+    box-shadow: 3px 3px var(--shadow);
     background-color: var(--colour-01-light);
     border-style:solid;
     color:#000;
     z-index: 0;
+}
+#Search .gridcontent, h1 .gridcontent{
+    box-shadow: 10px 10px var(--shadow);
+
 }
 .gridr{
     grid-area:r;
@@ -125,7 +129,11 @@ th, h3, #header a{
     padding: 0;
     font-weight: 300;
     color:var(--colour-04);
-    border-bottom: 1pt solid var(--colour-border);
+    border-bottom: var(--bd) solid var(--colour-border);
+}
+.cardDetails h3:not(:first-of-type), #header a{
+
+    border-bottom-style:dashed;
 }
 .card h2 ::after { 
 	float: right;
@@ -143,22 +151,28 @@ th, h3, #header a{
     cursor: pointer;
     anchor-name: --info;
 }
-.info + .infobox{
-    visibility: hidden;
+input[type=radio]{
+    anchor-name: --info;
+}
+.info + .infobox, input[type=radio] + .infobox{
+    max-height:0;
+    overflow:hidden;
     position-anchor: --info;
     text-transform: none;
     position:fixed;
-    width:400px;
+    max-width:400px;
     color:var(--colour-01-light);
     background-color: var(--colour-02);
     right: anchor(center);
     top: anchor(bottom);
-    padding: 5px 20px;
+    padding: 0px 20px;
     z-index: 3;
     font:normal 11pt var(--font-headings);
+    transition: all ease-in-out .5s;
 }
-.info:hover + .infobox{
-    visibility: visible;
+.info:hover + .infobox, input[type=radio]:hover + .infobox{
+    max-height:100vh;
+    padding:5px 20px;
 }
 th{
     border-bottom:none;
@@ -180,30 +194,33 @@ th{
     background-color:transparent;
     border: none;
     border-radius:0;
+    color:var(--colour-01-light);
 }
 #nav ul{
     width:min-content;
     position:relative;
     padding:0;
     right:0px;
-    margin:0;
+    margin: 0 20px;
     max-height:0;
     overflow:hidden;
     float:right;
-    transition: max-height ease-in-out .5s;
+    transition: all ease-in-out .5s;
 }
 #nav:hover ul{
-    max-height:300px;
+    max-height:90vh;
+    margin: 40px;
 }
 
 #header li {
     list-style-type: none;
     display:block;
     float: right;
-    width:80%;
+    width:60%;
     text-align:right;
-    padding:10px;
+    padding: 10px 30px;
     margin-left:5px;
+    transition: all ease-in-out .5s;
 }
 
 #header li:hover{
@@ -298,12 +315,14 @@ th{
     top:20px;
     max-height: calc(100vh - 60px);
     overflow-y: hidden;
+    left:10px;
 }
 #Search .gridcontent{
     padding: 20px 20px 0 20px;
     overflow-y: auto;
+    scrollbar-gutter: stable;
 }
-#Search >div >div:not(.cardDetails){
+#Search >div >div:not(.cardDetails), .cardDetails >div{
     column-width:200px;
 }
 
@@ -326,13 +345,23 @@ th{
 }
 #results{
     position: absolute;
-    left: 600px;
+    left: 560px;
     top: 40px;
+    bottom:30px;
     right: 140px;
     z-index:-2;
+    overflow-y:auto;
+    direction:rtl;
+    display:block;
+    scrollbar-gutter: stable;
+    scrollbar-color: var(--colour-border) var(--colour-01-light);
+    padding: 100px 0 100px 30px;
+    
 }
 .card{
-    display:inline-block;
+
+    direction:ltr;
+    float:left;
     width:282px;
     height:232px;
     box-shadow: none;
@@ -349,22 +378,23 @@ img {
     display:none;
 }
 .card h3{
-    height: 44px;
+    height: 50px;
   display: flex;
 }
 .card h3 a{
   align-self: flex-end;
 }
 
-.card ul{
+.gridcontent ul{
     position:relative;
+    margin:0;
 }
 .cardDetails{
     margin:0;
-    column-count:1;
 }
 .exitcard{
     float: right;
+    left: 15px;
 }
 fieldset{
     border:0;
@@ -392,8 +422,9 @@ legend{
     }
     #results{
         left: 7px;
-        top: 200px;
         right: 0px;
+    top: 40px;
+    padding: 200px 0 100px 30px;
     }
     #header{
         position:fixed;
@@ -402,16 +433,15 @@ legend{
     #header h1{
         margin: 15px 0;
     }
-    #Search.collapse{
-        grid-template-rows: 16px 65px 16px;
-    }
+
     #Search.collapse .gridcontent{
-        overflow-y: hidden;
+        overflow-y:hidden;
+        max-height: 55px;
+        transition:all ease-in-out .3s;
     }
-    #Search.collapse:hover{
-        grid-template-rows: 16px 1fr 16px;
-    }
+
     #Search.collapse:hover .gridcontent{
         overflow-y: auto;
+        max-height: calc(100vh - 150px);
     }
 }

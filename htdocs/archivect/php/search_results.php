@@ -31,7 +31,7 @@ function cardDetails($tableName,$columnName,$row,$sub){
 			while($row = $result->fetch_assoc()){
 			echo "
 			<li>".$row["".$rowvalue.""]."</li>
-			";}} else {echo "x";}
+			";}} else {echo "not yet listed/unknown";}
 	echo "
 	</ul>
 	";
@@ -48,15 +48,16 @@ function cardResults(){
 				<img class='logo' src='".$row["logo"]."'>
 				<div class='cardDetails hiddenClass' id='".$row["ID"]."'>
 				
-				<h3><button type='button' class='exitcard'>x</button> ". $row["Company"]. "</h3>
+				<h3><b><button type='button' class='exitcard'>x</button> ". $row["Company"]. "</b></h3>
 				<img class='logo' src='".$row["logo"]."'>
-				
-				";
+				<h3>Sectors</h3>
+				<div>";
 			cardDetails($sectorTable,"sectors",$row["ID"],1);
+			echo "</div><h3>Ethos</h3><div>";
 			cardDetails($ethosTable,"ethos",$row["ID"],1);
+			echo "</div><h3>Locations</h3><div>";
 			cardDetails($addressTable,"town",$row["ID"],0);
-
-			echo "</div></div>
+			echo "</div></div></div>
 			";
 		}
 	} else {

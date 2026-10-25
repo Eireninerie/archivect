@@ -86,7 +86,11 @@ $('#testButton').click(function(){
 $('#submitButton').click(function(){
    $searchheight = $('#Search').height();
    if (window.matchMedia("(min-width: 1010px)").matches) {
-   $('#Search').height($searchheight);
+      $('#Search').height($searchheight);
+   }else{
+      $('#pull').toggleClass('hiddenClass').click(function(){
+         $('#Search').toggleClass('collapse');
+      });
    }
    $("#errormsg").parent().remove();
    $results = $( "form" ).serialize();

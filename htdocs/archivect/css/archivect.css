@@ -100,6 +100,7 @@ h1 {
 }
 .gridt, .gridb{
     border-style: none solid;
+    overflow-y: visible;
 }
 .gridl, .gridr{
     border-style: solid none;
@@ -277,7 +278,7 @@ th{
 .content{
     text-align: center;
     margin: 15vh 0 100px 10%;
-    width: clamp(500px,60vw,800px);
+    width: clamp(500px,60%,800px);
 }
 
 .content p, .content li{
@@ -397,6 +398,7 @@ th{
     scrollbar-gutter: stable;
     scrollbar-color: var(--colour-border) var(--colour-01-light);
     padding: 100px 0 100px 30px;
+    overflow-x:hidden;
     
 }
 .card{
@@ -456,6 +458,7 @@ legend{
     -webkit-user-select: none;
 }
 
+
 @media screen and (max-width:1010px) {
     #Search{
             width: calc(100% - 20px);
@@ -483,8 +486,10 @@ legend{
         transition:all ease-in-out .3s;
     }
 
-    #Search.collapse:hover .gridcontent{
-        overflow-y: auto;
-        max-height: calc(100vh - 150px);
+    #pull{
+        grid-area: b;
+        height:20px;
+        overflow: hidden;
+
     }
 }

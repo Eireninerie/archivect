@@ -69,8 +69,8 @@ echo '</div>';
         <th>Rating</th>        
     </tr>
     <tr>
-       	<td><input type="text" id="postStartInput" maxLength="4" placeholder="eg. B77" required></td>
-        <td><input type="text" id="postEndInput" maxLength="4" placeholder="eg. EN6" required></td>
+       	<td><input type="text" id="postStartInput" maxLength="4" placeholder="eg. B77"></td>
+        <td><input type="text" id="postEndInput" maxLength="4" placeholder="eg. EN6"></td>
 		<td><button id="addPosts" type="button">+</button></td>
 	</tr>
 </table>

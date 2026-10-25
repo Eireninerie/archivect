@@ -36,7 +36,8 @@ include($pos.'./php/header.php');
 <p>This is fully intended to be a tool for students. At any stage. I'm not intending to include any firms that don't offer anything to students (knowledge, placements, etc).</p>
 <p>I'm not looking to make any money from this, so I will only use this to share whatever I want. But hosting and domains do cost money so I wouldn't mind help if you this think project is worth anything.</p>
 <p>I'm not using any AI because that kills the fun of it for me. It's a controversial topic, I may give my 2 cents on it in the manifesto page; but for now, in this specific project, that's the rules to play in this sandpit. Would love to bring others on board if they would like to join in the game, provided they also play nice.</p>
-<p>Regardless, I'm keeping this open source on Github. This specific page is intended for firms in the UK but if someone wants to set one up for another country that would be fun.</p>
+<p>Regardless, I'm keeping this open source on Github. Please feel free to look at my code for a free horror story and tell me about my errors. This specific page is intended for firms in the UK but if someone wants to set one up for another country that would be fun.</p>
+<p>I miss old internet. I know the styling here is a touch old-fashioned.</p>
 </p>
 </div>
 

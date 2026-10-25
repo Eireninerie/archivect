@@ -7,8 +7,8 @@ function xList($type,$table){
 	$Query = $conn->query($QuerySQL);
 	while($row = $Query->fetch_assoc()){
 
-	echo '<fieldset><legend for='.$type.$row["ID"].' title="" >'.$row["Name"].'</legend>
-	<div class="infobox"><p>'.$row["Description"].'</p></div>';
+	echo '<fieldset><legend for='.$type.$row["ID"].' title="" >'.$row["Name"].'<div class="infobox"><p>'.$row["Description"].'</p></div></legend>
+	';
 	rating($type,$type.$row["ID"]);
 	echo "</fieldset></br>";}
 }
@@ -37,9 +37,10 @@ global $sectorListTable;
 
 <script src='./js/searchbar.js'></script>
 <form id='Search' >
-<h3><b>Sectors</b>
+<h3><b>Search Priorities</b></h3>
+<h3>Sectors
 <b class="info">i</b><div class='infobox'>
-<p>Hover over some sectors for their description.</p>
+<p>Hover over some sectors for their description. Select rating or click on their name to cycle through options.</p>
 <p>Give a rating for each sector: default is 'ambivalent', ie. no feelings. The result each firm receives is on an average of the sectors it has. "avoid" weighs very strongly.
 </p><p>For example, if you selected "avoid" for transport and "best" for hospitality, you'd get the following result:
 	<ol><li>firms with hospitality and no transport</li><li>firms with neither hospitality nor transport</li><li>firms with hospitality and transport</li><li>firms with transport but no hospitality</li></ol>
@@ -52,7 +53,7 @@ echo xList("Sector",$sectorListTable);
 echo '</div>';
 ?>
 <table id="DistanceTable">
-	<h3><b>Search Radius</b>
+	<h3>Search Radius
 	<b class="info">i</b><div class='infobox'>
 	<p>Set your search ranges, with the postcode area of the centre of your search and the postcode area of any place on the circle furthest around that point. The search prioritises firms that have at least one office in each search radius.
 </p><p>GIVE A RATING FOR EACH RANGE YOU ADD.
@@ -73,7 +74,7 @@ echo '</div>';
 		<td><button id="addPosts" type="button">+</button></td>
 	</tr>
 </table>
-<h3><b>Ethos</b>
+<h3>Ethos
 <b class="info">i</b><div class='infobox'>
 <p>Add bonus points or negative points per ethos you are looking for.
 </p><p>For example, if you selected "best" for 4 day work week, but "avoid" for AJ100, you'd get:
@@ -85,7 +86,7 @@ echo '</div>';
 echo xList("EthosList",$ethosListTable);
 echo "</div>";
 
-echo "<h3><b>Size</b></h3><div id='SizesList'>";
+echo "<h3>Size</h3><div id='SizesList'>";
 function Bands($y,$z){
 	echo '<fieldset><legend>'.$y.'</legend>';
 	rating("Sizes",$z);
@@ -103,5 +104,5 @@ echo "</div>";
 <!-- <button id="testButton" type="button">test</button>
 <div id="testCont">test container</div>
 -->
-<button id="submitButton" type="button">Search</button>
+<button id="submitButton" type="button">SUBMIT</button>
 </form>

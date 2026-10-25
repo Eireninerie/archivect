@@ -46,6 +46,10 @@ input{
 }
 input[type=radio] {
   cursor: pointer;
+  margin-right:2px;
+}
+input:checked::checkmark{
+    content: "\2713";
 }
 input[type=radio]:hover {
   transform: scale(1.2);
@@ -131,7 +135,7 @@ th, h3, #header a{
     color:var(--colour-04);
     border-bottom: var(--bd) solid var(--colour-border);
 }
-.cardDetails h3:not(:first-of-type), #header a{
+h3:not(:first-of-type), #header a{
 
     border-bottom-style:dashed;
 }
@@ -139,46 +143,52 @@ th, h3, #header a{
 	float: right;
   content: ".";
 }
+fieldset:not(legend), h3,legend,#footer{
+    anchor-scope: --info;
+}
 .info{
 	float: right;
     border: 1px solid var(--colour-03-dark);
     border-radius:50%;
     text-align: center;
-    min-width:20px;
+    min-width:14px;
     margin: 0 0 2px;
-    text-transform: lowercase;
+    padding: 0 3px;
+    text-transform: none;
     background-color: var(--colour-03);
     cursor: pointer;
+    color:var(--colour-02);
+}
+input[type=radio],legend,.info,#footer a{
     anchor-name: --info;
 }
-input[type=radio],legend{
-    anchor-name: --info;
-}
-.info + .infobox, input[type=radio] + .infobox, legend + .infobox{
-    max-height:0;
+.infobox{
+    position:fixed;
+        max-height:0;
     overflow:hidden;
     position-anchor: --info;
     text-transform: none;
-    position:fixed;
-    max-width:400px;
+    max-width:600px;
     color:var(--colour-01-light);
     background-color: var(--colour-02);
-
-    top: anchor(bottom);
     padding: 0px 20px;
     z-index: 3;
     font:normal 11pt var(--font-headings);
+}
+#footer .infobox{
+    bottom:anchor(top);
+    right:anchor(right);
+}
+.info+.infobox{
+    position-area: (center right);
+    transition: all ease-in-out .5s;
+}
+input[type=radio]+.infobox, legend>.infobox{
+    top: anchor(bottom);
+    left: anchor(left);
 
 }
-.info + .infobox{
-    right: anchor(right);
-     transition: all ease-in-out .5s;
-}
-input[type=radio] + .infobox, legend{
-    left: anchor(right);
-
-}
-.info:hover + .infobox, input[type=radio]:hover + .infobox,legend:hover + .infobox{
+#footer a:hover .infobox,.info:hover+.infobox, input[type=radio]:hover+.infobox,legend:hover>.infobox{
     max-height:100vh;
     padding:5px 20px;
 }
@@ -216,7 +226,7 @@ th{
     float:right;
     transition: all ease-in-out .5s;
 }
-#nav:hover ul{
+#nav .menu{
     max-height:90vh;
     margin: 40px;
 }
@@ -229,7 +239,6 @@ th{
     text-align:right;
     padding: 10px 30px;
     margin-left:5px;
-    transition: all ease-in-out .5s;
 }
 
 #header li:hover{
@@ -255,9 +264,21 @@ th{
     right:0;
     padding:5px 10px;
     font-weight: 900;
+    display:inline-block;
 }
+
 #footer a{
     color: var(--colour-03);
+}
+
+.content{
+    text-align: center;
+    margin-top: 20vh;
+    max-width: 40vw;
+    margin-left: 10%;
+}
+.content .gridcontent{
+    padding:60px;
 }
 .pagination{
 
@@ -313,13 +334,14 @@ th{
     text-transform: uppercase;
     font-family: var(--font-title);
     font-size: 17pt;
+    white-space: nowrap;
 }
 #submitButton:hover{
     text-shadow:3px 3px var(--shadow);
 }
 
 #Search {
-    width: 520px;
+    width: 530px;
     position:fixed;
     top:20px;
     max-height: calc(100vh - 60px);
@@ -399,7 +421,7 @@ img {
     margin:0;
 }
 .cardDetails{
-    margin:0;
+    margin:0 0 100px 0;
 }
 .exitcard{
     float: right;
@@ -421,6 +443,7 @@ legend{
     unicode-bidi: inherit;
     float:left;
     user-select: none;
+    -webkit-user-select: none;
 }
 
 @media screen and (max-width:1010px) {

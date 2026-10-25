@@ -6,13 +6,8 @@ include('./php/header.php');
 
 ?>
 	<?php include('./php/tablesearch.php') ?>
-
-
-
-
-
 <div id='results'>
-	oo
+<div class='content'>Hiya (:</div>
 </div>
 <?php
 include('./php/footer.php');

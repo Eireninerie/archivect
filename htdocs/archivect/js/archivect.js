@@ -3,10 +3,10 @@ $.fn.addcorners = function(){
     $(this).addClass('corners').wrapInner('<div class="gridcontent">').prepend($prepended);
     }
 $(document).ready(function(){
-    $('h1, #header ul, #Search, .card').addcorners();
+    $('h1, #header ul, #Search, .card,.content').addcorners();
     $('legend').click(function(){
         $name = $(this).attr('for');
-        $input = $('input[name="'+$name+'"]:checked');
+        $input = $('input[name="'+$name+'"][checked]');
     
         $inputval = parseInt($input.val())+1;
         $input.removeAttr('checked');
@@ -16,5 +16,11 @@ $(document).ready(function(){
         else{$input.siblings('[value="'+$inputval+'"]').attr('checked','');}
         
     });
+    $('input[type="radio"]').click(function(){
+        $(this).attr('checked','').siblings().removeAttr('checked');
+    })
+    $('#nav').find('button').click(function(){
+        $(this).siblings('ul').toggleClass('menu');
+    })
     
 });

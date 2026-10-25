@@ -79,7 +79,10 @@ h1 {
     font-family: var(--font-title), sans-serif;
     font-size: 23 pt;
     text-transform: uppercase;
+}
+#header h1{
     anchor-name: --title;
+
 }
 /* corner style applied by js*/
 .corners {
@@ -143,7 +146,7 @@ h3:not(:first-of-type), #header a{
 	float: right;
   content: ".";
 }
-fieldset:not(legend), h3,legend,#footer{
+fieldset:not(legend), #header h1,legend,#footer{
     anchor-scope: --info;
 }
 .info{
@@ -273,12 +276,19 @@ th{
 
 .content{
     text-align: center;
-    margin-top: 20vh;
-    max-width: 40vw;
-    margin-left: 10%;
+    margin: 15vh 0 100px 10%;
+    width: clamp(500px,60vw,800px);
+}
+
+.content p, .content li{
+    text-align:justify;
+    text-justify: distribute;
+}
+.content p{
+    padding-bottom:20px;
 }
 .content .gridcontent{
-    padding:60px;
+    padding:10%;
 }
 .pagination{
 

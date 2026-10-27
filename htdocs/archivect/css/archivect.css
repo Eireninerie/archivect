@@ -7,13 +7,22 @@
     --colour-04:#314EFF;
     --colour-05:#aaa;
     --colour-border:green;
-    --shadow:rgba(0,0,0,0.15);
+    --shadow:rgba(0,0,0,0.10);
 	--bd:1px;
     --righthead:100px;
     --font-title:'Rock Salt';
     --font-headings:'Playpen-Sans';
     --font-text:'Titillium';
+
+    --bxbdw:10px;
+    --bxmar:20px;
+    --bxsh-offset: 10px;
+
+    --borderimg:url(../assets/corner.svg) no-repeat border-box;
+    --borderimgsh:url(../assets/cornersh.svg) no-repeat border-box;
+    --fauxbdw:2px;
 }
+
 .hiddenClass{
     display: none;
 }
@@ -35,6 +44,9 @@ body{
     font-family:var(--font-text), sans-serif;
     font-size:11pt;
     scrollbar-color: var(--colour-03) var(--colour-01-light);
+}
+sup{
+    font-size:60%;
 }
 input{
     font-family: inherit;
@@ -73,62 +85,87 @@ button:hover{
     right:var(--righthead);
     color:inherit;
     z-index: 2;
-    
 }
 h1 {
     font-family: var(--font-title), sans-serif;
-    font-size: 23 pt;
+    font-size: 23pt;
     text-transform: uppercase;
-}
+}   
 #header h1{
     anchor-name: --title;
-
 }
 /* corner style applied by js*/
-.corners {
-  display: grid;
-  grid-template-areas: '. t . ''l myArea r''. b .';
-  grid-template-rows: 16px 1fr 16px;
-    grid-template-columns: 16px 1fr 16px;
 
-  transition: grid-template-rows 0.5s ease-out;
-}
-.corners > div {
-    border-width: var(--bd);
-    border-color: var(--colour-border);
-
-}
-.gridt, .gridb{
-    border-style: none solid;
-    overflow-y: visible;
-}
-.gridl, .gridr{
-    border-style: solid none;
-}
-.gridt{
-    grid-area:t;
-}
-.gridl {
-    grid-area:l;
-}
-.gridcontent {
-    grid-area:myArea;
-    box-shadow: 3px 3px var(--shadow);
-    background-color: var(--colour-01-light);
-    border-style:solid;
-    color:#000;
+.boxed {
+    --borderimgsize:calc(var(--bxbdw) * 2 - var(--fauxbdw) );
+    --bxbdw-sh: calc(var(--bxbdw) + var(--bxsh-offset));
+    border:  solid transparent;
+    border-width: var(--bxbdw) var(--bxbdw-sh) var(--bxbdw-sh) var(--bxbdw);
+    
+    background: 
+    /*main*/       
+        linear-gradient(var(--colour-01-light), var(--colour-01-light)) 
+            padding-box,
+    /*faux border*/
+        linear-gradient(var(--colour-05), var(--colour-05)) no-repeat border-box,
+    /*corners*/   
+        var(--borderimg),
+        var(--borderimg),
+        var(--borderimg),
+        var(--borderimg),
+    /*corners shadow*/ 
+        var(--borderimgsh),
+        var(--borderimgsh),
+        var(--borderimgsh),
+        var(--borderimgsh),
+    /*main shadow*/
+        linear-gradient(var(--shadow), var(--shadow)) no-repeat border-box ;
+    background-size: 
+    /*main*/       
+        100%,
+    /*faux border*/
+        calc(100% - var(--bxbdw)*2 - var(--bxsh-offset) + var(--fauxbdw)*2) calc(100% - var(--bxbdw)*2 - var(--bxsh-offset) + var(--fauxbdw)*2),
+    /*corners*/        
+        var(--borderimgsize),
+        var(--borderimgsize),
+        var(--borderimgsize),
+        var(--borderimgsize),
+    /*corners shadow*/ 
+        var(--borderimgsize),
+        var(--borderimgsize),
+        var(--borderimgsize),
+        var(--borderimgsize),
+    /*main shadow*/
+        calc(100% - var(--bxbdw)*2 - var(--bxsh-offset)) calc(100% - var(--bxbdw)*2 - var(--bxsh-offset));
+    background-position: 
+    /*main*/       
+        left top, 
+    /*faux border*/
+        left calc(var(--bxbdw) - var(--fauxbdw)) top calc(var(--bxbdw) - var(--fauxbdw)),
+    /*corners*/        
+        left top, 
+        right var(--bxsh-offset) top, 
+        left bottom var(--bxsh-offset), 
+        right var(--bxsh-offset) bottom var(--bxsh-offset), 
+    /*corners shadow*/ 
+        left var(--bxsh-offset) top var(--bxsh-offset), 
+        right top var(--bxsh-offset), 
+        left var(--bxsh-offset) bottom, 
+        right bottom,
+    /*main shadow*/
+        right var(--bxbdw) bottom var(--bxbdw);
     z-index: 0;
-}
-#Search .gridcontent, h1 .gridcontent{
-    box-shadow: 10px 10px var(--shadow);
 
+    margin:30px;
 }
-.gridr{
-    grid-area:r;
+.boxed>*:not(#header *,#submitButton){
+    margin:var(--bxmar);
 }
-.gridb{
-    grid-area:b;
+
+.card.boxed{
+    --bxsh-offset: 5px;
 }
+
 /* consistent styles*/
 th, h3, #header a{
     font-family: var(--font-headings);
@@ -222,18 +259,22 @@ th{
 #nav ul{
     width:min-content;
     position:relative;
-    padding:0;
     right:0px;
     margin: 0 20px;
     max-height:0;
     overflow:hidden;
     float:right;
+    border-width:0;
     transition: all ease-in-out .5s;
 }
 #nav .menu{
     max-height:90vh;
     margin: 40px;
+    border-width:  var(--bxbdw) var(--bxbdw-sh) var(--bxbdw-sh) var(--bxbdw);
+    padding:0;
 }
+
+
 
 #header li {
     list-style-type: none;
@@ -276,20 +317,24 @@ th{
 }
 
 .content{
+    box-sizing: border-box;
     text-align: center;
     margin: 15vh 0 100px 10%;
     width: clamp(500px,60%,800px);
 }
-
+.content:nth-child(odd){
+    margin: 15vh 0 100px 15%;
+}
 .content p, .content li{
     text-align:justify;
     text-justify: distribute;
+    font-size: 13pt;
 }
 .content p{
     padding-bottom:20px;
 }
-.content .gridcontent{
-    padding:10%;
+.content.boxed{
+    padding:5%;
 }
 .pagination{
 
@@ -334,8 +379,7 @@ th{
 }
 
 #submitButton{
-    margin-top:8px;
-    margin-left: calc( 50% - 60px );
+    margin:12px 0 0 calc( 80% - 60px );
     height:60px;
     width:120px;
     border-width: 0;
@@ -352,25 +396,32 @@ th{
 }
 
 #Search {
-    width: 530px;
+    width: 630px;
     position:fixed;
     top:20px;
-    max-height: calc(100vh - 60px);
-    overflow-y: hidden;
+  box-sizing: border-box;
+    max-height: calc(100vh - 100px);
     left:10px;
-}
-#Search .gridcontent{
-    padding: 20px 20px 0 20px;
+    --searchpad: 40px;
+    padding: 0 var(--searchpad);
+    padding-top: var(--searchpad);
     overflow-y: auto;
     scrollbar-gutter: stable;
 }
-#Search >div >div:not(.cardDetails), .cardDetails >div{
-    column-width:200px;
+#Search >div:not(.cardDetails), .cardDetails >div{
+    column-width:210px;
+}
+#Searh::before {
+  content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='100' cy='50' r='40' stroke='black' stroke-width='2' fill='red'/%3E%3Cpolyline points='20,20 40,25 60,40 80,120 120,140 200,180' style='fill:none;stroke:black;stroke-width:3'/%3E%3C/svg%3E ");
+  width: 200px;
+  height: 200px;
+  position:absolute;
+  top:-100px;
+  z-index:4;
 }
 
-
 .theInputs{
-    display: inline; 
+    display: inline; margin
     white-space: nowrap;
 }
 .PostcodeInput{
@@ -387,17 +438,17 @@ th{
 }
 #results{
     position: absolute;
-    left: 560px;
+    left: 640px;
     top: 40px;
     bottom:30px;
-    right: 140px;
+    right: 0;
     z-index:-2;
     overflow-y:auto;
     direction:rtl;
     display:block;
     scrollbar-gutter: stable;
     scrollbar-color: var(--colour-border) var(--colour-01-light);
-    padding: 100px 0 100px 30px;
+    padding: 100px 100px 100px 30px;
     overflow-x:hidden;
     
 }
@@ -406,16 +457,13 @@ th{
     direction:ltr;
     float:left;
     width:282px;
-    height:232px;
     box-shadow: none;
     margin:3px 1px;
-
-}
-.card .gridcontent{
 
     padding:0 20px 0 20px;
     height:200px;
     overflow:hidden;
+
 }
 img {
     display:none;
@@ -428,12 +476,11 @@ img {
   align-self: flex-end;
 }
 
-.gridcontent ul{
-    position:relative;
-    margin:0;
-}
 .cardDetails{
     margin:0 0 100px 0;
+}
+.cardDetails ul {
+    margin-top: 0;
 }
 .exitcard{
     float: right;
@@ -461,8 +508,8 @@ legend{
 
 @media screen and (max-width:1010px) {
     #Search{
-            width: calc(100% - 20px);
-        max-height: calc(100vh - 150px);
+            width: calc(100vw - 60px);
+        max-height: calc(100vh - 160px - var(--bxbdw) * 2);
         top:100px;
         transition:all ease-in-out .3s;
     }
@@ -480,7 +527,7 @@ legend{
         margin: 15px 0;
     }
 
-    #Search.collapse .gridcontent{
+    #Search.collapse {
         overflow-y:hidden;
         max-height: 55px;
         transition:all ease-in-out .3s;

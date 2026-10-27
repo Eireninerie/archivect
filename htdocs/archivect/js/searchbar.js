@@ -102,12 +102,12 @@ $('#submitButton').click(function(){
    $("#results").load('./php/search_results.php', {SectorList,EthosList,SizesList,DistanceList},
       function(){
       $('#Search').addClass('collapse');
-      $('.card').wrapInner('<div>').children('div').addcorners();
-      $('.card .gridcontent').hover(function(){
+//      $('.card').wrapInner('<div>').children('div').addcorners();
+      $('.card').hover(function(){
          $('#Search').find('.cardDetails ').remove();
          $content = $(this).find('.cardDetails').clone(); 
-         $('#Search').find('.gridcontent').wrapInner('<div class="wrapped">').find('.wrapped').addClass('hiddenClass');
-         $('#Search').find('.gridcontent').prepend($content);
+         $('#Search').wrapInner('<div class="wrapped">').find('.wrapped').addClass('hiddenClass');
+         $('#Search').prepend($content);
          $('#Search').find('.cardDetails').removeClass('hiddenClass');
          $('.exitcard').click(function(){
                $('#Search').find('.cardDetails ').remove();

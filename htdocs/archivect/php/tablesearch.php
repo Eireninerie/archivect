@@ -36,7 +36,7 @@ global $sectorListTable;
 ?>
 
 <script src='./js/searchbar.js'></script>
-<form id='Search' >
+<form id='Search' class="boxed">
 <h3><b>Search Priorities</b></h3>
 <h3>Sectors
 <b class="info">i</b><div class='infobox'>

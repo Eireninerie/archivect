@@ -101,25 +101,26 @@ $sizeTypeSQL = 'SELECT CompanyID, CONCAT(st.Location,st.Size) AS SizeID FROM
 
 //Set size ratings from input
 $sizeRatingSET=' SELECT 
-	ID, SUBSTRING('.$SizesListRatings.',ROW_NUMBER() OVER( ORDER BY ID),1) AS Rating 
+	Name, SUBSTRING('.$SizesListRatings.',ROW_NUMBER() OVER( ORDER BY ID),1) AS Rating 
 	FROM sizesList
 	';
 	// print query
 //	$sizeRatingSETq = $conn->query($sizeRatingSET);
 //	while($row = $sizeRatingSETq->fetch_assoc()){
+//	echo $SizesListRatings;
 //	echo "<table><tr><td>".$row["ID"]."</td><td>".$row["Rating"]."</td></tr></table>";}
 	
 // Connect size ratings to weighting and company categorisation
 $sizeRatingsQuerySQL=
-	'SELECT weighting.Rating, t.CompanyID
+	'SELECT s.Rating AS "OG", weighting.Rating, t.CompanyID
 		FROM ('.$sizeRatingSET.') AS s
 		LEFT JOIN weighting ON weighting.ID = s.Rating
-		RIGHT JOIN ('.$sizeTypeSQL.') as t ON t.SizeID = s.ID
+		RIGHT JOIN ('.$sizeTypeSQL.') as t ON t.SizeID = s.Name
 	';
 	// print query
 //	$sizeRatingsQuery = $conn->query($sizeRatingsQuerySQL);
 //	while($row = $sizeRatingsQuery->fetch_assoc()){
-//	echo "<table><tr><td>".$row["ID"]."</td><td>".$row["CompanyID"]."</td><td>".$row["Rating"]."</td></tr></table>";}
+//	echo "<table><tr><td>OG:".$row["OG"]."</td><td>ID:".$row["ID"]."</td><td>Company:".$row["CompanyID"]."</td><td>Rating:".$row["Rating"]."</td></tr></table>";}
 
 //Get sector ratings
 $SectorRatingsQuerySQL = 
@@ -165,18 +166,18 @@ $ethosRatingsQuerySQL = "SELECT
 $ratingSortSQL = "SELECT ID, Company, logo, website,
 	If(postRating.MaxRating IS NULL, 0, MaxRating)+
 	If(sectorRating.SRating IS NULL, 0, sectorRating.SRating)+
-"//	If(sizeRating.Rating IS NULL, 0, sizeRating.Rating)+
-."	If(ethosRating.Rating IS NULL, 0, ethosRating.Rating)
+	If(sizeRating.Rating IS NULL, 0, sizeRating.Rating)+
+	If(ethosRating.Rating IS NULL, 0, ethosRating.Rating)
 	AS totalRating
 FROM
        ".$primaryTable."
         LEFT JOIN (".$postCompanyRatingSQL.") AS postRating ON  ".$primaryTable.".ID = postRating.CompanyID 
         LEFT JOIN (".$SectorCompanyRatingsSQL.") AS sectorRating ON  ".$primaryTable.".ID = sectorRating.CompanyID 
-"//     LEFT JOIN (".$sizeRatingsQuerySQL.") AS sizeRating ON  ".$primaryTable.".ID = sizeRating.CompanyID 
-."        LEFT JOIN (".$ethosRatingsQuerySQL.") AS ethosRating ON  ".$primaryTable.".ID = ethosRating.CompanyID 
+	     LEFT JOIN (".$sizeRatingsQuerySQL.") AS sizeRating ON  ".$primaryTable.".ID = sizeRating.CompanyID 
+        LEFT JOIN (".$ethosRatingsQuerySQL.") AS ethosRating ON  ".$primaryTable.".ID = ethosRating.CompanyID 
         
 ORDER BY
-    totalRating DESC
+    totalRating DESC, Company ASC
 LIMIT 50";
 
 ?>

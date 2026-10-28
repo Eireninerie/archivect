@@ -14,7 +14,7 @@
     --font-headings:'Playpen-Sans';
     --font-text:'Titillium';
 
-    --bxbdw:10px;
+    --bxbdw:15px;
     --bxmar:20px;
     --bxsh-offset: 10px;
 
@@ -47,6 +47,9 @@ body{
 }
 sup{
     font-size:60%;
+}
+a {
+    color:var(--colour-03-dark)
 }
 input{
     font-family: inherit;
@@ -237,6 +240,7 @@ input[type=radio]+.infobox, legend>.infobox{
 th{
     border-bottom:none;
 }
+
 #nav{
     position-anchor: --title;
     position: fixed;
@@ -360,7 +364,7 @@ th{
 }
 .Company tbody{
     display:inline-block; 
-    height:150px; 
+    height:180px; 
     overflow-y:auto;
 }
 #Companies{
@@ -368,7 +372,7 @@ th{
 }
 .table{
     display:inline-block; 
-
+    margin:0 15px;
 }
 .url{
     width:300px;
@@ -379,7 +383,7 @@ th{
 }
 
 #submitButton{
-    margin:12px 0 0 calc( 80% - 60px );
+    margin:12px 0 0 calc( 50% - 60px );
     height:60px;
     width:120px;
     border-width: 0;
@@ -509,9 +513,10 @@ legend{
 @media screen and (max-width:1010px) {
     #Search{
             width: calc(100vw - 60px);
-        max-height: calc(100vh - 160px - var(--bxbdw) * 2);
+        max-height: calc(100vh - 180px - var(--bxbdw) * 2);
         top:100px;
         transition:all ease-in-out .3s;
+        anchor-name: --pull;
     }
     #results{
         left: 7px;
@@ -530,13 +535,21 @@ legend{
     #Search.collapse {
         overflow-y:hidden;
         max-height: 55px;
-        transition:all ease-in-out .3s;
+        padding-top: 0;
     }
+    #Search.collapse *{
+        margin-top:0;
+        padding-top:0;
 
+    }
     #pull{
-        grid-area: b;
+        --pullw:40px;
         height:20px;
+        width:var(--pullw);
         overflow: hidden;
-
+        position-anchor: --pull;
+        position:absolute;
+        top: calc(anchor(bottom) - var(--bxbdw) - var(--bxsh-offset));
+        left: calc(anchor(center) - var(--pullw)/2);
     }
 }

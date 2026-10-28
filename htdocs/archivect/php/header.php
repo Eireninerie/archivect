@@ -36,10 +36,10 @@ echo '
 
 echo '
 	<li><a href="'.$pos.'./">Search</a></li>
-	<li><a href="#"><s title="under construction">Sumbit</s></a></li>
-	<li><a href="#"><s title="under construction">Resources</s></a></li>
+	<li><a href="'.$pos.'./resources">Resources</a></li>
 	<li><a href="#"><s title="under construction">Diary</s></a></li>
 	<li><a href="'.$pos.'./about">about</a></li>
+	<li><a href="https://www.linkedin.com/in/eireni-m/" title="Sorry until I set up an email for this project send me a request with a note or something. Or just duck-duck-go my name">LinkedIn</a></li>
 	</ul>
 	'
 ?>

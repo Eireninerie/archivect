@@ -64,16 +64,15 @@ function html2insert() {
 $(document).ready(function(){
 
 $('#addPosts').click(        function() {
-            // Get input values
-            $postStart = $("#postStartInput").val();
-            $postEnd = $("#postEndInput").val();
-            $newRow = "./php/DRows.php?postStart="+$postStart+"&postEnd="+$postEnd;
-            $(this).parent().parent().after($('<tr class="inputs">').load($newRow));
-            $("#postEndInput").val("");
-            $("#postStartInput").val("");
-            $("#errormsg").parent().remove();
-
-        });
+   // Get input values
+   $postStart = $("#postStartInput").val();
+   $postEnd = $("#postEndInput").val();
+   $newRow = "./php/DRows.php?postStart="+$postStart+"&postEnd="+$postEnd;
+   $(this).parent().parent().after($('<tr class="inputs">').load($newRow));
+   $("#postEndInput").val("");
+   $("#postStartInput").val("");
+   $("#errormsg").parent().remove();
+});
 $('#testButton').click(function(){
     $results2 = '{'+joinvalues("#SectorList")+'}'
         ;
@@ -82,15 +81,13 @@ $('#testButton').click(function(){
     '&'+html2insert()
     );
 });
-    
+
 $('#submitButton').click(function(){
    $searchheight = $('#Search').height();
    if (window.matchMedia("(min-width: 1010px)").matches) {
       $('#Search').height($searchheight);
    }else{
-      $('#pull').toggleClass('hiddenClass').click(function(){
-         $('#Search').toggleClass('collapse');
-      });
+      $('#pull').removeClass('hiddenClass');
    }
    $("#errormsg").parent().remove();
    $results = $( "form" ).serialize();
@@ -103,21 +100,40 @@ $('#submitButton').click(function(){
       function(){
       $('#Search').addClass('collapse');
 //      $('.card').wrapInner('<div>').children('div').addcorners();
-      $('.card').hover(function(){
-         $('#Search').find('.cardDetails ').remove();
-         $content = $(this).find('.cardDetails').clone(); 
-         $('#Search').wrapInner('<div class="wrapped">').find('.wrapped').addClass('hiddenClass');
-         $('#Search').prepend($content);
-         $('#Search').find('.cardDetails').removeClass('hiddenClass');
-         $('.exitcard').click(function(){
+         if (window.matchMedia("(max-width: 1010px)").matches) {
+            $('#pull').click(function(){
+               $('#Search').toggleClass('collapse');
+            });
+            $('.card').click(function(){
+               $('#Search').removeClass('collapse');
                $('#Search').find('.cardDetails ').remove();
-               $('#Search').find('.wrapped').children().unwrap();
-         });
-         },function(){
+               $content = $(this).find('.cardDetails').clone(); 
+               $('#Search').wrapInner('<div class="wrapped">').find('.wrapped').addClass('hiddenClass');
+               $('#Search').prepend($content);
+               $('#Search').find('.cardDetails').removeClass('hiddenClass');
+               $('.exitcard').click(function(){
+                  $('#Search').find('.cardDetails ').remove();
+                  $('#Search').find('.wrapped').children().unwrap();
+                  $('#Search').removeClass('collapse');
+               });
+            });
+         }else{
+            $('.card').hover(function(){
+               $('#Search').find('.cardDetails ').remove();
+               $content = $(this).find('.cardDetails').clone(); 
+               $('#Search').wrapInner('<div class="wrapped">').find('.wrapped').addClass('hiddenClass');
+               $('#Search').prepend($content);
+               $('#Search').find('.cardDetails').removeClass('hiddenClass');
+               $('.exitcard').click(function(){
+                  $('#Search').find('.cardDetails ').remove();
+                  $('#Search').find('.wrapped').children().unwrap();
+               });
+            },function(){
           
-         }); 
+            }); 
+         }
       }
    );
-         
-   });
+});
+
 });

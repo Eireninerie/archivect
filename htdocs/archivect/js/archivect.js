@@ -4,7 +4,6 @@ $.fn.addcorners = function(){
     }
 $(document).ready(function(){
 //    $('h1, #header ul, #Search, .card,.content').addcorners();
-    $('#Search').append('<button id="pull" class="hiddenClass">close</button>');
     $('legend').click(function(){
         $name = $(this).attr('for');
         $input = $('input[name="'+$name+'"][checked]');

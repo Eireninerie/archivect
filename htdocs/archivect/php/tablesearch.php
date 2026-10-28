@@ -106,3 +106,4 @@ echo "</div>";
 -->
 <button id="submitButton" type="button">SUBMIT</button>
 </form>
+<button id="pull" class="hiddenClass"></button>

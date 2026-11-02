@@ -35,7 +35,7 @@ FROM
 global $sectorListTable;
 ?>
 
-<script src='./js/searchbar.js'></script>
+<script src=<?php echo $pos.'./js/searchbar.js'; ?>></script>
 <form id='Search' class="boxed">
 <h3><b>Search Priorities</b></h3>
 <h3>Sectors

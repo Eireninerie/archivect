@@ -1,15 +1,14 @@
 <?php
 $pos ='.';
 //sudo /opt/lampp/manager-linux-x64.run
-include('../php/header.php');
+include($pos.'./php/header.php');
 
 
 ?>
 
 <?php
 
-
-include('../php/public_functions.php');
+include($pos.'./php/public_functions.php');
 echo "<script src='../js/inputs.js?v=0.1'></script>";
 
 if (isset($_GET['page'])) {

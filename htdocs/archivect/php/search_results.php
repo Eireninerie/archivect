@@ -1,5 +1,6 @@
 <?php	
 // echo "WOAH";
+$pos = ".";
 include('./public_functions.php');
 
 $SectorListRatings = filter_var($_POST['SectorList'], FILTER_SANITIZE_NUMBER_INT);

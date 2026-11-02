@@ -1,8 +1,5 @@
 <?php
-$host = 'localhost';
-$username = 'root';
-$password = '';
-$dbname = "test";
+include($pos.'./config.php');
 
 //database tables
 $postcodeRefTable = "postcodeCoordsEN";
@@ -17,7 +14,7 @@ $ethosListTable = "ethosList";
 $socialsListTable = "socialsList";
 
 
-$conn = new mysqli($host,$username,$password,$dbname);
+$conn = new mysqli($fhost,$fusername,$fpassword,$fdbname);
 if (!$conn) {
 	die('Connection failed: '.mysqli_connect_error());
 	}

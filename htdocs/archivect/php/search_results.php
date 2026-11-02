@@ -44,7 +44,7 @@ function cardResults(){
 		while($row = $ratingSort->fetch_assoc()){
 			echo "
 				<div class='card boxed' id='".$row["ID"]." '>		
-				<h3> <a href='https://".$row["website"]."' alt='". $row["Company"]." website link' title='https://".$row["website"]."'>". $row["Company"]. "</a>".$row["totalRating"]."</h3>
+				<h3> <a href='https://".$row["website"]."' alt='". $row["Company"]." website link' title='https://".$row["website"]."'>". $row["Company"]. "</a><span class='hiddenClass'>".$row["totalRating"]."</span></h3>
 				<img class='logo' src='".$row["logo"]."'>
 				<div class='cardDetails hiddenClass' id='".$row["ID"]."'>
 				

@@ -53,7 +53,7 @@ echo xList("Sector",$sectorListTable);
 echo '</div>';
 ?>
 <table id="DistanceTable">
-	<h3>Search Radius
+	<h3>Postcode Areas
 	<b class="info">i</b><div class='infobox'>
 	<p>Set your search ranges, with the postcode area of the centre of your search and the postcode area of any place on the circle furthest around that point. The search prioritises firms that have at least one office in each search radius.
 </p><p>GIVE A RATING FOR EACH RANGE YOU ADD.

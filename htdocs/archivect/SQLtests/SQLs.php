@@ -1,7 +1,7 @@
 <?php
 
 
-// Turn Distance ratings into table
+// Turn Distance ratings into table.
 $tempTable = "
     CREATE TEMPORARY TABLE temp_table_1 (
       `Id` int AUTO_INCREMENT PRIMARY KEY,

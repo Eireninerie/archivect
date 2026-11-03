@@ -1,0 +1,32 @@
+@font-face{
+    font-family: 'Titillium';
+    src: url(./assets/TitilliumWeb-Regular.ttf);
+}
+@font-face{
+    font-family: 'Playpen Sans';
+    src: url(./assets/PlaypenSans-VariableFont_wght.ttf);
+}
+@font-face{
+    font-family: 'Ink-Free';
+    src: url(./assets/Inkfree.ttf);
+}
+body{
+    background: #F0F3F1;
+    color: #212531;
+    font-family:'Titillium', sans-serif;
+    font-size:11pt
+}
+h1 {
+    font-family: 'Ink-Free', sans-serif;
+    font-size: 23 pt;
+
+}
+h2 {
+    font-family: 'Playpen Sans', sans-serif;
+    font-size: 11pt;
+}
+div .c{
+    color: #314EFF;
+    color: #F9BCA4;
+    box-shadow: 13px 14px rgba(0,0,0,0.15);
+}

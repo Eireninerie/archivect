@@ -66,9 +66,7 @@ input[type=radio] {
 input:checked::checkmark{
     content: "\2713";
 }
-input[type=radio]:hover {
-  transform: scale(1.2);
-}
+
 label {
     margin: 0 5px 0 8px;
 }
@@ -79,9 +77,7 @@ button {
     border-radius:2px;
     cursor: pointer;
 }
-button:hover{
-    transform: scale(1.1);
-}
+
 #header{
     position:fixed;
     top: 20px;
@@ -217,14 +213,16 @@ input[type=radio],legend,.info,#footer a{
     background-color: var(--colour-02);
     padding: 0px 20px;
     z-index: 3;
-    font:normal 11pt var(--font-headings);
+    font-weight:normal;
+    font-family: var(--font-headings);
+    font-size: 11pt;
 }
 #footer .infobox{
     bottom:anchor(top);
     right:anchor(right);
 }
 .info+.infobox{
-    position-area: (center right);
+    position-area: bottom left;
     transition: all ease-in-out .5s;
 }
 input[type=radio]+.infobox, legend>.infobox{
@@ -232,10 +230,7 @@ input[type=radio]+.infobox, legend>.infobox{
     left: anchor(left);
 
 }
-#footer a:hover .infobox,.info:hover+.infobox, input[type=radio]:hover+.infobox,legend:hover>.infobox{
-    max-height:100vh;
-    padding:5px 20px;
-}
+
 
 th{
     border-bottom:none;
@@ -290,10 +285,7 @@ th{
     margin-left:5px;
 }
 
-#header li:hover{
-    margin-left:0;
-    margin-right: 5px;
-}
+
 
 #header a, .card a {
     display:inline-block;
@@ -323,11 +315,17 @@ th{
 .content{
     box-sizing: border-box;
     text-align: center;
-    margin: 15vh 0 100px 10%;
+    margin-left:10%;
     width: clamp(500px,60%,800px);
 }
+.content:first-child{
+    margin-top:15vh;
+}
 .content:nth-child(odd){
-    margin: 15vh 0 100px 15%;
+    margin-left:15%;
+}
+.content:last-child{
+    margin-bottom:100px;
 }
 .content p, .content li{
     text-align:justify;
@@ -379,8 +377,9 @@ th{
 }
 /* main search */
 #DistanceTable input[type=text]{
-    width: 80px;
+    width: 5em;
 }
+
 
 #submitButton{
     margin:12px 0 0 calc( 50% - 60px );
@@ -395,9 +394,7 @@ th{
     font-size: 17pt;
     white-space: nowrap;
 }
-#submitButton:hover{
-    text-shadow:3px 3px var(--shadow);
-}
+
 
 #Search {
     width: 630px;
@@ -497,6 +494,7 @@ fieldset{
     unicode-bidi: inherit;
     min-inline-size: initial;
     padding:0;
+    white-space: nowrap;
 }
 legend{
     width: 130px;
@@ -510,7 +508,7 @@ legend{
 }
 
 
-@media screen and (max-width:1010px) {
+@media screen and (max-width:1010px), (min-resolution: 2x){
     #Search{
             width: calc(100vw - 60px);
         max-height: calc(100vh - 180px - var(--bxbdw) * 2);
@@ -553,3 +551,69 @@ legend{
         left: calc(anchor(center) - var(--pullw)/2);
     }
 }
+@media screen and (min-resolution: 2x){
+    body{
+        font-size: 20pt;
+    }
+    .content p, .content li{
+        font-size: 20pt;
+    }
+    h1 {
+        font-size: 40px;
+    }
+    th, h3, #header a, legend, button {
+        font-size: 20pt;
+    }
+    #header{
+        transform: scale(2,2);
+        transform-origin: right 70%;
+    }
+    #submitButton {
+       transform: scale(2,2);
+    }
+    legend{
+        width: 260px;
+    }
+    #Search{
+        top:250px;
+
+    }#footer {
+    font-size: 30pt;
+    padding:10px 20px;
+    }
+    .content{
+        width: calc(100% - 100px);
+    }
+    #Search >div:not(.cardDetails), .cardDetails >div{
+    column-width:min-content;}
+    #DistanceTable input[type=text]{
+        font-size: 25pt;
+    }
+    input[type=radio]{
+     transform: scale(2.5,2.5);
+  margin-right:30px;   
+    }
+    .infobox{
+        transform: scale(2,2);
+    }
+}
+@media (hover:hover){
+    #header li:hover{
+        margin-left:0;
+        margin-right: 5px;
+    }
+    input[type=radio]:hover {
+        transform: scale(1.2);
+    }
+    #submitButton:hover{
+        text-shadow:3px 3px var(--shadow);
+    }
+    button:hover{
+        transform: scale(1.1);
+    }
+    #footer a:hover .infobox,.info:hover+.infobox, input[type=radio]:hover+.infobox,legend:hover>.infobox{
+        max-height:100vh;
+        padding:5px 20px;
+    }
+}
+

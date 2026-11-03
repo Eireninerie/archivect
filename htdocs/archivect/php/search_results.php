@@ -1,5 +1,5 @@
 <?php	
-// echo "WOAH";
+//echo "<p>WOAH";
 $pos = ".";
 include('./public_functions.php');
 
@@ -10,8 +10,6 @@ $SizesListRatings= filter_var($_POST['SizesList'], FILTER_SANITIZE_NUMBER_INT);
 
 include('../SQLtests/SQLs.php'); 
 
-
-//  temp table construction for distance ratings
 
 function cardDetails($tableName,$columnName,$row,$sub){
 

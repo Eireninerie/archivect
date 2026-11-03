@@ -6,7 +6,7 @@ include($pos.'./php/header.php');
 
 
 ?>
-
+<div>
 <div class='content boxed'>
 
 <h1 >About</h1>
@@ -54,7 +54,7 @@ include($pos.'./php/header.php');
 <p>I miss old internet. I know the styling here is a touch old-fashioned.</p>
 </p>
 </div>
-
+</div>
 <?php
 include($pos.'./php/footer.php');
 ?>

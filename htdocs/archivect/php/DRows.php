@@ -1,13 +1,9 @@
 <?php
+$pos ='.';
 include('./public_functions.php');
 
 $postStart = $_GET['postStart'];
 $postEnd = $_GET['postEnd'];
-
-
-
-
-
 
 // get input coordinates as km
 
@@ -26,6 +22,7 @@ function distanceKm($postStart,$postEnd){
 	$psN = coord($postStart,'NORTHING');
 	$peN = coord($postEnd,'NORTHING');
 	return round(sqrt(pow(abs( $psE - $peE ),2) + POW(ABS( $psN - $peN ),2)));}
+
 if ($result = $conn -> query(
 	"SELECT * FROM ".$postcodeRefTable." WHERE postcode_district='".$postStart."' OR postcode_district='".$postEnd."'"
 	)) {
@@ -34,7 +31,7 @@ if ($result = $conn -> query(
   $result -> free_result();
   if ($numR < 2) {echo "<script id='errormsg'>alert('CHECK UR POSTCODES LAV xoxox')</script>";}
   else {
-echo "
+	echo "
 	
 	<td><input type='text' class='postStart' name='postStart' value=".$postStart." readonly></td>
 	<td><input type='text' class='postEnd' name='postEnd' value=".$postEnd." readonly></td>

@@ -11,12 +11,12 @@ $tempTable = "
     )
   ";
   
-$conn->query($tempTable);
+// $conn->query($tempTable);
 
 $insertTempTable = 'INSERT INTO temp_table_1 (postStart, postEnd, Rating)
 	VALUES'.$DistanceListRatings;
 
-$conn->query($insertTempTable);
+// $conn->query($insertTempTable);
 
 $tempTableQuerySQL = 'SELECT ID, postStart, postEnd, Rating FROM temp_table_1';
 
@@ -164,20 +164,20 @@ $ethosRatingsQuerySQL = "SELECT
 
 //Attach combined ratings to Company details
 $ratingSortSQL = "SELECT ID, Company, logo, website,
-	If(postRating.MaxRating IS NULL, 0, MaxRating)+
+--	If(postRating.MaxRating IS NULL, 0, MaxRating)+
 	If(sectorRating.SRating IS NULL, 0, sectorRating.SRating)+
 	If(sizeRating.Rating IS NULL, 0, sizeRating.Rating)+
 	If(ethosRating.Rating IS NULL, 0, ethosRating.Rating)
 	AS totalRating
 FROM
-       ".$primaryTable."
-        LEFT JOIN (".$postCompanyRatingSQL.") AS postRating ON  ".$primaryTable.".ID = postRating.CompanyID 
-        LEFT JOIN (".$SectorCompanyRatingsSQL.") AS sectorRating ON  ".$primaryTable.".ID = sectorRating.CompanyID 
-	     LEFT JOIN (".$sizeRatingsQuerySQL.") AS sizeRating ON  ".$primaryTable.".ID = sizeRating.CompanyID 
-        LEFT JOIN (".$ethosRatingsQuerySQL.") AS ethosRating ON  ".$primaryTable.".ID = ethosRating.CompanyID 
+       $primaryTable
+        LEFT JOIN ($SectorCompanyRatingsSQL) AS sectorRating ON  $primaryTable.ID = sectorRating.CompanyID 
+	     LEFT JOIN ($sizeRatingsQuerySQL) AS sizeRating ON  $primaryTable.ID = sizeRating.CompanyID 
+        LEFT JOIN ($ethosRatingsQuerySQL) AS ethosRating ON  $primaryTable.ID = ethosRating.CompanyID 
         
 ORDER BY
     totalRating DESC, Company ASC
 LIMIT 50";
+// 	LEFT JOIN ($postCompanyRatingSQL) AS postRating ON  $primaryTable.ID = postRating.CompanyID 
 
 ?>

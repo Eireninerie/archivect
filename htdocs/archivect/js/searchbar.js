@@ -42,7 +42,7 @@ function html2json() {
    })
    $json += $otArr.join(",") + ']'
 
-   return 'DistanceList:'+$json;
+//   if(!$json){}else{return $json;}
 }
 function html2insert() {
    
@@ -95,43 +95,43 @@ $('#submitButton').click(function(){
    let EthosList = joinvalues("#EthosList");
    let SizesList = joinvalues("#SizesList");
    let DistanceList = html2insert();
-   $("#results").html("...loading ");
-   $("#results").load('./php/search_results.php', {SectorList,EthosList,SizesList,DistanceList},
+   let DistanceListjson = html2json();
+   $("#results").html("<div class='content'>...loading </div>").load('./php/search_results.php', {SectorList,EthosList,SizesList,DistanceList},
       function(){
       $('#Search').addClass('collapse');
 //      $('.card').wrapInner('<div>').children('div').addcorners();
-         if (window.matchMedia("(max-width: 1010px)").matches) {
-            $('#pull').click(function(){
-               $('#Search').toggleClass('collapse');
-            });
-            $('.card').click(function(){
+      if (window.matchMedia("(max-width: 1010px), (min-resolution: 2x)").matches) {
+         $('#pull').click(function(){
+         $('#Search').toggleClass('collapse');
+         });
+         $('.card').click(function(){
+            $('#Search').removeClass('collapse');
+            $('#Search').find('.cardDetails ').remove();
+            $content = $(this).find('.cardDetails').clone(); 
+            $('#Search').wrapInner('<div class="wrapped">').find('.wrapped').addClass('hiddenClass');
+            $('#Search').prepend($content);
+            $('#Search').find('.cardDetails').removeClass('hiddenClass');
+            $('.exitcard').click(function(){
+               $('#Search').find('.cardDetails ').remove();
+               $('#Search').find('.wrapped').children().unwrap();
                $('#Search').removeClass('collapse');
-               $('#Search').find('.cardDetails ').remove();
-               $content = $(this).find('.cardDetails').clone(); 
-               $('#Search').wrapInner('<div class="wrapped">').find('.wrapped').addClass('hiddenClass');
-               $('#Search').prepend($content);
-               $('#Search').find('.cardDetails').removeClass('hiddenClass');
-               $('.exitcard').click(function(){
-                  $('#Search').find('.cardDetails ').remove();
-                  $('#Search').find('.wrapped').children().unwrap();
-                  $('#Search').removeClass('collapse');
-               });
             });
-         }else{
-            $('.card').hover(function(){
+         });
+      }else{
+         $('.card').hover(function(){
+            $('#Search').find('.cardDetails ').remove();
+            $content = $(this).find('.cardDetails').clone(); 
+            $('#Search').wrapInner('<div class="wrapped">').find('.wrapped').addClass('hiddenClass');
+            $('#Search').prepend($content);
+            $('#Search').find('.cardDetails').removeClass('hiddenClass');
+            $('.exitcard').click(function(){
                $('#Search').find('.cardDetails ').remove();
-               $content = $(this).find('.cardDetails').clone(); 
-               $('#Search').wrapInner('<div class="wrapped">').find('.wrapped').addClass('hiddenClass');
-               $('#Search').prepend($content);
-               $('#Search').find('.cardDetails').removeClass('hiddenClass');
-               $('.exitcard').click(function(){
-                  $('#Search').find('.cardDetails ').remove();
-                  $('#Search').find('.wrapped').children().unwrap();
-               });
-            },function(){
+               $('#Search').find('.wrapped').children().unwrap();
+            });
+         },function(){
           
-            }); 
-         }
+         }); 
+      }
       }
    );
 });

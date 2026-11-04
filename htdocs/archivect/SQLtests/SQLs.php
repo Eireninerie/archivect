@@ -1,6 +1,8 @@
 <?php
 
+$local = 0;
 
+if ($local == 1){
 // Turn Distance ratings into table.
 $tempTable = "
     CREATE TEMPORARY TABLE temp_table_1 (
@@ -11,19 +13,27 @@ $tempTable = "
     )
   ";
   
-// $conn->query($tempTable);
+ $conn->query($tempTable);
 
 $insertTempTable = 'INSERT INTO temp_table_1 (postStart, postEnd, Rating)
 	VALUES'.$DistanceListRatings;
 
-// $conn->query($insertTempTable);
+ $conn->query($insertTempTable);
 
+ $tempTableQuerySQL = 'SELECT postStart, postEnd, Rating FROM temp_table_1';
+
+// print query
+	$tempTableQuery = $conn->query($tempTableQuerySQL);
+	while($row = $tempTableQuery->fetch_assoc()){
+	echo "<table><tr><td>".$row["postStart"]."</td><td>".$row["postEnd"]."</td><td>".$row["Rating"]."</td></tr></table>";}
+	
+}else{
 // jurn json to queryable table
 
 //print_r($DistanceListarray);
 $jsonTempTableSET = "SET @json='$DistanceListarray'"
 ;
-//print_r($jsonTempTableSET);
+print_r($jsonTempTableSET);
 $jsonsettempTableQuery = $conn->query($jsonTempTableSET);
 
 $jsonTempTableSQL=" SELECT postStart,postEnd,Rating FROM json_table(@json, '$[*]' 
@@ -31,21 +41,16 @@ $jsonTempTableSQL=" SELECT postStart,postEnd,Rating FROM json_table(@json, '$[*]
    postStart  VARCHAR(4) path '$.Start', 
    postEnd VARCHAR(4) path '$.End',
    Rating INT(1) path '$.Rating' ) 
-) AS temp_table_1;
+) AS temp_table_1
 ";
+
 // print query
 	$jsontempTableQuery = $conn->query($jsonTempTableSQL);
 	while($row = $jsontempTableQuery->fetch_assoc()){
 	echo "<table><tr><td>".$row["postStart"]."</td><td>".$row["postEnd"]."</td><td>".$row["Rating"]."</td></tr></table>";}
 
+}
 
-$tempTableQuerySQL = 'SELECT ID, postStart, postEnd, Rating FROM temp_table_1';
-
-// print query
-//	$tempTableQuery = $conn->query($tempTableQuerySQL);
-//	while($row = $tempTableQuery->fetch_assoc()){
-//	echo "<table><tr><td>".$row["ID"]."</td><td>".$row["postStart"]."</td><td>".$row["postEnd"]."</td><td>".$row["Rating"]."</td></tr></table>";}
-	
 //Attaching coordinates to the company ID postcodes
 
 $postCompanyENSQL = "SELECT    CompanyID,  postcode,    EASTING,    NORTHING
@@ -54,15 +59,16 @@ $postCompanyENSQL = "SELECT    CompanyID,  postcode,    EASTING,    NORTHING
 
 			LEFT JOIN ".$postcodeRefTable." ON substring(postcode,1,length(postcode)-3) = TRIM(postcode_district)";
 	// print query
-	$postCompanyEN = $conn->query($postCompanyENSQL);
+//	$postCompanyEN = $conn->query($postCompanyENSQL);
 //	while($row = $postCompanyEN->fetch_assoc()){
 //	echo "<table><tr><td>".$row["CompanyID"]."</td><td>".$row["postcode"]."</td></tr></table>";}
 
 
 
 //Attaching coordinates to the rating postcodes
+if ($local == 1){
 $distanceInputTable = "temp_table_1";
-$postVarRatingSQL = "SELECT ID, Rating, postStart, postEnd,
+$postVarRatingSQL = "SELECT Rating, postStart, postEnd,
 coordStart.EASTING AS coordSE,
 coordStart.Northing AS coordSN,
 ROUND(
@@ -76,10 +82,34 @@ FROM
 	".$postcodeRefTable." AS coordStart 
 	RIGHT JOIN ".$distanceInputTable." ON postStart = coordStart.Postcode_district
 	LEFT JOIN ".$postcodeRefTable." AS coordEnd ON postEnd = coordEnd.Postcode_district";
+print_r($postVarRatingSQL);
 	// print query
 //	$postVarRating = $conn->query($postVarRatingSQL);
 //	while($row = $postVarRating->fetch_assoc()){
 //	echo "<table><tr><td>".$row["ID"]."</td><td>".$row["Rating"]."</td><td>".$row["postStart"]."</td><td>".$row["postEnd"]."</td><td>".$row["coordSE"]."</td><td>".$row["totalDistance"]."</td></tr></table>";}
+}else{
+$jsonTempTableSQL=" SELECT  
+
+jt.postStart, postEndCoords.EASTING AS postEndEasting, postEndCoords.Northing AS postEndNorthing,
+jt.postEnd, postEndCoords.EASTING AS postEndEasting, postEndCoords.Northing AS postEndNorthing, 
+jt.Rating
+FROM
+json_table(@json, '$[*]' 
+  COLUMNS(
+   postStart  VARCHAR(4) path '$.Start', 
+   postEnd VARCHAR(4) path '$.End',
+   Rating INT(1) path '$.Rating' ) 
+) AS jt 
+LEFT JOIN $postcodeRefTable AS postEndCoords ON jt.postEnd=postEndCoords.postcode_district
+LEFT JOIN $postcodeRefTable AS postStartCoords ON jt.postStart=postStartCoords.postcode_district
+
+";
+// print query
+	$jsontempTableQuery = $conn->query($jsonTempTableSQL);
+	while($row = $jsontempTableQuery->fetch_assoc()){
+	echo "<table><tr><td>".$row["postStart"]."</td><td>".$row["postStartEasting"]."</td><td>".$row["postStartNorthing"]."</td><td>".$row["postEnd"]."</td><td>".$row["postEndEasting"]."</td><td>".$row["postEndNorthing"]."</td><td>".$row["Rating"]."</td></tr></table>";}
+}
+
 
 // Attaching Rating to Company ID by comparing the company coordinates to the rating coordinates
 $postCompanyRatingSQL = "SELECT

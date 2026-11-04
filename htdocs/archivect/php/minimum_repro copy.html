@@ -1,0 +1,64 @@
+<head>
+<script>
+function joinvalues(){
+let tbl = $('#DistanceTable .inputs')
+    .get().map(function(row) {
+        return $(row).find('input:checked,input[readonly]')
+            .get()
+            .map(function(element) {
+                return $(element).val();
+         });
+   });
+return tbl; 
+}
+
+function tablevalues() { 
+    return $('#DistanceTable .inputs')
+    .get().map(function(row) { 
+        let vals = $(row).find('input:checked, input[readonly]')
+            .map(function(i, el) { 
+                return $(el).val(); 
+            }).get(); 
+        return { postStart: vals[0], postEnd: vals[1], Rating: vals[2] }; 
+    }); 
+}
+
+
+</script>
+</head>
+<body>
+	<table id="DistanceTable">
+    <thead>
+        <tr>
+            <th>Start</th>
+            <th>End</th>
+            <th>Value</th>
+        </tr>
+    </thead>
+	<tbody>
+        <!-- example row 1-->
+       	<tr class="inputs">
+	        <td><input type="text" class="postStart" name="postStart" value="B7" readonly=""></td>
+	        <td><input type="text" class="postEnd" name="postEnd" value="B6" readonly=""></td>
+	        <td><input type="radio" class="Rating" name="B6B7" value="1">
+                <input type="radio" class="Rating" name="B6B7" value="2">
+                <input type="radio" class="Rating" name="B6B7" value="3" checked="checked">
+                <input type="radio" class="Rating" name="B6B7" value="4">
+                <input type="radio" class="Rating" name="B6B7" value="5">
+            </td></tr>
+        <!-- example row 2-->
+            <tr class="inputs">
+	        <td><input type="text" class="postStart" name="postStart" value="B7" readonly=""></td>
+	        <td><input type="text" class="postEnd" name="postEnd" value="EN6" readonly=""></td>
+	        <td><input type="radio" class="Rating" name="EN6B7" value="1">
+                <input type="radio" class="Rating" name="EN6B7" value="2">
+                <input type="radio" class="Rating" name="EN6B7" value="3">
+                <input type="radio" class="Rating" name="EN6B7" value="4">
+                <input type="radio" class="Rating" name="EN6B7" value="5" checked="checked">
+            </td>
+        </tr>
+        <!-- and more <tr>s as added by user-->
+        </tbody>
+    </table>
+    
+</body>

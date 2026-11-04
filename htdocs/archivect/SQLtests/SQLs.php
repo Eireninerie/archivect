@@ -18,6 +18,27 @@ $insertTempTable = 'INSERT INTO temp_table_1 (postStart, postEnd, Rating)
 
 // $conn->query($insertTempTable);
 
+// jurn json to queryable table
+
+//print_r($DistanceListarray);
+$jsonTempTableSET = "SET @json='$DistanceListarray'"
+;
+//print_r($jsonTempTableSET);
+$jsonsettempTableQuery = $conn->query($jsonTempTableSET);
+
+$jsonTempTableSQL=" SELECT postStart,postEnd,Rating FROM json_table(@json, '$[*]' 
+  COLUMNS(
+   postStart  VARCHAR(4) path '$.Start', 
+   postEnd VARCHAR(4) path '$.End',
+   Rating INT(1) path '$.Rating' ) 
+) AS temp_table_1;
+";
+// print query
+	$jsontempTableQuery = $conn->query($jsonTempTableSQL);
+	while($row = $jsontempTableQuery->fetch_assoc()){
+	echo "<table><tr><td>".$row["postStart"]."</td><td>".$row["postEnd"]."</td><td>".$row["Rating"]."</td></tr></table>";}
+
+
 $tempTableQuerySQL = 'SELECT ID, postStart, postEnd, Rating FROM temp_table_1';
 
 // print query
@@ -33,7 +54,7 @@ $postCompanyENSQL = "SELECT    CompanyID,  postcode,    EASTING,    NORTHING
 
 			LEFT JOIN ".$postcodeRefTable." ON substring(postcode,1,length(postcode)-3) = TRIM(postcode_district)";
 	// print query
-//	$postCompanyEN = $conn->query($postCompanyENSQL);
+	$postCompanyEN = $conn->query($postCompanyENSQL);
 //	while($row = $postCompanyEN->fetch_assoc()){
 //	echo "<table><tr><td>".$row["CompanyID"]."</td><td>".$row["postcode"]."</td></tr></table>";}
 

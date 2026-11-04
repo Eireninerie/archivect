@@ -15,22 +15,23 @@ function joinvalues ($table){
 }
 // redundant ): will delete if I give up on understanding why its wrong. Or if I understand it.
 
-function joinvalues2 (){
-$joinedagain = $( "#DistanceTable").find("tr" ).each(function( index ) {
-        $values = $(this).find("input:checked,input[readonly]");
-        $myArray = $.map($values, function(element) {
-            return element.value;
-            });
-        console.log($myArray.join());
-        return $myArray.join();
-        });
-        return $joinedagain.join();
-        
+function tablevalues() { 
+    return $('#DistanceTable .inputs')
+    .get().map(function(row) { 
+        let vals = $(row).find('input:checked, input[readonly]')
+            .map(function(i, el) { 
+                return $(el).val(); 
+            }).get(); 
+        return { Start: vals[0], End: vals[1], Rating: vals[2] }; 
+    }); 
+
+
+
 }
 //thank you John Rumpel! turning distance table into json
 
 function html2json() {
-   $json = '[';
+   $json = '{ "Distances": [';
    $otArr = [];
    $tbl2 = $('#DistanceTable tr.inputs').each(function(i) {        
       x = $(this).find("input:checked,input[readonly]");
@@ -40,9 +41,9 @@ function html2json() {
       });
       $otArr.push('{"ID":' + i + ',' + $itArr.join(',') + '}');
    })
-   $json += $otArr.join(",") + ']'
+   $json += $otArr.join(",") + ']}'
 
-//   if(!$json){}else{return $json;}
+   if(!$json){}else{return $json;}
 }
 function html2insert() {
    
@@ -95,8 +96,8 @@ $('#submitButton').click(function(){
    let EthosList = joinvalues("#EthosList");
    let SizesList = joinvalues("#SizesList");
    let DistanceList = html2insert();
-   let DistanceListjson = html2json();
-   $("#results").html("<div class='content'>...loading </div>").load('./php/search_results.php', {SectorList,EthosList,SizesList,DistanceList},
+   let DistanceListarray = tablevalues();
+   $("#results").html("<div class='content'>...loading </div>").load('./php/search_results.php', {SectorList,EthosList,SizesList,DistanceList,DistanceListarray},
       function(){
       $('#Search').addClass('collapse');
 //      $('.card').wrapInner('<div>').children('div').addcorners();

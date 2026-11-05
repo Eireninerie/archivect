@@ -12,6 +12,7 @@ echo '
 
 	<title>archivect - architectural archive</title>
 	<link rel="stylesheet" type="text/css" href="'.$pos.'./css/archivect.css"/>
+	<link rel="stylesheet" type="text/css" href="'.$pos.'./css/lightmode.css"/>
 	<script src="'.$pos.'./js/php.js"></script>
 
 <style></style>

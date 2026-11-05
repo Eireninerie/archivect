@@ -1,12 +1,7 @@
 :root{
-    --colour-01:#F0F3F1;
-    --colour-01-light:#FAFAFA;
-    --colour-02:#212531;
-    --colour-03:#F9BCA4;
-    --colour-03-dark:#a63;
-    --colour-04:#314EFF;
-    --colour-05:#aaa;
     --colour-border:green;
+
+
     --shadow:rgba(0,0,0,0.10);
 	--bd:1px;
     --righthead:100px;
@@ -40,6 +35,7 @@
 }
 body{
     background: var(--colour-01);
+    background: var(--colour-01) url('../assets/dot.svg') repeat ;
     color: var(--colour-02);
     font-family:var(--font-text), sans-serif;
     font-size:11pt;
@@ -89,6 +85,8 @@ h1 {
     font-family: var(--font-title), sans-serif;
     font-size: 23pt;
     text-transform: uppercase;
+
+        text-shadow:3px 3px var(--shadow);
 }   
 #header h1{
     anchor-name: --title;
@@ -218,11 +216,10 @@ input[type=radio],legend,.info,#footer a{
     font-size: 11pt;
 }
 #footer .infobox{
-    bottom:anchor(top);
-    right:anchor(right);
+    position-area: top;
 }
 .info+.infobox{
-    position-area: bottom left;
+    position-area: bottom;
     transition: all ease-in-out .5s;
 }
 input[type=radio]+.infobox, legend>.infobox{
@@ -243,7 +240,7 @@ th{
     top: calc(anchor(bottom) - 60px);
     z-index: -1;
     height:min-content;
-    background: #314EFF;
+    background: var(--colour-04);
     padding:16px;
     display: block;
     width:min-content;
@@ -291,7 +288,7 @@ th{
     display:inline-block;
     width: 100%;
     text-decoration: none;
-    color:#314EFF;
+    color:var(--colour-04);
     font-weight: 400;
 }
 
@@ -299,7 +296,7 @@ th{
 #footer{
     position:fixed;
     bottom:0;
-    background: #314EFF;
+    background: var(--colour-04);
     color: #aaa;
     left:0;
     right:0;
@@ -393,6 +390,7 @@ th{
     font-family: var(--font-title);
     font-size: 17pt;
     white-space: nowrap;
+    color: var(--colour-02);
 }
 
 
@@ -458,7 +456,6 @@ th{
     direction:ltr;
 }
 .card{
-
 
     float:left;
     width:282px;

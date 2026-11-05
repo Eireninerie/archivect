@@ -23,33 +23,10 @@ $insertTempTable = 'INSERT INTO temp_table_1 (postStart, postEnd, Rating)
  $tempTableQuerySQL = 'SELECT postStart, postEnd, Rating FROM temp_table_1';
 
 // print query
-	$tempTableQuery = $conn->query($tempTableQuerySQL);
-	while($row = $tempTableQuery->fetch_assoc()){
-	echo "<table><tr><td>".$row["postStart"]."</td><td>".$row["postEnd"]."</td><td>".$row["Rating"]."</td></tr></table>";}
+//	$tempTableQuery = $conn->query($tempTableQuerySQL);
+//	while($row = $tempTableQuery->fetch_assoc()){
+//	echo "<table><tr><td>".$row["postStart"]."</td><td>".$row["postEnd"]."</td><td>".$row["Rating"]."</td></tr></table>";}
 	
-}else{
-// jurn json to queryable table
-
-//print_r($DistanceListarray);
-$jsonTempTableSET = "SET @json='$DistanceListarray'"
-;
-print_r($jsonTempTableSET);
-$jsonsettempTableQuery = $conn->query($jsonTempTableSET);
-
-$jsonTempTableSQL=" SELECT postStart,postEnd,Rating FROM json_table(@json, '$[*]' 
-  COLUMNS(
-   postStart  VARCHAR(4) path '$.Start', 
-   postEnd VARCHAR(4) path '$.End',
-   Rating INT(1) path '$.Rating' ) 
-) AS temp_table_1
-";
-
-// print query
-	$jsontempTableQuery = $conn->query($jsonTempTableSQL);
-	while($row = $jsontempTableQuery->fetch_assoc()){
-	echo "<table><tr><td>".$row["postStart"]."</td><td>".$row["postEnd"]."</td><td>".$row["Rating"]."</td></tr></table>";}
-
-}
 
 //Attaching coordinates to the company ID postcodes
 
@@ -64,9 +41,6 @@ $postCompanyENSQL = "SELECT    CompanyID,  postcode,    EASTING,    NORTHING
 //	echo "<table><tr><td>".$row["CompanyID"]."</td><td>".$row["postcode"]."</td></tr></table>";}
 
 
-
-//Attaching coordinates to the rating postcodes
-if ($local == 1){
 $distanceInputTable = "temp_table_1";
 $postVarRatingSQL = "SELECT Rating, postStart, postEnd,
 coordStart.EASTING AS coordSE,
@@ -87,37 +61,6 @@ print_r($postVarRatingSQL);
 //	$postVarRating = $conn->query($postVarRatingSQL);
 //	while($row = $postVarRating->fetch_assoc()){
 //	echo "<table><tr><td>".$row["ID"]."</td><td>".$row["Rating"]."</td><td>".$row["postStart"]."</td><td>".$row["postEnd"]."</td><td>".$row["coordSE"]."</td><td>".$row["totalDistance"]."</td></tr></table>";}
-}else{
-$jsonsettempTableSQL="SELECT  
-addresses.CompanyID, weighting.Rating
-FROM
-json_table(@json, '$[*]' 
-  COLUMNS(
-   postStart  VARCHAR(4) path '$.Start', 
-   postEnd VARCHAR(4) path '$.End',
-   unweighted INT(1) path '$.Rating' ) 
-) AS jt 
-CROSS JOIN $addressTable AS addresses
-LEFT JOIN $postcodeRefTable AS postEndCoords ON jt.postEnd=postEndCoords.postcode_district
-LEFT JOIN $postcodeRefTable AS postStartCoords ON jt.postStart=postStartCoords.postcode_district
-LEFT JOIN $postcodeRefTable AS addressCoords ON TRIM(substring(addresses.postcode,1,length(addresses.postcode)-3)) = addressCoords.postcode_district
-LEFT JOIN weighting ON jt.unweighted = weighting.ID
-WHERE (power(ABS(postStartCoords.EASTING - addressCoords.EASTING),2) + power(ABS(postStartCoords.Northing - addressCoords.Northing),2)) < (power(ABS(postStartCoords.Northing - postEndCoords.Northing),2) + power(ABS(postStartCoords.Easting - postEndCoords.Easting),2))
-";
-$jsonTempTableSQL=" SELECT firms.ID, dis.Rating 
-FROM $primaryTable AS firms 
-LEFT JOIN ($jsonsettempTableSQL) AS dis ON firms.ID = dis.CompanyID
-";
-//  CROSS JOIN (".$postCompanyENSQL.") AS Companies ON 
-//((POWER(ABS(postStartCoords.Northing-Companies.Northing),2) + (POWER(ABS(postStartCoords.Easting-Companies.Easting),2) <
-//(POWER(ABS(postEndCoords.Northing-postStartCoords.Northing),2) + (POWER(ABS(postEndCoords.Easting-postStartCoords.Easting),2))
-
-// print query
-	$jsontempTableQuery = $conn->query($jsonTempTableSQL);
-	while($row = $jsontempTableQuery->fetch_assoc()){
-	echo "<table><tr><td>CompanyID:".$row["ID"]."</td><td>".$row["Rating"]."</td></tr></table>";}
-}
-
 
 // Attaching Rating to Company ID by comparing the company coordinates to the rating coordinates
 $postCompanyRatingSQL = "SELECT
@@ -136,14 +79,53 @@ GROUP BY
     CompanyID
 ORDER BY
     MaxRating DESC";
-    
+  
 
+}else{
+// jurn json to queryable table
 
-	// print query
-//	$postCompanyRating = $conn->query($postCompanyRatingSQL);
-//	while($row = $postCompanyRating->fetch_assoc()){
-//	echo "<table><tr><td>".$row["CompanyID"]."</td><td>".$row["MaxRating"]."</td></tr></table>";}
+//print_r($DistanceListarray);
+$jsonTempTableSET = "SET @json='$DistanceListarray'"
+;
+//print_r($jsonTempTableSET);
+$jsonsettempTableQuery = $conn->query($jsonTempTableSET);
 
+$jsonTempTableSQL=" SELECT postStart,postEnd,Rating FROM json_table(@json, '$[*]' 
+  COLUMNS(
+   postStart  VARCHAR(4) path '$.Start', 
+   postEnd VARCHAR(4) path '$.End',
+   Rating INT(1) path '$.Rating' ) 
+) AS temp_table_1
+";
+
+// print query
+//	$jsontempTableQuery = $conn->query($jsonTempTableSQL);
+//	while($row = $jsontempTableQuery->fetch_assoc()){
+//	echo "<table><tr><td>".$row["postStart"]."</td><td>".$row["postEnd"]."</td><td>".$row["Rating"]."</td></tr></table>";}
+
+$postCompanyRatingSQL="SELECT  
+	addresses.CompanyID, MAX(weighting.Rating) AS Rating
+	FROM
+		json_table(@json, '$[*]' 
+  			COLUMNS(
+   				postStart  VARCHAR(4) path '$.Start', 
+   				postEnd VARCHAR(4) path '$.End',
+   				unweighted INT(1) path '$.Rating' ) 
+		) AS jt 
+		CROSS JOIN $addressTable AS addresses
+		LEFT JOIN $postcodeRefTable AS postEndCoords ON jt.postEnd=postEndCoords.postcode_district
+		LEFT JOIN $postcodeRefTable AS postStartCoords ON jt.postStart=postStartCoords.postcode_district
+		LEFT JOIN $postcodeRefTable AS addressCoords ON TRIM(substring(addresses.postcode,1,length(addresses.postcode)-3)) = addressCoords.postcode_district
+		LEFT JOIN weighting ON jt.unweighted = weighting.ID
+		WHERE (power(ABS(postStartCoords.EASTING - addressCoords.EASTING),2) + power(ABS(postStartCoords.Northing - addressCoords.Northing),2)) < (power(ABS(postStartCoords.Northing - postEndCoords.Northing),2) + power(ABS(postStartCoords.Easting - postEndCoords.Easting),2))
+	GROUP BY CompanyID
+";
+
+//	$jsontempTableQuery = $conn->query($postCompanyRatingSQL);
+//	while($row = $jsontempTableQuery->fetch_assoc()){
+//	echo "<table><tr><td>".$row["CompanyID"]."</td><td>".$row["Rating"]."</td></table>";}
+
+}
 //Determine Company size
 $sizeTypeSQL = 'SELECT CompanyID, CONCAT(st.Location,st.Size) AS SizeID FROM 
 	(SELECT	CompanyID, 
@@ -194,8 +176,8 @@ $SectorRatingsQuerySQL =
 
 // weight and average sector ratings
  $SectorCompanyRatingsSQL = " SELECT ROUND(avg(weighting.rating),2) AS SRating, CompanyID
- 	FROM ".$sectorTable."
-		LEFT JOIN (".$SectorRatingsQuerySQL.") AS v ON v.ID = ".$sectorTable.".Sectors
+ 	FROM $sectorTable
+		LEFT JOIN (".$SectorRatingsQuerySQL.") AS v ON v.ID = $sectorTable.Sectors
 		LEFT JOIN weighting on v.Rating = weighting.ID
 	GROUP BY CompanyID
 ";
@@ -221,6 +203,9 @@ $ethosRatingsQuerySQL = "SELECT
 //	while($row = $ethosCompanyRatings->fetch_assoc()){
 //	echo "<table><tr><td>".$row["CompanyID"]."</td><td>".$row["Rating"]."</td></tr></table>";}
 
+
+if ($local == 1){
+
 //Attach combined ratings to Company details
 $ratingSortSQL = "SELECT ID, Company, logo, website,
 --	If(postRating.MaxRating IS NULL, 0, MaxRating)+
@@ -229,14 +214,32 @@ $ratingSortSQL = "SELECT ID, Company, logo, website,
 	If(ethosRating.Rating IS NULL, 0, ethosRating.Rating)
 	AS totalRating
 FROM
-       $primaryTable
-        LEFT JOIN ($SectorCompanyRatingsSQL) AS sectorRating ON  $primaryTable.ID = sectorRating.CompanyID 
-	     LEFT JOIN ($sizeRatingsQuerySQL) AS sizeRating ON  $primaryTable.ID = sizeRating.CompanyID 
-        LEFT JOIN ($ethosRatingsQuerySQL) AS ethosRating ON  $primaryTable.ID = ethosRating.CompanyID 
+       $primaryTable as firms
+	   
+        LEFT JOIN ($SectorCompanyRatingsSQL) AS sectorRating ON firms.ID = sectorRating.CompanyID 
+	     LEFT JOIN ($sizeRatingsQuerySQL) AS sizeRating ON firms.ID = sizeRating.CompanyID 
+        LEFT JOIN ($ethosRatingsQuerySQL) AS ethosRating ON firms.ID = ethosRating.CompanyID 
         
 ORDER BY
     totalRating DESC, Company ASC
 LIMIT 50";
 // 	LEFT JOIN ($postCompanyRatingSQL) AS postRating ON  $primaryTable.ID = postRating.CompanyID 
+}else{
+$ratingSortSQL=" SELECT firms.ID, firms.Company, logo, website,
+dis.Rating, sectorRating.SRating, sizeRating.Rating AS szRating,
+COALESCE(dis.Rating)+ COALESCE(sectorRating.SRating)+ COALESCE(sizeRating.Rating) + COALESCE(ethosRating.Rating) AS totalRating
+	FROM $primaryTable AS firms 
+	LEFT JOIN ($postCompanyRatingSQL) AS dis ON firms.ID = dis.CompanyID
+    LEFT JOIN ($SectorCompanyRatingsSQL) AS sectorRating ON firms.ID = sectorRating.CompanyID 
+	LEFT JOIN ($sizeRatingsQuerySQL) AS sizeRating ON firms.ID = sizeRating.CompanyID 
+        LEFT JOIN ($ethosRatingsQuerySQL) AS ethosRating ON firms.ID = ethosRating.CompanyID 
+	ORDER BY COALESCE(dis.Rating)+ COALESCE(sectorRating.SRating)+ COALESCE(sizeRating.Rating) + COALESCE(ethosRating.Rating) DESC
+";
 
+// print query
+//	$jsontempTableQuery = $conn->query($ratingSortSQL.'LIMIT 30');
+//	while($row = $jsontempTableQuery->fetch_assoc()){
+//	echo "<table><tr><td>CompanyID:".$row["ID"]."</td><td>".$row["Company"]."</td><td>Distance:".$row["Rating"]."</td><td>Sectors:".$row["SRating"]."</td><td>Size:".$row["szRating"]."</td></tr></table>";}
+
+}
 ?>

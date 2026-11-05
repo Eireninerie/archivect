@@ -453,9 +453,13 @@ th{
     overflow-x:hidden;
     
 }
-.card{
+#results *{
 
     direction:ltr;
+}
+.card{
+
+
     float:left;
     width:282px;
     box-shadow: none;

@@ -89,8 +89,8 @@ print_r($postVarRatingSQL);
 //	echo "<table><tr><td>".$row["ID"]."</td><td>".$row["Rating"]."</td><td>".$row["postStart"]."</td><td>".$row["postEnd"]."</td><td>".$row["coordSE"]."</td><td>".$row["totalDistance"]."</td></tr></table>";}
 }else{
 $jsonTempTableSQL=" SELECT  
-
-jt.postStart, postEndCoords.EASTING AS postEndEasting, postEndCoords.Northing AS postEndNorthing,
+addresses.CompanyID, addresses.postcode AS postcode, addressCoords.EASTING AS addressEasting, addressCoords.Northing AS addressNorthing,
+jt.postStart, postStartCoords.EASTING AS postStartEasting, postStartCoords.Northing AS postStartNorthing,
 jt.postEnd, postEndCoords.EASTING AS postEndEasting, postEndCoords.Northing AS postEndNorthing, 
 jt.Rating
 FROM
@@ -100,14 +100,21 @@ json_table(@json, '$[*]'
    postEnd VARCHAR(4) path '$.End',
    Rating INT(1) path '$.Rating' ) 
 ) AS jt 
+CROSS JOIN $addressTable AS addresses
 LEFT JOIN $postcodeRefTable AS postEndCoords ON jt.postEnd=postEndCoords.postcode_district
 LEFT JOIN $postcodeRefTable AS postStartCoords ON jt.postStart=postStartCoords.postcode_district
+LEFT JOIN $postcodeRefTable AS addressCoords ON TRIM(substring(addresses.postcode,1,length(addresses.postcode)-3)) = addressCoords.postcode_district
+WHERE (power(ABS(postStartCoords.EASTING - addressCoords.EASTING),2) + power(ABS(postStartCoords.Northing - addressCoords.Northing),2)) < (power(ABS(postStartCoords.Northing - postEndCoords.Northing),2) + power(ABS(postStartCoords.Easting - postEndCoords.Easting),2))
 
 ";
+//  CROSS JOIN (".$postCompanyENSQL.") AS Companies ON 
+//((POWER(ABS(postStartCoords.Northing-Companies.Northing),2) + (POWER(ABS(postStartCoords.Easting-Companies.Easting),2) <
+//(POWER(ABS(postEndCoords.Northing-postStartCoords.Northing),2) + (POWER(ABS(postEndCoords.Easting-postStartCoords.Easting),2))
+
 // print query
 	$jsontempTableQuery = $conn->query($jsonTempTableSQL);
 	while($row = $jsontempTableQuery->fetch_assoc()){
-	echo "<table><tr><td>".$row["postStart"]."</td><td>".$row["postStartEasting"]."</td><td>".$row["postStartNorthing"]."</td><td>".$row["postEnd"]."</td><td>".$row["postEndEasting"]."</td><td>".$row["postEndNorthing"]."</td><td>".$row["Rating"]."</td></tr></table>";}
+	echo "<table><tr><td>addID".$row["postcode"]."</td><td>CompanyID:".$row["CompanyID"]."</td><td>addEAST: ".$row["addressEasting"]."</td><td>addNORTH:".$row["addressNorthing"]."</td><td>postStart:".$row["postStart"]."</td><td>starttEAST:".$row["postStartEasting"]."</td><td>startNORTH:".$row["postStartNorthing"]."</td><td>postEnd:".$row["postEnd"]."</td><td>EndEAST:".$row["postEndEasting"]."</td><td>EndNorth:".$row["postEndNorthing"]."</td><td>".$row["Rating"]."</td></tr></table>";}
 }
 
 

@@ -88,7 +88,7 @@ print_r($postVarRatingSQL);
 //	while($row = $postVarRating->fetch_assoc()){
 //	echo "<table><tr><td>".$row["ID"]."</td><td>".$row["Rating"]."</td><td>".$row["postStart"]."</td><td>".$row["postEnd"]."</td><td>".$row["coordSE"]."</td><td>".$row["totalDistance"]."</td></tr></table>";}
 }else{
-$jsonTempTableSQL=" SELECT  
+$jsonsettempTableSQL="SELECT  
 addresses.CompanyID, weighting.Rating
 FROM
 json_table(@json, '$[*]' 
@@ -103,7 +103,10 @@ LEFT JOIN $postcodeRefTable AS postStartCoords ON jt.postStart=postStartCoords.p
 LEFT JOIN $postcodeRefTable AS addressCoords ON TRIM(substring(addresses.postcode,1,length(addresses.postcode)-3)) = addressCoords.postcode_district
 LEFT JOIN weighting ON jt.unweighted = weighting.ID
 WHERE (power(ABS(postStartCoords.EASTING - addressCoords.EASTING),2) + power(ABS(postStartCoords.Northing - addressCoords.Northing),2)) < (power(ABS(postStartCoords.Northing - postEndCoords.Northing),2) + power(ABS(postStartCoords.Easting - postEndCoords.Easting),2))
-
+";
+$jsonTempTableSQL=" SELECT firms.ID, dis.Rating 
+FROM $primaryTable AS firms 
+LEFT JOIN ($jsonsettempTableSQL) AS dis ON firms.ID = dis.CompanyID
 ";
 //  CROSS JOIN (".$postCompanyENSQL.") AS Companies ON 
 //((POWER(ABS(postStartCoords.Northing-Companies.Northing),2) + (POWER(ABS(postStartCoords.Easting-Companies.Easting),2) <
@@ -112,7 +115,7 @@ WHERE (power(ABS(postStartCoords.EASTING - addressCoords.EASTING),2) + power(ABS
 // print query
 	$jsontempTableQuery = $conn->query($jsonTempTableSQL);
 	while($row = $jsontempTableQuery->fetch_assoc()){
-	echo "<table><tr><td>CompanyID:".$row["CompanyID"]."</td><td>".$row["Rating"]."</td></tr></table>";}
+	echo "<table><tr><td>CompanyID:".$row["ID"]."</td><td>".$row["Rating"]."</td></tr></table>";}
 }
 
 

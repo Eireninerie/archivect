@@ -18,7 +18,6 @@ $offset = ($page-1) * $precs;
 $pageSQL = "SELECT * FROM ".$primaryTable;
 	$pagequery = $conn->query($pageSQL);
 	$pages = ceil($pagequery->num_rows / $precs);
-echo $pages;
 ?>
 <ul class="pagination">
     <li><a href="?page=1">First</a></li>

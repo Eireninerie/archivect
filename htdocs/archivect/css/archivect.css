@@ -69,7 +69,8 @@ label {
 button {
     font-family: inherit;
     background-color: var(--colour-03);
-    border: 1px solid var(--colour-03-dark);
+    outline: 1px solid var(--colour-03-dark);
+    border: none;
     border-radius:2px;
     cursor: pointer;
 }
@@ -339,10 +340,14 @@ th{
 
     position:fixed;
     background-color: var(--colour-04);
-    left: 25%;
+    left: calc(round(25%,20px) + 10px );
+    height:40px;
     top: 10px;
-    width:max-content;
-    padding: 10px;
+    width:180px;
+    padding: 15px 20px 5px 20px;
+    margin:20px;
+    outline:2px solid var(--colour-04);
+    border-radius: 2px;
 }
 .pagination li, .pagination a{
     list-style:none;
@@ -354,8 +359,9 @@ th{
 }
 /* Input update UI page*/
 .Company{
-    padding: 0 10px 20px 10px;
+    padding: 20px ;
     border-bottom: 1px solid var(--colour-05);
+    height:319px;
 }
 .Company tbody{
     display:inline-block; 
@@ -363,7 +369,7 @@ th{
     overflow-y:auto;
 }
 #Companies{
-    margin:90px 0 0 0;
+    margin:110px 0 0 0;
 }
 .table{
     display:inline-block; 

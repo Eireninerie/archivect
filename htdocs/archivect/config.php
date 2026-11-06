@@ -1,5 +1,7 @@
 <?php
 //firms database
+$local = '1';
+
 $fhost = 'localhost';
 $fusername = 'root';
 $fpassword = '';

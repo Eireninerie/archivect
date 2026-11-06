@@ -1,6 +1,5 @@
 <?php
-
-$local = 0;
+global $local;
 
 if ($local == 1){
 

@@ -1,8 +1,9 @@
 <?php
 
-$local = 1;
+$local = 0;
 
 if ($local == 1){
+
 // Turn Distance ratings into table.
 $tempTable = "
     CREATE TEMPORARY TABLE temp_table_1 (
@@ -82,11 +83,14 @@ ORDER BY
   
 
 }else{
+	
+$DistanceListarray = json_encode($_POST['DistanceListarray']);
 // jurn json to queryable table
 
 //print_r($DistanceListarray);
 $jsonTempTableSET = "SET @json='$DistanceListarray'"
 ;
+//print_r($DistanceListarray);
 //print_r($jsonTempTableSET);
 $jsonsettempTableQuery = $conn->query($jsonTempTableSET);
 
@@ -99,7 +103,10 @@ $jsonTempTableSQL=" SELECT postStart,postEnd,Rating FROM json_table(@json, '$[*]
 ";
 
 // print query
-//	$jsontempTableQuery = $conn->query($jsonTempTableSQL);
+//echo '<br><br>toot';
+//print_r($jsonTempTableSQL);
+
+	$jsontempTableQuery = $conn->query($jsonTempTableSQL);
 //	while($row = $jsontempTableQuery->fetch_assoc()){
 //	echo "<table><tr><td>".$row["postStart"]."</td><td>".$row["postEnd"]."</td><td>".$row["Rating"]."</td></tr></table>";}
 
@@ -146,7 +153,7 @@ $sizeRatingSET=' SELECT
 	FROM sizesList
 	';
 	// print query
-//	$sizeRatingSETq = $conn->query($sizeRatingSET);
+	$sizeRatingSETq = $conn->query($sizeRatingSET);
 //	while($row = $sizeRatingSETq->fetch_assoc()){
 //	echo $SizesListRatings;
 //	echo "<table><tr><td>".$row["ID"]."</td><td>".$row["Rating"]."</td></tr></table>";}
@@ -187,9 +194,13 @@ $SectorRatingsQuerySQL =
 //	echo "<table><tr><td>".$row["v.ID"]."</td><td>".$row["CompanyID"]."</td><td>".$row["SRating"]."</td><td>".$row["Rating"]."</td></tr></table>";}
 
 $ethosRatings = "SELECT 
-	ID,
-	SUBSTRING('.$EthosListRatings.',ROW_NUMBER() OVER( ORDER BY Name),1) AS Rating
+	ID, Name,
+	SUBSTRING('$EthosListRatings',ROW_NUMBER() OVER( ORDER BY Name),1) AS Rating
 	FROM ".$ethosListTable."";
+
+//		$ethosCompanyRatings = $conn->query($ethosRatings);
+//	while($row = $ethosCompanyRatings->fetch_assoc()){
+//	echo "<table><tr><td>".$row["Name"]."</td><td>".$row["Rating"]."</td></tr></table>";}
 
 $ethosRatingsQuerySQL = "SELECT
 	CompanyID, SUM(weighting.Rating)  AS Rating
@@ -227,13 +238,13 @@ LIMIT 50";
 }else{
 $ratingSortSQL=" SELECT firms.ID, firms.Company, logo, website,
 dis.Rating, sectorRating.SRating, sizeRating.Rating AS szRating,
-COALESCE(dis.Rating)+ COALESCE(sectorRating.SRating)+ COALESCE(sizeRating.Rating) + COALESCE(ethosRating.Rating) AS totalRating
+COALESCE(dis.Rating,0)+ COALESCE(sectorRating.SRating,0)+ COALESCE(sizeRating.Rating,0) + COALESCE(ethosRating.Rating,0) AS totalRating
 	FROM $primaryTable AS firms 
 	LEFT JOIN ($postCompanyRatingSQL) AS dis ON firms.ID = dis.CompanyID
     LEFT JOIN ($SectorCompanyRatingsSQL) AS sectorRating ON firms.ID = sectorRating.CompanyID 
 	LEFT JOIN ($sizeRatingsQuerySQL) AS sizeRating ON firms.ID = sizeRating.CompanyID 
         LEFT JOIN ($ethosRatingsQuerySQL) AS ethosRating ON firms.ID = ethosRating.CompanyID 
-	ORDER BY COALESCE(dis.Rating)+ COALESCE(sectorRating.SRating)+ COALESCE(sizeRating.Rating) + COALESCE(ethosRating.Rating) DESC
+	ORDER BY COALESCE(dis.Rating,0)+ COALESCE(sectorRating.SRating,0)+ COALESCE(sizeRating.Rating,0) + COALESCE(ethosRating.Rating,0) DESC
 ";
 
 // print query

@@ -1,31 +1,25 @@
 <?php
-include($pos.'./config.php');
-
+global $pos;
+$include = $pos.'./config.php';
+include($include);
+global $fhost, $fusername,$fpassword,$fdbname;
 //database tables
 $postcodeRefTable = "postcodeCoordsEN";
-
 $primaryTable = "firms";
 $addressTable = "addresses";
 $sectorTable = "sectors";
 $ethosTable = "ethos";
-
 $sectorListTable = "sectorsList";
 $ethosListTable = "ethosList";
 $socialsListTable = "socialsList";
-
-
 $conn = new mysqli($fhost,$fusername,$fpassword,$fdbname);
 if (!$conn) {
 	die('Connection failed: '.mysqli_connect_error());
 	}
 // echo '<p>Connected successfully';
 	
-
-
-function rB($x,$y,$z,$w,$v)
-              {echo '<input type="radio" class="'.$x.'" name="'.$y.'" value="'.$z.'" '.$v.'><label class="infobox">'.$w.'</label>';}
-             
-           
+function rB($x,$y,$z,$w,$v){ echo '<input type="radio" class="'.$x.'" name="'.$y.'" value="'.$z.'" '.$v.'><label class="infobox">'.$w.'</label>';}
+                   
 function rating($ID,$Name){
 	rB($ID,$Name,1,"avoid","").	
 	rB($ID,$Name,2,"ambivalent","checked='checked'").

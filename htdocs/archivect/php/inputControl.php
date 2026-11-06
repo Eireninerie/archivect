@@ -1,4 +1,6 @@
 <?php
+$pos = '.';
+global $conn,$primaryTable;
 include('../php/public_functions.php');
 // print_r($GLOBALS);
 

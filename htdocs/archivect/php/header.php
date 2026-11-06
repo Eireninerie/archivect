@@ -3,8 +3,9 @@
 <!DOCTYPE html>
 <html lang="en-GB">
 <head>
-<?php include('./php/public_functions.php');?>
-<?php
+<?php 
+global $pos;
+include($pos.'./php/public_functions.php');
 
 echo '
 <script type="text/javascript" src="'.$pos.'./js/jquery-4.0.0.min.js"></script>
@@ -34,6 +35,7 @@ echo '
 	<button>Menu</button>
 	<ul class="boxed">
 		<?php
+global $pos;
 
 echo '
 	<li><a href="'.$pos.'./">Search</a></li>

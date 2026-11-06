@@ -1,4 +1,5 @@
 <?php
+global $distanceInputTable;
 
 function xList($type,$table){
 	global $conn;
@@ -35,7 +36,9 @@ FROM
 global $sectorListTable;
 ?>
 
-<script src=<?php echo $pos.'./js/searchbar.js?v=0.1'; ?>></script>
+<script src=<?php 
+if(isset($pos)){}else{$pos='';} 
+echo $pos.'./js/searchbar.js?v=0.1'; ?>></script>
 <form id='Search' class="boxed">
 <h3><b>Search Priorities</b></h3>
 <h3>Sectors

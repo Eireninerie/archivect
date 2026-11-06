@@ -4,11 +4,6 @@ $pos ='.';
 include($pos.'./php/header.php');
 
 
-?>
-
-<?php
-
-include($pos.'./php/public_functions.php');
 echo "<script src='../js/inputs.js?v=0.1'></script>";
 
 if (isset($_GET['page'])) {
@@ -16,14 +11,14 @@ if (isset($_GET['page'])) {
 } else {
     $page = 1;
 }
-echo $pages;
+
 $precs = 64;
 $offset = ($page-1) * $precs; 
 
 $pageSQL = "SELECT * FROM ".$primaryTable;
 	$pagequery = $conn->query($pageSQL);
 	$pages = ceil($pagequery->num_rows / $precs);
-
+echo $pages;
 ?>
 <ul class="pagination">
     <li><a href="?page=1">First</a></li>

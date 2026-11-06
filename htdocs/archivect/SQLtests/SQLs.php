@@ -1,6 +1,6 @@
 <?php
 
-$local = 0;
+$local = 1;
 
 if ($local == 1){
 // Turn Distance ratings into table.
@@ -56,7 +56,7 @@ FROM
 	".$postcodeRefTable." AS coordStart 
 	RIGHT JOIN ".$distanceInputTable." ON postStart = coordStart.Postcode_district
 	LEFT JOIN ".$postcodeRefTable." AS coordEnd ON postEnd = coordEnd.Postcode_district";
-print_r($postVarRatingSQL);
+//print_r($postVarRatingSQL);
 	// print query
 //	$postVarRating = $conn->query($postVarRatingSQL);
 //	while($row = $postVarRating->fetch_assoc()){

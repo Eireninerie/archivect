@@ -7,15 +7,14 @@ $SectorListRatings = filter_var($_POST['SectorList'], FILTER_SANITIZE_NUMBER_INT
 $EthosListRatings = filter_var($_POST['EthosList'], FILTER_SANITIZE_NUMBER_INT);
 $DistanceListRatings= preg_replace('/[A-Za-z]*[\d]+/', '"$0"', preg_replace('/[^a-zA-Z\d\(\)\,]/',"",$_POST['DistanceList']));
 $SizesListRatings= filter_var($_POST['SizesList'], FILTER_SANITIZE_NUMBER_INT);
-
 echo '<br><br>';
-
+if(isset($_Post['DistanceListarray'])){
 $DistanceListarray = json_encode($_POST['DistanceListarray']);
+}else{
+$DistanceListarray = '';}
 include('../SQLtests/SQLs.php'); 
 //print_r($_POST['DistanceListarray']);
 //print_r($GLOBALS);
-
-
 function cardDetails($tableName,$columnName,$row,$sub){
 
 	echo "	<ul class='c_".$columnName."'>	";

@@ -12,11 +12,12 @@ function sanitiseaddress($string){
     //make empty into NULL
     return preg_replace ('/\,\,/',",NULL,",
         //place valid postcodes and locations into quotes
-        preg_replace('/[A-Z][A-Za-z\-]+[a-z][\,\s]*[A-Za-z\-]*[a-z]|[a-zA-Z]+[\s\d]+[a-zA-Z]+/', '"$0"', 
+        preg_replace('/[A-Z][A-Za-z\-\s]+[a-z][\,\s]*[A-Za-z\-\s]*[a-z]|[a-zA-Z]{1,2}\d{1,2}[a-zA-Z]?[\s]?\d[a-zA-Z]{2}/', '"$0"', 
             //remove invalid characters
             preg_replace('/[^a-zA-Z\d\(\)\,\s\-]/',"", 
         $string)));
 }
+
 
 //sanitise & declare POSTs
 $mainupdate = explode(",",$_POST['main']);
@@ -31,7 +32,7 @@ $ethoskeep = sanitisesubs($_POST['ethoskeep']);
 $ethosdel = sanitisesubs($_POST['ethosdel']);
 $addressdel = sanitisesubs($_POST['addressdel']);
 $addressupdate = sanitiseaddress($_POST['addressupdate']);
-
+// echo 'addressupdate: '.$addressupdate;
 // update main bits
 $mainupdateSQL = "UPDATE ".$primaryTable." SET
 Company = '".$Company."',

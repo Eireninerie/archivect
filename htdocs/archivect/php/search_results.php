@@ -51,7 +51,11 @@ function cardResults(){
 				<div class='cardDetails hiddenClass' id='".$row["ID"]."'>
 				<img class='logo' src='".$row["logo"]."'>
 				<h3><b><button type='button' class='exitcard'>x</button> ". $row["Company"]. "</b></h3>
-				<h3>a.k.a.: ". $row["CompanySimple"]."</h3>
+			";
+			if ($row["CompanySimple"] != NULL){echo "
+				<p>a.k.a.: ". $row["CompanySimple"]."</p>
+			";}
+			echo "
 				<h3>Sectors</h3>
 				<div>";
 			cardDetails($sectorTable,"sectors",$row["ID"],1);

@@ -12,7 +12,7 @@ function sanitiseaddress($string){
     //make empty into NULL
     return preg_replace ('/\,\,/',",NULL,",
         //place valid postcodes and locations into quotes
-        preg_replace('/[A-Z][A-Za-z\-\s]+[a-z][\,\s]*[A-Za-z\-\s]*[a-z]|[a-zA-Z]{1,2}\d{1,2}[a-zA-Z]?[\s]?\d[a-zA-Z]{2}/', '"$0"', 
+        preg_replace('/Overseas|[A-Z][A-Za-z\-\s]+[a-z](\,\s)*[A-Za-z\-\s]*|[a-zA-Z]{1,2}\d{1,2}[a-zA-Z]?[\s]?\d[a-zA-Z]{2}/', '"$0"', 
             //remove invalid characters
             preg_replace('/[^a-zA-Z\d\(\)\,\s\-]/',"", 
         $string)));
@@ -23,7 +23,7 @@ function sanitiseaddress($string){
 $mainupdate = explode(",",$_POST['main']);
 $ID = filter_var($mainupdate[0], FILTER_SANITIZE_NUMBER_INT);
 $Company = preg_replace('/[^A-Za-z\d\s\+\&\x{002F}\x{00C0}-\x{024F}]/u',"",$mainupdate[1]);
-$mainupdate[2] = preg_replace('/[^A-Za-z\d\+]+/',"",$mainupdate[2]);
+$mainupdate[2] = preg_replace('/[^A-Za-z\d\+\s]+/',"",$mainupdate[2]);
 $mainupdate[3] = filter_var($mainupdate[3], FILTER_SANITIZE_URL);
 $mainupdate[4] = filter_var($mainupdate[4], FILTER_SANITIZE_URL);
 $sectorskeep = sanitisesubs($_POST['sectorskeep']);

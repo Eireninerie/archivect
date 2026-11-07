@@ -47,11 +47,11 @@ function cardResults(){
 			echo "
 				<div class='card boxed' id='".$row["ID"]." '>		
 				<h3> <a href='https://".$row["website"]."' alt='". $row["Company"]." website link' title='https://".$row["website"]."'>". $row["Company"]. "</a><span class='hiddenClass'>".$row["totalRating"]."</span></h3>
-				<img class='logo' src='".$row["logo"]."'>
+
 				<div class='cardDetails hiddenClass' id='".$row["ID"]."'>
-				
-				<h3><b><button type='button' class='exitcard'>x</button> ". $row["Company"]. "</b></h3>
 				<img class='logo' src='".$row["logo"]."'>
+				<h3><b><button type='button' class='exitcard'>x</button> ". $row["Company"]. "</b></h3>
+				<h3>a.k.a.: ". $row["CompanySimple"]."</h3>
 				<h3>Sectors</h3>
 				<div>";
 			cardDetails($sectorTable,"sectors",$row["ID"],1);

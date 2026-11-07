@@ -45,12 +45,10 @@ $distanceInputTable = "temp_table_1";
 $postVarRatingSQL = "SELECT Rating, postStart, postEnd,
 coordStart.EASTING AS coordSE,
 coordStart.Northing AS coordSN,
-ROUND(
-		SQRT(
+
 			power(ABS(coordStart.EASTING - coordEnd.Easting),2)+
 			power(ABS(coordStart.Northing - coordEnd.Northing),2)
-		)/1000
-	,2) AS totalDistance
+		 AS totalDistance
 
 FROM 
 	".$postcodeRefTable." AS coordStart 
@@ -68,12 +66,10 @@ $postCompanyRatingSQL = "SELECT
 FROM (".$postCompanyENSQL.") AS postCompanyEN
 LEFT JOIN (".$postVarRatingSQL.") AS postVarRating
 	ON totalDistance > (
-        ROUND(
-		SQRT(
+        
 			power(ABS(coordSE - postCompanyEN.Easting),2)+
 			power(ABS(coordSN - postCompanyEN.Northing),2)
-		)/1000
-	,2))
+		)
 	LEFT JOIN weighting on postVarRating.Rating = weighting.ID
 GROUP BY
     CompanyID
@@ -217,14 +213,15 @@ $ethosRatingsQuerySQL = "SELECT
 if ($local == 1){
 
 //Attach combined ratings to Company details
-$ratingSortSQL = "SELECT ID, Company, logo, website,
---	If(postRating.MaxRating IS NULL, 0, MaxRating)+
+$ratingSortSQL = "SELECT ID, Company, CompanySimple, logo, website,
+	If(postRating.MaxRating IS NULL, 0, MaxRating)+
 	If(sectorRating.SRating IS NULL, 0, sectorRating.SRating)+
 	If(sizeRating.Rating IS NULL, 0, sizeRating.Rating)+
 	If(ethosRating.Rating IS NULL, 0, ethosRating.Rating)
 	AS totalRating
 FROM
        $primaryTable as firms
+ 	LEFT JOIN ($postCompanyRatingSQL) AS postRating ON  $primaryTable.ID = postRating.CompanyID 
 	   
         LEFT JOIN ($SectorCompanyRatingsSQL) AS sectorRating ON firms.ID = sectorRating.CompanyID 
 	     LEFT JOIN ($sizeRatingsQuerySQL) AS sizeRating ON firms.ID = sizeRating.CompanyID 
@@ -235,7 +232,7 @@ ORDER BY
 LIMIT 50";
 // 	LEFT JOIN ($postCompanyRatingSQL) AS postRating ON  $primaryTable.ID = postRating.CompanyID 
 }else{
-$ratingSortSQL=" SELECT firms.ID, firms.Company, logo, website,
+$ratingSortSQL=" SELECT firms.ID, firms.Company, CompanySimple, logo, website,
 dis.Rating, sectorRating.SRating, sizeRating.Rating AS szRating,
 COALESCE(dis.Rating,0)+ COALESCE(sectorRating.SRating,0)+ COALESCE(sizeRating.Rating,0) + COALESCE(ethosRating.Rating,0) AS totalRating
 	FROM $primaryTable AS firms 

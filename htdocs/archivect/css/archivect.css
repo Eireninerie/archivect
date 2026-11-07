@@ -486,10 +486,7 @@ th{
   display: flex;
   align-items: flex-end;
 }
-.cardDetails h3 b {
-max-width: if (width(fit-content > 100% ):calc-size(max-content, size / 2));
-max-width: calc-size(max-content, 100% + 50px - size / 2 );
-}
+
 .cardDetails span{
     flex:auto;
 }

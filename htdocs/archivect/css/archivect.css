@@ -34,7 +34,6 @@
     src: url(../assets/PlaypenSans-VariableFont_wght.ttf);
 }
 body{
-    background: var(--colour-01);
     background: var(--colour-01) url('../assets/dot.svg') repeat ;
     color: var(--colour-02);
     font-family:var(--font-text), sans-serif;
@@ -475,32 +474,38 @@ th{
     width:282px;
     box-shadow: none;
     margin:3px 1px;
-
+    display:flex;
     padding:0 20px 0 20px;
     height:200px;
     overflow:hidden;
 
 }
-img {
-    display:none;
-}
-.card h3{
+.card h3, .cardDetails h3{
+    width:100%;
     height: 50px;
   display: flex;
+  align-items: flex-end;
 }
-.card h3 a{
-  align-self: flex-end;
+.cardDetails h3 b {
+max-width: if (width(fit-content > 100% ):calc-size(max-content, size / 2));
+max-width: calc-size(max-content, 100% + 50px - size / 2 );
 }
-
+.cardDetails span{
+    flex:auto;
+}
 .cardDetails{
     margin:0 0 100px 0;
 }
 .cardDetails ul {
     margin-top: 0;
 }
-.exitcard{
-    float: right;
-    left: 15px;
+
+.logo{
+    width:60px;
+    height:40px;
+}
+.logo img{
+    height:40px;
 }
 fieldset{
     border:0;

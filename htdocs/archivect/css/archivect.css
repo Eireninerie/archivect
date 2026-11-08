@@ -40,6 +40,27 @@ body{
     font-size:11pt;
     scrollbar-color: var(--colour-03) var(--colour-01-light);
 }
+.lightmode{
+    --colour-01:#F0F3F1;
+    --colour-01-light:#FAFAFA;
+    --colour-02:#212531;
+    --colour-03:#F9BCA4;
+    --colour-03-dark:#a63;
+    --colour-04:#314EFF;
+    --colour-05:#aaa;
+    transition: all ease-in-out 1s;
+}
+.darkmode{
+    --colour-05:#aaa;
+    --colour-01:#015ca1;
+    --colour-01-light:#013f91;
+    --colour-02:#F0F3F1;
+    --colour-03:#a63;
+    --colour-03-dark:#F9BCA4;
+    --colour-04:#F0F3F1;
+    transition: all ease-in-out 1s;
+}
+
 sup{
     font-size:60%;
 }
@@ -47,6 +68,7 @@ a {
     color:var(--colour-03-dark)
 }
 input{
+    color:var(--colour-02);
     font-family: inherit;
     margin: 5px 0;;
     padding: 1px 3px 1px 3px;
@@ -73,7 +95,31 @@ button {
     border-radius:2px;
     cursor: pointer;
 }
-
+#mode{
+    position:fixed;
+    box-sizing: border-box;
+    max-width: 40px;
+    height:40px;
+    top:0;
+    right:0;
+    outline:none;
+    border-radius: 0 0 0 40px;
+    color:var(--colour-01);
+    background: var(--colour-02);
+    text-align: center;
+    justify-content: right;
+    padding:0 20px 0 30px;
+    overflow:hidden;
+    white-space: nowrap;
+    transition: all ease .5s;
+}
+#mode:hover::after{
+    content: 'light/dark mode';
+}
+#mode:hover{
+    max-width:200px;
+    transform: none;
+}
 #header{
     position:fixed;
     top: 20px;
@@ -244,6 +290,7 @@ th{
     padding:16px;
     display: block;
     width:min-content;
+    border-radius:27px;
 }
 #nav button{
     float:right;
@@ -251,6 +298,7 @@ th{
     border: none;
     border-radius:0;
     color:var(--colour-01-light);
+    outline: none;
 }
 #nav ul{
     width:min-content;
@@ -388,6 +436,12 @@ th{
 /* main search */
 #DistanceTable input[type=text]{
     width: 5em;
+    border-radius:15px;
+    text-align: center;
+}
+#DistanceTable input[readonly]{
+user-select: none;
+cursor: default;
 }
 
 
@@ -458,7 +512,7 @@ th{
     overflow-y:auto;
     
     display: grid;
-  grid-template-columns: repeat(auto-fit, 360px);
+  grid-template-columns: repeat(auto-fit, minmax(360px,1fr));
     scrollbar-gutter: stable;
     scrollbar-color: var(--colour-border) var(--colour-01-light);
     padding: 100px 100px 100px 30px;
@@ -466,23 +520,19 @@ th{
     container-type: size;
     
 }
-#results *{
-
-    direction:ltr;
-}
-
 .card{
-    width:280px;
+    --cardw:360px;
+    width:var(--cardw);
+    height:280px;
     box-shadow: none;
-    margin:3px 1px;
+    box-sizing: border-box;
     display:flex;
     padding:0 20px 0 20px;
-    height:200px;
-    overflow:hidden;
---columncount:round(down , calc(100cqw / 360px), 1);
+--columncount:round(down , calc(100cqw / var(--cardw)), 1);
 --columnid:mod(calc(sibling-index() - 0),var(--columncount));
     --coldisplace: calc(var(--columnid) * -20px);
     margin-top: var(--coldisplace);
+    margin-left:calc(calc(100%-var(--cardw))/2);
 }
 /*.card:after{
     counter-reset: columnid var(--columnid);
@@ -522,7 +572,6 @@ fieldset{
     unicode-bidi: inherit;
     min-inline-size: initial;
     padding:0;
-    white-space: nowrap;
 }
 legend{
     width: 130px;

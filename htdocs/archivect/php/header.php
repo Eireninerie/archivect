@@ -21,8 +21,8 @@ echo '
 ?>
 </head>
 
-<body>
-
+<body class='lightmode'>
+<button id='mode'></button>
 <div id="header">
 	<h1 class="boxed">Archivect<sup class="info">.beta</sup>
 	<div class="infobox">
@@ -33,7 +33,7 @@ echo '
 
 <div id="nav" >
 	<button>Menu</button>
-	<ul class="boxed">
+	<ul class="boxed darkmode">
 		<?php
 global $pos;
 

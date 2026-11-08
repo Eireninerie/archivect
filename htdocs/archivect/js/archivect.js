@@ -22,5 +22,9 @@ $(document).ready(function(){
     $('#nav').find('button').click(function(){
         $(this).siblings('ul').toggleClass('menu');
     })
+    $('#mode').click(function(){
+        $('body').toggleClass('darkmode');
+        $('#nav').find('.boxed').toggleClass('lightmode').toggleClass('darkmode');
+    })
     
 });

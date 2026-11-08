@@ -532,7 +532,7 @@ cursor: default;
 --columnid:mod(calc(sibling-index() - 0),var(--columncount));
     --coldisplace: calc(var(--columnid) * -20px);
     margin-top: var(--coldisplace);
-    margin-left:calc(calc(100%-var(--cardw))/2);
+    margin-left:calc(calc(100% - var(--cardw)) / 2);
 }
 /*.card:after{
     counter-reset: columnid var(--columnid);

@@ -76,7 +76,7 @@ echo '</div>';
     <tr>
 		<td style="visibility: hidden;"><input type='radio'><input type='radio'><input type='radio'><input type='radio'><input type='radio'></td>
        	<td><input type="text" id="postStartInput" maxLength="4" placeholder="eg. B77"></td>
-		<td style="text-align:center" >o-- -- >)</td>
+		<td style="text-align:center" >-- -- >)</td>
         <td><input type="text" id="postEndInput" maxLength="4" placeholder="eg. EN6"></td>
 		
 		<td ><button id="addPosts" type="button" style='margin-left:20px'>+</button></td>

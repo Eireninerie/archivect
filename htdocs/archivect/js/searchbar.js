@@ -129,6 +129,7 @@ $('#submitButton').click(function(){
             $('.exitcard').click(function(){
                $('#Search').find('.cardDetails ').remove();
                $('#Search').find('.wrapped').children().unwrap();
+
             });
          },function(){
           

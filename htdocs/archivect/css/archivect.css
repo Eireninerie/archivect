@@ -198,10 +198,6 @@ h1 {
     margin:var(--bxmar);
 }
 
-.card.boxed{
-    --bxsh-offset: 5px;
-}
-
 /* consistent styles*/
 th, h3, #header a{
     font-family: var(--font-headings);
@@ -490,7 +486,7 @@ cursor: default;
 }
 #results{
     position: absolute;
-    left: 640px;
+    left: 620px;
     top: 40px;
     bottom:30px;
     right: 0;
@@ -501,15 +497,16 @@ cursor: default;
   grid-template-columns: repeat(auto-fit, minmax(360px,1fr));
     scrollbar-gutter: stable;
     scrollbar-color: var(--colour-border) var(--colour-01-light);
-    padding: 100px 100px 100px 0px;
+    padding: 100px 100px 100px 20px;
     overflow-x:hidden;
     container-type: size;
     
 }
 .card{
+    --bxsh-offset: 5px;
     --cardw:360px;
-    width:var(--cardw);
-    height:280px;
+    width:calc(var(--cardw) + var(--bxsh-offset));
+    height:calc(280px + var(--bxsh-offset));
     box-shadow: none;
     box-sizing: border-box;
     display:flex;
@@ -517,14 +514,17 @@ cursor: default;
 --columncount:round(down , calc(100cqw / var(--cardw)), 1);
 --columnid:mod(calc(sibling-index() - 0),var(--columncount));
     --coldisplace: calc(var(--columnid) * -20px);
-    margin-top: var(--coldisplace);
-    margin-left:calc(calc(100% - var(--cardw)) / 2);
+    margin-top: calc(var(--coldisplace) - var(--bxsh-offset));
+    margin-bottom:0px;
+    margin-left:calc(calc(calc(100% - var(--cardw)) / 2) - calc(var(--bxsh-offset) / 2 ));
+    transition: all ease .4s;
 }
-/*.card:after{
+/*
+.card:after{
     counter-reset: columnid var(--columnid);
     content:  counter(columnid); 
-}*/
-
+}
+*/
 .card h3, .cardDetails h3{
     width:99%;
     height: 50px;
@@ -688,5 +688,11 @@ legend{
         max-width:200px;
         transform: none;
     }
+    .card:hover{
+
+    --bxsh-offset: 20px;
+    z-index:2;
+    }
+    
 }
 

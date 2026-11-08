@@ -25,7 +25,7 @@ include($pos.'./php/header.php');
 <ul>
     <li><b>Sketching/painting:</b> <a href="https://krita.org/en/">Krita</a><br>One of the very best pieces of software out there for drawing. And I don't mean best of affordable, I mean best of all: the brushes and tools are great. That said, it's a little basic for photo editing.</li>
     <li><b>Design:</b> <a href="https://inkscape.org/">Inkscape</a><br>It's a little like Adobe Illustrator I guess. I use it to take apart cad drawings and pdfs or for simple icons and annotations.</li>
-    <li><b>CAD:</b> <a href="https://www.freecad.org/">FreeCAD</a><br>Not as powerful as Autocad or Revit, which you can get a free student license for, but good for the fundamentals and means you're not locked in to subscriptions.</li>
+    <li><b>CAD:</b> <a href="https://www.freecad.org/">FreeCAD</a><br>Not as powerful as Autocad or Revit, which you can get a free student license for and are both very well worth learning, but good for the fundamentals and means you're not locked in to subscriptions.</li>
 <li><b>Presentations/ publishing/ documents:</b> <a href="https://www.affinity.studio/">Affinity</a><br> Not open source, but a genuine legally free competitor to InDesign. No reason to still use Powerpoint.</li>
 <li><b>General 3D:</b> <a href="https://www.blender.org/download/">Blender</a> When I say blender can do everything, I mean it. but it is a bit steep to learn.</a>
 </ul>

@@ -79,6 +79,7 @@ input{
 input[type=radio] {
   cursor: pointer;
   margin-right:2px;
+  float:left;
 }
 input:checked::checkmark{
     content: "\2713";
@@ -113,13 +114,7 @@ button {
     white-space: nowrap;
     transition: all ease .5s;
 }
-#mode:hover::after{
-    content: 'light/dark mode';
-}
-#mode:hover{
-    max-width:200px;
-    transform: none;
-}
+
 #header{
     position:fixed;
     top: 20px;
@@ -198,8 +193,6 @@ h1 {
     /*main shadow*/
         right var(--bxbdw) bottom var(--bxbdw);
     z-index: 0;
-
-    margin:30px;
 }
 .boxed>*:not(#header *,#submitButton){
     margin:var(--bxmar);
@@ -435,7 +428,7 @@ th{
 }
 /* main search */
 #DistanceTable input[type=text]{
-    width: 5em;
+    width: 4em;
     border-radius:15px;
     text-align: center;
 }
@@ -464,26 +457,19 @@ cursor: default;
 #Search {
     width: 630px;
     position:fixed;
-    top:20px;
-  box-sizing: border-box;
-    max-height: calc(100vh - 100px);
-    left:10px;
+    top:5px;
+    box-sizing: border-box;
+    bottom:60px;
+    left:5px;
     --searchpad: 40px;
     padding: 0 var(--searchpad);
     padding-top: var(--searchpad);
     overflow-y: auto;
     scrollbar-gutter: stable;
+    --bxsh-offset: 0px;
 }
 #Search >div:not(.cardDetails), .cardDetails >div{
     column-width:210px;
-}
-#Searh::before {
-  content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='100' cy='50' r='40' stroke='black' stroke-width='2' fill='red'/%3E%3Cpolyline points='20,20 40,25 60,40 80,120 120,140 200,180' style='fill:none;stroke:black;stroke-width:3'/%3E%3C/svg%3E ");
-  width: 200px;
-  height: 200px;
-  position:absolute;
-  top:-100px;
-  z-index:4;
 }
 
 .theInputs{
@@ -515,7 +501,7 @@ cursor: default;
   grid-template-columns: repeat(auto-fit, minmax(360px,1fr));
     scrollbar-gutter: stable;
     scrollbar-color: var(--colour-border) var(--colour-01-light);
-    padding: 100px 100px 100px 30px;
+    padding: 100px 100px 100px 0px;
     overflow-x:hidden;
     container-type: size;
     
@@ -539,21 +525,23 @@ cursor: default;
     content:  counter(columnid); 
 }*/
 
-
-
 .card h3, .cardDetails h3{
-    width:100%;
+    width:99%;
     height: 50px;
   display: flex;
   align-items: flex-end;
+}
+.cardDetails{
+    margin:0 0 100px 0;
+    max-height:0;
+    overflow-y:hidden;
+    overflow-x:visible;
 }
 
 .cardDetails span{
     flex:auto;
 }
-.cardDetails{
-    margin:0 0 100px 0;
-}
+
 .cardDetails ul {
     margin-top: 0;
 }
@@ -579,9 +567,10 @@ legend{
     padding:0;
     position:relative;
     unicode-bidi: inherit;
-    float:left;
+    float:inline-start;
     user-select: none;
     -webkit-user-select: none;
+    margin-left:5px;
 }
 
 
@@ -691,6 +680,13 @@ legend{
     #footer a:hover .infobox,.info:hover+.infobox, input[type=radio]:hover+.infobox,legend:hover>.infobox{
         max-height:100vh;
         padding:5px 20px;
+    }
+    #mode:hover::after{
+    content: 'light/dark mode';
+        }
+    #mode:hover{
+        max-width:200px;
+        transform: none;
     }
 }
 

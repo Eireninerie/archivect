@@ -32,12 +32,13 @@ if ($result = $conn -> query(
   if ($numR < 2) {echo "<script id='errormsg'>alert('CHECK UR POSTCODES LAV xoxox')</script>";}
   else {
 	echo "
-	
-	<td><input type='text' class='postStart' name='postStart' value=".$postStart." readonly></td>
-	<td><input type='text' class='postEnd' name='postEnd' value=".$postEnd." readonly></td>
-	<td style='text-align:center'>".distanceKM($postStart,$postEnd)."km</td>
 	<td>";
 rating('Rating',$postEnd.$postStart);
-echo "</td><td><button onclick='deleteData(this)' style='margin-left:20px'>-</button></td>";}};
+echo "</td>
+	<td><input type='text' class='postStart' name='postStart' value=".$postStart." readonly></td>
+	<td style='text-align:center'>-".distanceKM($postStart,$postEnd)."km->)</td>
+	<td><input type='text' class='postEnd' name='postEnd' value=".$postEnd." readonly></td>
+	
+	<td><button onclick='deleteData(this)' style='margin-left:20px'>-</button></td>";}};
 
 ?>

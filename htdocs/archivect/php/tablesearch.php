@@ -8,9 +8,11 @@ function xList($type,$table){
 	$Query = $conn->query($QuerySQL);
 	while($row = $Query->fetch_assoc()){
 
-	echo '<fieldset><legend for='.$type.$row["ID"].' title="" >'.$row["Name"].'<div class="infobox"><p>'.$row["Description"].'</p></div></legend>
-	';
+	echo '<fieldset>';
 	rating($type,$type.$row["ID"]);
+	
+	echo '<legend for='.$type.$row["ID"].' title="" >'.$row["Name"].'<div class="infobox"><p>'.$row["Description"].'</p></div></legend>
+	';
 	echo "</fieldset></br>";}
 }
 function distanceSQL(){
@@ -65,16 +67,19 @@ echo '</div>';
 <p >NB: these are calculated from the average coordinates of all postcodes in that area, so will be a touch imprecise. Choose a slightly further away postcode to be certain another is covered. Also, the outer postcode itself will always be included, so you can search a range like NG1 to NG1.</p>
 </div>
 	</h3>
-    <tr>     
-	    <th>Centre</th>
-        <th>Radius</th>
-        <th style="width:70px"></th>
+    <tr>    
         <th>Rating</th>        
+	    <th>Centre</th>
+        <th style="width:90px"></th>
+        <th>Radius</th> 
     </tr>
     <tr>
+		<td style="visibility: hidden;"><input type='radio'><input type='radio'><input type='radio'><input type='radio'><input type='radio'></td>
        	<td><input type="text" id="postStartInput" maxLength="4" placeholder="eg. B77"></td>
+		<td style="text-align:center" >o-- -- >)</td>
         <td><input type="text" id="postEndInput" maxLength="4" placeholder="eg. EN6"></td>
-		<td><button id="addPosts" type="button">+</button></td>
+		
+		<td ><button id="addPosts" type="button" style='margin-left:20px'>+</button></td>
 	</tr>
 </table>
 <h3>Ethos
@@ -91,8 +96,9 @@ echo "</div>";
 
 echo "<h3>Size</h3><div id='SizesList'>";
 function Bands($y,$z){
-	echo '<fieldset><legend>'.$y.'</legend>';
 	rating("Sizes",$z);
+	echo '<fieldset><legend>'.$y.'</legend>';
+
 	echo "</fieldset></br>";
 }
 

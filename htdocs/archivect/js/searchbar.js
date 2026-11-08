@@ -125,6 +125,7 @@ $('#submitButton').click(function(){
             $('#Search').wrapInner('<div class="wrapped">').find('.wrapped').addClass('hiddenClass');
             $('#Search').prepend($content);
             $('#Search').find('.cardDetails').removeClass('hiddenClass');
+            $('#Search').find('.cardDetails').animate({"max-height": "100%"},600);
             $('.exitcard').click(function(){
                $('#Search').find('.cardDetails ').remove();
                $('#Search').find('.wrapped').children().unwrap();

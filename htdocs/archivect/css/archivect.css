@@ -16,6 +16,9 @@
     --borderimg:url(../assets/corner.svg) no-repeat border-box;
     --borderimgsh:url(../assets/cornersh.svg) no-repeat border-box;
     --fauxbdw:2px;
+
+    --font-reg:calc(10px + 0.4vw);
+
 }
 
 .hiddenClass{
@@ -37,7 +40,7 @@ body{
     background: var(--colour-01) url('../assets/dot.svg') repeat ;
     color: var(--colour-02);
     font-family:var(--font-text), sans-serif;
-    font-size:11pt;
+    font-size:var(--font-reg);
     scrollbar-color: var(--colour-03) var(--colour-01-light);
 }
 .lightmode{
@@ -124,7 +127,7 @@ button {
 }
 h1 {
     font-family: var(--font-title), sans-serif;
-    font-size: 23pt;
+    font-size: calc(30px + 0.5vw);
     text-transform: uppercase;
 
         text-shadow:3px 3px var(--shadow);
@@ -201,7 +204,7 @@ h1 {
 /* consistent styles*/
 th, h3, #header a{
     font-family: var(--font-headings);
-    font-size:11pt;
+    font-size:var(--font-reg);
     text-transform: uppercase;    
     padding: 0;
     font-weight: 300;
@@ -248,7 +251,7 @@ input[type=radio],legend,.info,#footer a{
     z-index: 3;
     font-weight:normal;
     font-family: var(--font-headings);
-    font-size: 11pt;
+    font-size: var(--font-reg);
 }
 #footer .infobox{
     position-area: top;
@@ -364,7 +367,7 @@ th{
 .content p, .content li{
     text-align:justify;
     text-justify: distribute;
-    font-size: 13pt;
+    font-size: calc(var(--font-reg) * 1.2);
 }
 .content p{
     padding-bottom:20px;
@@ -444,7 +447,7 @@ cursor: default;
     transform-origin: bottom;
     text-transform: uppercase;
     font-family: var(--font-title);
-    font-size: 17pt;
+    font-size: calc(var(--font-reg) * 1.6);
     white-space: nowrap;
     color: var(--colour-02);
 }
@@ -510,7 +513,7 @@ cursor: default;
     box-shadow: none;
     box-sizing: border-box;
     display:flex;
-    padding:0 20px 0 20px;
+    padding:0 20px;
 --columncount:round(down , calc(100cqw / var(--cardw)), 1);
 --columnid:mod(calc(sibling-index() - 0),var(--columncount));
     --coldisplace: calc(var(--columnid) * -20px);
@@ -523,6 +526,9 @@ cursor: default;
 .card:after{
     counter-reset: columnid var(--columnid);
     content:  counter(columnid); 
+    background:rgb(124, 124, 138);
+    width: calc(var(--columncountpx) *10);
+    height:20px;
 }
 */
 .card h3, .cardDetails h3{
@@ -618,7 +624,7 @@ legend{
     }
 }
 @media screen and (min-resolution: 2x){
-    body{
+/*    body{
         font-size: 20pt;
     }
     .content p, .content li{
@@ -630,6 +636,7 @@ legend{
     th, h3, #header a, legend, button {
         font-size: 20pt;
     }
+        */
     #header{
         transform: scale(2,2);
         transform-origin: right 70%;
@@ -644,7 +651,7 @@ legend{
         top:250px;
 
     }#footer {
-    font-size: 30pt;
+/*    font-size: 30pt; */
     padding:10px 20px;
     }
     .content{
@@ -653,7 +660,7 @@ legend{
     #Search >div:not(.cardDetails), .cardDetails >div{
     column-width:min-content;}
     #DistanceTable input[type=text]{
-        font-size: 25pt;
+/*        font-size: 25pt; */
     }
     input[type=radio]{
      transform: scale(2.5,2.5);

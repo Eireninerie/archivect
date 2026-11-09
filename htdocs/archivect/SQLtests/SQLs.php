@@ -15,7 +15,7 @@ $tempTable = "
   
  $conn->query($tempTable);
 
-$insertTempTable = 'INSERT INTO temp_table_1 (postStart, postEnd, Rating)
+$insertTempTable = 'INSERT INTO temp_table_1 (Rating, postStart, postEnd)
 	VALUES'.$DistanceListRatings;
 
  $conn->query($insertTempTable);

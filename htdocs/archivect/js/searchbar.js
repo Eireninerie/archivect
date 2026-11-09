@@ -22,7 +22,7 @@ function tablevalues() {
             .map(function(i, el) { 
                 return $(el).val(); 
             }).get(); 
-        return { Start: vals[0], End: vals[1], Rating: vals[2] }; 
+        return { Start: vals[1], End: vals[2], Rating: vals[0] }; 
     }); 
 
 
@@ -57,7 +57,7 @@ function html2insert() {
       $otArr.push('(' + $itArr.join() + ')');
    })
    $insert = $otArr.join()
-   if(!$insert){return '("D45","D45","2")';}else{return $insert;}
+   if(!$insert){return '("2","D45","D45")';}else{return $insert;}
    
 }
 

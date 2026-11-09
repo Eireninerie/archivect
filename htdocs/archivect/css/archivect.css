@@ -17,7 +17,7 @@
     --borderimgsh:url(../assets/cornersh.svg) no-repeat border-box;
     --fauxbdw:2px;
 
-    --font-reg:calc(10px + 0.4vw);
+    font-size:clamp(13pt,calc(50px - 2vw),calc(6vw - 40px));
 
 }
 
@@ -40,7 +40,7 @@ body{
     background: var(--colour-01) url('../assets/dot.svg') repeat ;
     color: var(--colour-02);
     font-family:var(--font-text), sans-serif;
-    font-size:var(--font-reg);
+    font-size:1rem;
     scrollbar-color: var(--colour-03) var(--colour-01-light);
 }
 .lightmode{
@@ -80,9 +80,13 @@ input{
     border-radius: 2px;
 }
 input[type=radio] {
+    
   cursor: pointer;
   margin-right:2px;
   float:left;
+  border: 0px;
+    width: 1em;
+    height: 1em;
 }
 input:checked::checkmark{
     content: "\2713";
@@ -127,7 +131,7 @@ button {
 }
 h1 {
     font-family: var(--font-title), sans-serif;
-    font-size: calc(30px + 0.5vw);
+    font-size: 2rem;
     text-transform: uppercase;
 
         text-shadow:3px 3px var(--shadow);
@@ -204,7 +208,7 @@ h1 {
 /* consistent styles*/
 th, h3, #header a{
     font-family: var(--font-headings);
-    font-size:var(--font-reg);
+    font-size:1rem;
     text-transform: uppercase;    
     padding: 0;
     font-weight: 300;
@@ -251,7 +255,7 @@ input[type=radio],legend,.info,#footer a{
     z-index: 3;
     font-weight:normal;
     font-family: var(--font-headings);
-    font-size: var(--font-reg);
+    font-size: 1rem;
 }
 #footer .infobox{
     position-area: top;
@@ -367,7 +371,7 @@ th{
 .content p, .content li{
     text-align:justify;
     text-justify: distribute;
-    font-size: calc(var(--font-reg) * 1.2);
+    font-size: 1.2rem;
 }
 .content p{
     padding-bottom:20px;
@@ -427,8 +431,9 @@ th{
 }
 /* main search */
 #DistanceTable input[type=text]{
-    width: 4em;
-    border-radius:15px;
+    font-size:inherit;
+    width: 4rem;
+    border-radius:;
     text-align: center;
 }
 #DistanceTable input[readonly]{
@@ -447,7 +452,7 @@ cursor: default;
     transform-origin: bottom;
     text-transform: uppercase;
     font-family: var(--font-title);
-    font-size: calc(var(--font-reg) * 1.6);
+    font-size: 1.6rem;
     white-space: nowrap;
     color: var(--colour-02);
 }
@@ -663,8 +668,8 @@ legend{
 /*        font-size: 25pt; */
     }
     input[type=radio]{
-     transform: scale(2.5,2.5);
-  margin-right:30px;   
+    width: 2.2em;
+    height:2em;
     }
     .infobox{
         transform: scale(2,2);

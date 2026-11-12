@@ -6,10 +6,11 @@ include('./php/header.php');
 
 
 ?>
-	<?php include('./php/tablesearch.php') ?>
+
 <div id='results'>
-<div class='content'>Hiya (:</div>
+Hiya (:</div>
 </div>
+<?php include('./php/tablesearch.php') ?>
 <?php
 include('./php/footer.php');
 ?>

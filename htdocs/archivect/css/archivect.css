@@ -1,4 +1,6 @@
 :root{
+
+    font-size:1rem;
     --colour-border:green;
 
 
@@ -9,15 +11,13 @@
     --font-headings:'Playpen-Sans';
     --font-text:'Titillium';
 
-    --bxbdw:15px;
-    --bxmar:20px;
-    --bxsh-offset: 10px;
+    --bxbdw:0.8rem;
+    --bxmar:1.2rem;
+    --bxsh-offset: 1rem;
 
     --borderimg:url(../assets/corner.svg) no-repeat border-box;
     --borderimgsh:url(../assets/cornersh.svg) no-repeat border-box;
-    --fauxbdw:2px;
-
-    font-size:clamp(13pt,calc(50px - 2vw),calc(6vw - 40px));
+    --fauxbdw:3px;
 
 }
 
@@ -97,6 +97,7 @@ label {
 }
 button {
     font-family: inherit;
+    font-size:inherit;
     background-color: var(--colour-03);
     outline: 1px solid var(--colour-03-dark);
     border: none;
@@ -106,12 +107,12 @@ button {
 #mode{
     position:fixed;
     box-sizing: border-box;
-    max-width: 40px;
-    height:40px;
+    max-width: 2rem;
+    height:2rem;
     top:0;
     right:0;
     outline:none;
-    border-radius: 0 0 0 40px;
+    border-radius: 0 0 0 2rem;
     color:var(--colour-01);
     background: var(--colour-02);
     text-align: center;
@@ -134,7 +135,7 @@ h1 {
     font-size: 2rem;
     text-transform: uppercase;
 
-        text-shadow:3px 3px var(--shadow);
+        text-shadow:0.2rem 0.2rem var(--shadow);
 }   
 #header h1{
     anchor-name: --title;
@@ -150,7 +151,7 @@ h1 {
     background: 
     /*main*/       
         linear-gradient(var(--colour-01-light), var(--colour-01-light)) 
-            padding-box,
+            no-repeat padding-box,
     /*faux border*/
         linear-gradient(var(--colour-05), var(--colour-05)) no-repeat border-box,
     /*corners*/   
@@ -201,6 +202,7 @@ h1 {
         right var(--bxbdw) bottom var(--bxbdw);
     z-index: 0;
 }
+
 .boxed>*:not(#header *,#submitButton){
     margin:var(--bxmar);
 }
@@ -231,9 +233,8 @@ fieldset:not(legend), #header h1,legend,#footer{
     border: 1px solid var(--colour-03-dark);
     border-radius:50%;
     text-align: center;
-    min-width:14px;
-    margin: 0 0 2px;
-    padding: 0 3px;
+    min-width:1.5em;
+    min-height:1.5em;
     text-transform: none;
     background-color: var(--colour-03);
     cursor: pointer;
@@ -286,7 +287,7 @@ th{
     padding:16px;
     display: block;
     width:min-content;
-    border-radius:27px;
+    border-radius:calc(1em + 16px);
 }
 #nav button{
     float:right;
@@ -356,8 +357,11 @@ th{
 .content{
     box-sizing: border-box;
     text-align: center;
-    margin-left:10%;
+    padding-left:10vw;
+}
+.content>*:not(#header, #results){
     width: clamp(500px,60%,800px);
+
 }
 .content:first-child{
     margin-top:15vh;
@@ -433,7 +437,7 @@ th{
 #DistanceTable input[type=text]{
     font-size:inherit;
     width: 4rem;
-    border-radius:;
+    border-radius:0.9em;
     text-align: center;
 }
 #DistanceTable input[readonly]{
@@ -459,13 +463,13 @@ cursor: default;
 
 
 #Search {
-    width: 630px;
     position:fixed;
-    top:5px;
     box-sizing: border-box;
-    bottom:60px;
-    left:5px;
-    --searchpad: 40px;
+    top:0.2rem;
+    bottom:3rem;
+    left:.2rem;
+    width:38rem;
+    --searchpad: 2rem;
     padding: 0 var(--searchpad);
     padding-top: var(--searchpad);
     overflow-y: auto;
@@ -473,7 +477,7 @@ cursor: default;
     --bxsh-offset: 0px;
 }
 #Search >div:not(.cardDetails), .cardDetails >div{
-    column-width:210px;
+    column-width:13rem;
 }
 
 .theInputs{
@@ -493,22 +497,15 @@ cursor: default;
     color:var(--colour-05);
 }
 #results{
-    position: absolute;
-    left: 620px;
-    top: 40px;
-    bottom:30px;
-    right: 0;
-    z-index:-2;
-    overflow-y:auto;
-    
+    position:absolute;
+    left:40rem ;
+    right:0;
     display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(360px,1fr));
+    grid-template-columns: repeat(auto-fit, minmax(360px,1fr));
     scrollbar-gutter: stable;
     scrollbar-color: var(--colour-border) var(--colour-01-light);
     padding: 100px 100px 100px 20px;
-    overflow-x:hidden;
     container-type: size;
-    
 }
 .card{
     --bxsh-offset: 5px;
@@ -573,7 +570,7 @@ fieldset{
     padding:0;
 }
 legend{
-    width: 130px;
+    width: 8.5rem;
     cursor:pointer;
     padding:0;
     position:relative;
@@ -585,22 +582,25 @@ legend{
 }
 
 
-@media screen and (max-width:1010px), (min-resolution: 2x){
+@media screen and (max-width:1300px), (min-resolution: 2x){
+    body {
+        left:0;
+        top:0;
+        width:99%;
+    }
     #Search{
-            width: calc(100vw - 60px);
-        max-height: calc(100vh - 180px - var(--bxbdw) * 2);
-        top:100px;
+        position:absolute;
+        bottom: 3rem;
+        left:0;
+        height:90vh;
+        width:99vw;
         transition:all ease-in-out .3s;
         anchor-name: --pull;
+        margin-bottom:4rem;
     }
-    #results{
-        left: 7px;
-        right: 0px;
-    top: 40px;
-    padding: 200px 0 100px 30px;
-    }
+
     #header{
-        position:fixed;
+        position:relative;
         top: 5px;
     }
     #header h1{
@@ -617,6 +617,8 @@ legend{
         padding-top:0;
 
     }
+     #Search >div:not(.cardDetails), .cardDetails >div{
+    column-width:14rem;}
     #pull{
         --pullw:40px;
         height:20px;
@@ -627,6 +629,15 @@ legend{
         top: calc(anchor(bottom) - var(--bxbdw) - var(--bxsh-offset));
         left: calc(anchor(center) - var(--pullw)/2);
     }
+    #results{
+
+    left:0;
+    }
+    
+    
+
+
+
 }
 @media screen and (min-resolution: 2x){
 /*    body{
@@ -642,35 +653,22 @@ legend{
         font-size: 20pt;
     }
         */
-    #header{
-        transform: scale(2,2);
-        transform-origin: right 70%;
-    }
+
     #submitButton {
        transform: scale(2,2);
     }
-    legend{
-        width: 260px;
-    }
-    #Search{
-        top:250px;
 
-    }#footer {
+    #footer {
 /*    font-size: 30pt; */
     padding:10px 20px;
     }
-    .content{
-        width: calc(100% - 100px);
-    }
-    #Search >div:not(.cardDetails), .cardDetails >div{
-    column-width:min-content;}
-    #DistanceTable input[type=text]{
-/*        font-size: 25pt; */
-    }
+   
+
     input[type=radio]{
     width: 2.2em;
     height:2em;
     }
+
     .infobox{
         transform: scale(2,2);
     }

@@ -4,7 +4,7 @@ $include = $pos.'./config.php';
 include($include);
 global $fhost, $fusername,$fpassword,$fdbname;
 //database tables
-$postcodeRefTable = "postcodeCoordsEN";
+$postcodeRefTable = "postcode_districts";
 $primaryTable = "firms";
 $addressTable = "addresses";
 $sectorTable = "sectors";

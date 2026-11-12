@@ -1,0 +1,39 @@
+<head>
+<style>
+.container{
+    width:50%;
+    container-type: size;
+}
+.card{
+
+    background-color: blue;
+    color:white;
+    display:flex;
+
+    --offset: 5px;
+    --w:360px;
+    --test: calc(100cqw / var(--w));
+
+    width:calc(var(--w) + var(--offset));
+    height:calc(280px + var(--offset));
+    padding:20px;
+
+    --divide: calc(100cqw / 10px);
+    --multiply: calc(var(--divide) * 1px);
+}
+
+.card:after{
+    counter-reset: test var(--test);
+    content:  counter(test) ; 
+    background-color:brown;
+    width: var(--multiply);
+    height: calc(60px + calc(var(--test) * 1px));
+}
+
+</style>
+</head>
+<body>
+<div class="container">
+    <div class="card"></div>
+</div>
+</body>

@@ -1,12 +1,25 @@
 :root{
+    --rem:0rem;
+    --vw:2vw;
 
     font-size:1rem;
+    font-size: 16px;
+    font-size:0.9vw;
+
+    font-size:2rem;
+    font-size: 32px;
+    font-size: 2.5vw;
+
+    font-size: 1rem; 
+@media screen and (min-resolution: 2x){
+    font-size:2rem;
+}
+ 
     --colour-border:green;
 
 
     --shadow:rgba(0,0,0,0.10);
 	--bd:1px;
-    --righthead:100px;
     --font-title:'Rock Salt';
     --font-headings:'Playpen-Sans';
     --font-text:'Titillium';
@@ -40,9 +53,10 @@ body{
     background: var(--colour-01) url('../assets/dot.svg') repeat ;
     color: var(--colour-02);
     font-family:var(--font-text), sans-serif;
-    font-size:1rem;
     scrollbar-color: var(--colour-03) var(--colour-01-light);
+    margin:0;
 }
+
 .lightmode{
     --colour-01:#F0F3F1;
     --colour-01-light:#FAFAFA;
@@ -73,8 +87,8 @@ a {
 input{
     color:var(--colour-02);
     font-family: inherit;
-    margin: 5px 0;;
-    padding: 1px 3px 1px 3px;
+    margin: 0.3rem 0;
+    padding: 0.06rem 0.2rem 0.06rem 0.2rem;
     background: var(--colour-01-light);
     border:1px solid var(--colour-border);
     border-radius: 2px;
@@ -82,7 +96,7 @@ input{
 input[type=radio] {
     
   cursor: pointer;
-  margin-right:2px;
+  margin-right:0.12rem;
   float:left;
   border: 0px;
     width: 1em;
@@ -210,7 +224,6 @@ h1 {
 /* consistent styles*/
 th, h3, #header a{
     font-family: var(--font-headings);
-    font-size:1rem;
     text-transform: uppercase;    
     padding: 0;
     font-weight: 300;
@@ -256,7 +269,7 @@ input[type=radio],legend,.info,#footer a{
     z-index: 3;
     font-weight:normal;
     font-family: var(--font-headings);
-    font-size: 1rem;
+    font-size: 0.6rem;
 }
 #footer .infobox{
     position-area: top;
@@ -339,6 +352,7 @@ th{
 
 
 #footer{
+    visibility: hidden;
     position:fixed;
     bottom:0;
     background: var(--colour-04);
@@ -357,12 +371,15 @@ th{
 .content{
     box-sizing: border-box;
     text-align: center;
-    padding-left:10vw;
+    display:flex;
+    flex-wrap: wrap;
 }
-.content>*:not(#header, #results){
-    width: clamp(500px,60%,800px);
+/* ------ Generic Content ---------- */
 
+.content>div:not(#results){
+    width: clamp(500px,60%,800px);
 }
+/*
 .content:first-child{
     margin-top:15vh;
 }
@@ -372,10 +389,10 @@ th{
 .content:last-child{
     margin-bottom:100px;
 }
+    */
 .content p, .content li{
     text-align:justify;
     text-justify: distribute;
-    font-size: 1.2rem;
 }
 .content p{
     padding-bottom:20px;
@@ -383,6 +400,9 @@ th{
 .content.boxed{
     padding:5%;
 }
+
+/* ------ Input update UI page ---------- */
+
 .pagination{
 
     position:fixed;
@@ -404,7 +424,7 @@ th{
     font-weight:bold;
 
 }
-/* Input update UI page*/
+
 .Company{
     padding: 20px ;
     border-bottom: 1px solid var(--colour-05);
@@ -433,7 +453,36 @@ th{
 .url{
     width:300px;
 }
-/* main search */
+
+/* ------ main search ---------- */
+
+#Search {
+    margin-top:2rem;
+    top:2rem;
+    left:.2rem;
+    position:sticky;
+
+
+    box-sizing: border-box;
+    max-height: calc(100vh - 3rem);
+    width:38rem;
+
+    --searchpad: 2rem;
+    padding: 0 var(--searchpad);
+    padding-top: var(--searchpad);
+    overflow-y: auto;
+    scrollbar-gutter: stable;
+    --bxsh-offset: 0px;
+    text-align:initial;
+    text-justify: left;
+}
+
+#Search >div:not(.cardDetails), .cardDetails >div{
+    column-width:13rem;
+    column-gap:0rem;
+    
+}
+
 #DistanceTable input[type=text]{
     font-size:inherit;
     width: 4rem;
@@ -462,23 +511,6 @@ cursor: default;
 }
 
 
-#Search {
-    position:fixed;
-    box-sizing: border-box;
-    top:0.2rem;
-    bottom:3rem;
-    left:.2rem;
-    width:38rem;
-    --searchpad: 2rem;
-    padding: 0 var(--searchpad);
-    padding-top: var(--searchpad);
-    overflow-y: auto;
-    scrollbar-gutter: stable;
-    --bxsh-offset: 0px;
-}
-#Search >div:not(.cardDetails), .cardDetails >div{
-    column-width:13rem;
-}
 
 .theInputs{
     display: inline;
@@ -496,22 +528,27 @@ cursor: default;
 .delete input{
     color:var(--colour-05);
 }
+
+
+/* ------ results ---------- */
+
 #results{
-    position:absolute;
-    left:40rem ;
-    right:0;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(360px,1fr));
     scrollbar-gutter: stable;
     scrollbar-color: var(--colour-border) var(--colour-01-light);
     padding: 100px 100px 100px 20px;
-    container-type: size;
+    container-type: inline-size;
+    box-sizing: border-box;
+    width: clamp( 40rem, calc(100vw - 40rem), 100%)
 }
 .card{
     --bxsh-offset: 5px;
     --cardw:360px;
     width:calc(var(--cardw) + var(--bxsh-offset));
     height:calc(280px + var(--bxsh-offset));
+    
+    text-align:left;
     box-shadow: none;
     box-sizing: border-box;
     display:flex;
@@ -563,7 +600,7 @@ cursor: default;
 }
 fieldset{
     border:0;
-    position:relative;
+    position:static;
     display:inline-block;
     unicode-bidi: inherit;
     min-inline-size: initial;
@@ -573,55 +610,32 @@ legend{
     width: 8.5rem;
     cursor:pointer;
     padding:0;
-    position:relative;
+    position:static;
     unicode-bidi: inherit;
     float:inline-start;
     user-select: none;
     -webkit-user-select: none;
-    margin-left:5px;
+    margin-left:0.3rem;
 }
 
 
 @media screen and (max-width:1300px), (min-resolution: 2x){
-    body {
-        left:0;
-        top:0;
-        width:99%;
-    }
-    #Search{
-        position:absolute;
-        bottom: 3rem;
-        left:0;
-        height:90vh;
-        width:99vw;
-        transition:all ease-in-out .3s;
-        anchor-name: --pull;
-        margin-bottom:4rem;
-    }
-
-    #header{
-        position:relative;
-        top: 5px;
-    }
-    #header h1{
-        margin: 15px 0;
-    }
 
     #Search.collapse {
         overflow-y:hidden;
-        max-height: 55px;
+        max-height: 5rem;
         padding-top: 0;
     }
     #Search.collapse *{
         margin-top:0;
         padding-top:0;
+        anchor-scope: --pull;
 
     }
-     #Search >div:not(.cardDetails), .cardDetails >div{
-    column-width:14rem;}
+
     #pull{
-        --pullw:40px;
-        height:20px;
+        --pullw:4rem;
+        height:4rem;
         width:var(--pullw);
         overflow: hidden;
         position-anchor: --pull;
@@ -629,54 +643,20 @@ legend{
         top: calc(anchor(bottom) - var(--bxbdw) - var(--bxsh-offset));
         left: calc(anchor(center) - var(--pullw)/2);
     }
-    #results{
-
-    left:0;
-    }
-    
-    
-
 
 
 }
 @media screen and (min-resolution: 2x){
-/*    body{
-        font-size: 20pt;
-    }
-    .content p, .content li{
-        font-size: 20pt;
-    }
-    h1 {
-        font-size: 40px;
-    }
-    th, h3, #header a, legend, button {
-        font-size: 20pt;
-    }
-        */
-
-    #submitButton {
-       transform: scale(2,2);
-    }
-
-    #footer {
-/*    font-size: 30pt; */
-    padding:10px 20px;
-    }
-   
 
     input[type=radio]{
     width: 2.2em;
     height:2em;
     }
-
-    .infobox{
-        transform: scale(2,2);
-    }
 }
 @media (hover:hover){
     #header li:hover{
         margin-left:0;
-        margin-right: 5px;
+        margin-right: 0.3rem;
     }
     input[type=radio]:hover {
         transform: scale(1.2);
@@ -700,7 +680,7 @@ legend{
     }
     .card:hover{
 
-    --bxsh-offset: 20px;
+    --bxsh-offset: 1.5rem;
     z-index:2;
     }
     

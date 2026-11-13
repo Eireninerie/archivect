@@ -7,10 +7,12 @@ include('./php/header.php');
 
 ?>
 
+
+<?php include('./php/tablesearch.php') ?>
+
 <div id='results'>
 Hiya (:</div>
 </div>
-<?php include('./php/tablesearch.php') ?>
 <?php
 include('./php/footer.php');
 ?>

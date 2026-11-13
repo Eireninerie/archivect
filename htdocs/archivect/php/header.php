@@ -24,7 +24,6 @@ echo '
 <body class='lightmode'>
 
 <button id='mode'></button>
-<div class='content'>
 <div id="header">
 	<h1 class="boxed">Archivect<sup class="info">.beta</sup>
 	<div class="infobox">
@@ -50,3 +49,4 @@ echo '
 ?>
 </div>
 </div>
+<div class='content'>

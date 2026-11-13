@@ -21,7 +21,7 @@ include($pos.'./php/header.php');
 </ul>
     </div><div class='content boxed'>
 <h3>Open source and legally free software</h3>
-<span>Instead of paying an arm and a leg for software, or for some reason using Sketchup (heaven help us), consider the following:</span>
+<span>Instead of paying an arm and a leg for software, consider the following:</span>
 <ul>
     <li><b>Sketching/painting:</b> <a href="https://krita.org/en/">Krita</a><br>One of the very best pieces of software out there for drawing. And I don't mean best of affordable, I mean best of all: the brushes and tools are great. That said, it's a little basic for photo editing.</li>
     <li><b>Design:</b> <a href="https://inkscape.org/">Inkscape</a><br>It's a little like Adobe Illustrator I guess. I use it to take apart cad drawings and pdfs or for simple icons and annotations.</li>

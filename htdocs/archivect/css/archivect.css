@@ -24,13 +24,13 @@
     --font-headings:'Playpen-Sans';
     --font-text:'Titillium';
 
-    --bxbdw:0.8rem;
-    --bxmar:1.2rem;
-    --bxsh-offset: 1rem;
+    --bxbdw:12px;
+    --bxmar:12px;
+    --bxsh-offset: 10px;
 
     --borderimg:url(../assets/corner.svg) no-repeat border-box;
     --borderimgsh:url(../assets/cornersh.svg) no-repeat border-box;
-    --fauxbdw:3px;
+    --fauxbdw:2px;
 
 }
 
@@ -99,7 +99,7 @@ input[type=radio] {
   margin-right:0.12rem;
   float:left;
   border: 0px;
-    width: 1em;
+    width: 1.1em;
     height: 1em;
 }
 input:checked::checkmark{
@@ -159,6 +159,7 @@ h1 {
 .boxed {
     --borderimgsize:calc(var(--bxbdw) * 2 - var(--fauxbdw) );
     --bxbdw-sh: calc(var(--bxbdw) + var(--bxsh-offset));
+
     border:  solid transparent;
     border-width: var(--bxbdw) var(--bxbdw-sh) var(--bxbdw-sh) var(--bxbdw);
     
@@ -228,6 +229,7 @@ th, h3, #header a{
     padding: 0;
     font-weight: 300;
     color:var(--colour-04);
+    font-size:1.1rem;
     border-bottom: var(--bd) solid var(--colour-border);
 }
 h3:not(:first-of-type), #header a{
@@ -465,7 +467,9 @@ th{
 
     box-sizing: border-box;
     max-height: calc(100vh - 3rem);
-    width:38rem;
+
+    min-width: 39rem;
+    flex-grow: 1;
 
     --searchpad: 2rem;
     padding: 0 var(--searchpad);
@@ -474,11 +478,10 @@ th{
     scrollbar-gutter: stable;
     --bxsh-offset: 0px;
     text-align:initial;
-    text-justify: left;
 }
 
 #Search >div:not(.cardDetails), .cardDetails >div{
-    column-width:13rem;
+    column-width:15rem;
     column-gap:0rem;
     
 }
@@ -534,20 +537,23 @@ cursor: default;
 
 #results{
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(360px,1fr));
+    --cardw:23rem;
+
+    grid-template-columns: repeat(auto-fit, minmax(var(--cardw),1fr));
     scrollbar-gutter: stable;
     scrollbar-color: var(--colour-border) var(--colour-01-light);
-    padding: 100px 100px 100px 20px;
-    container-type: inline-size;
+    padding: 100px 100px 100vh 20px;
     box-sizing: border-box;
-    width: clamp( 40rem, calc(100vw - 40rem), 100%)
+    min-width: var(--cardw);
+    flex-grow: 80;
+    container-type: inline-size;
 }
 .card{
-    --bxsh-offset: 5px;
-    --cardw:360px;
+    --bxsh-offset: 3px;
     width:calc(var(--cardw) + var(--bxsh-offset));
-    height:calc(280px + var(--bxsh-offset));
+    height:calc(5rem + var(--bxsh-offset));
     
+    position:relative;
     text-align:left;
     box-shadow: none;
     box-sizing: border-box;
@@ -557,7 +563,7 @@ cursor: default;
 --columnid:mod(calc(sibling-index() - 0),var(--columncount));
     --coldisplace: calc(var(--columnid) * -20px);
     margin-top: calc(var(--coldisplace) - var(--bxsh-offset));
-    margin-bottom:0px;
+    margin-bottom:1rem;
     margin-left:calc(calc(calc(100% - var(--cardw)) / 2) - calc(var(--bxsh-offset) / 2 ));
     transition: all ease .4s;
 }
@@ -570,9 +576,15 @@ cursor: default;
     height:20px;
 }
 */
+.card:nth-child(3n){
+    left:10px;
+}
+.card:nth-child(5n-3){
+    left:-10px;
+}
 .card h3, .cardDetails h3{
     width:99%;
-    height: 50px;
+    height: 2.2em;
   display: flex;
   align-items: flex-end;
 }
@@ -619,11 +631,11 @@ legend{
 }
 
 
-@media screen and (max-width:1300px), (min-resolution: 2x){
+@media screen and (max-width:63rem){
 
     #Search.collapse {
         overflow-y:hidden;
-        max-height: 5rem;
+        max-height: 5.5rem;
         padding-top: 0;
     }
     #Search.collapse *{
@@ -680,7 +692,7 @@ legend{
     }
     .card:hover{
 
-    --bxsh-offset: 1.5rem;
+    --bxsh-offset: 0.5rem;
     z-index:2;
     }
     

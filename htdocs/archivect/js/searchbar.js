@@ -85,7 +85,7 @@ $('#testButton').click(function(){
 
 $('#submitButton').click(function(){
    $searchheight = $('#Search').height();
-   if (window.matchMedia("(min-width: 1010px)").matches) {
+   if (window.matchMedia("(min-width: 63rem)").matches) {
       $('#Search').height($searchheight);
    }else{
       $('#pull').removeClass('hiddenClass');
@@ -101,7 +101,7 @@ $('#submitButton').click(function(){
       function(){
       $('#Search').addClass('collapse');
 //      $('.card').wrapInner('<div>').children('div').addcorners();
-      if (window.matchMedia("(max-width: 1010px), (min-resolution: 2x)").matches) {
+      if (window.matchMedia("(max-width: 63rem").matches) {
          $('#pull').click(function(){
          $('#Search').toggleClass('collapse');
          });

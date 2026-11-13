@@ -377,9 +377,23 @@ th{
     flex-wrap: wrap;
 }
 /* ------ Generic Content ---------- */
+.content>*:first-child{
+    height:min-content;
 
-.content>div:not(#results){
-    width: clamp(500px,60%,800px);
+}
+.content>*:nth-child(n+2){
+
+    padding: 100px 100px 100vh 20px;
+    box-sizing: border-box;
+    min-width: 35rem;
+    flex-grow: 80;
+    height:min-content;
+    container-type: inline-size;
+}
+.content>*:nth-child(n+2)>*{
+    box-sizing: border-box;
+    width: clamp(35rem,100%,50rem);
+    padding: 2rem;
 }
 /*
 .content:first-child{

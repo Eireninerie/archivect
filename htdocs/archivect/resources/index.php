@@ -10,18 +10,18 @@ include($pos.'./php/header.php');
         <h1 >RESOURCES</h1>
 </div>
 <div>
-    <div class='content boxed'>
+    <div class='boxed'>
         <h3>Links for Learning</h3>
         <p>At some point I intend to turn this into a fully-fledged searchable directory, because I have many more. Until then, here's some starters</p>
     </div>
-    <div class='content boxed'>
+    <div class='boxed'>
         <h3>General Architecture</h3>
         <ul>
             <li><b>Architects directory:</b> <a href="https://architectdirectory.co.uk/">The Architect Directory</a><br> This came out while I was making this database. It's much larger than this one but it is specific to housing and landscapes. I think it is tailored towards clients rather than students. It's similar in some respects to <a href="https://www.houzz.co.uk/professionals/architects-and-building-designers/">houzz</a>, if a little fancier.</a></li>
             <li><b>Case Studies:</b> <a href="https://divisare.com/">Divisare</a></br> A student-focused list of global case studies</li>
         </ul>
     </div>
-    <div class='content boxed'>
+    <div class='boxed'>
         <h3>Open source and legally free software</h3>
         <span>Instead of paying an arm and a leg for software, consider the following:</span>
         <ul>
@@ -32,7 +32,7 @@ include($pos.'./php/header.php');
         <li><b>General 3D:</b> <a href="https://www.blender.org/download/">Blender</a> When I say blender can do everything, I mean it. but it is a bit steep to learn.</a>
         </ul>
     </div>
-    <div class='content boxed'>
+    <div class='boxed'>
         <h3>Other</h3>
         <ul>
             <li><b>Magazine</b>: <a href="https://www.theplan.it/eng/theplan-free">The Plan</a><br> The plan has a main page and subscription, but sometimes it'll provide free copies of past issues through this link. To save parts of the free digital magazine, press print and select a few articles at a time. (it doesn't like 'printing' the whole thing in one go).</li>

@@ -26,7 +26,7 @@
 
     --bxbdw:12px;
     --bxmar:12px;
-    --bxsh-offset: 10px;
+    --bxsh-offset: 0px;
 
     --borderimg:url(../assets/corner.svg) no-repeat border-box;
     --borderimgsh:url(../assets/cornersh.svg) no-repeat border-box;
@@ -232,7 +232,7 @@ th, h3, #header a{
     font-size:1.1rem;
     border-bottom: var(--bd) solid var(--colour-border);
 }
-h3:not(:first-of-type), #header a{
+h3:nth-child(n+2), #header a{
 
     border-bottom-style:dashed;
 }
@@ -375,6 +375,8 @@ th{
     text-align: center;
     display:flex;
     flex-wrap: wrap;
+    padding:1rem;
+    margin:1rem;
 }
 /* ------ Generic Content ---------- */
 .content>*:first-child{
@@ -390,10 +392,11 @@ th{
     height:min-content;
     container-type: inline-size;
 }
-.content>*:nth-child(n+2)>*not:(.card){
+.content>*:nth-child(n+2)>*:not(.card){
     box-sizing: border-box;
     width: clamp(35rem,100%,50rem);
-    padding: 2rem;
+    padding: 2rem 2rem 3rem 2rem;
+    margin-bottom:2rem;
 }
 /*
 .content:first-child{
@@ -415,6 +418,9 @@ th{
 }
 .content.boxed{
     padding:5%;
+}
+.content li{
+    padding-right:2rem;
 }
 
 /* ------ Input update UI page ---------- */
@@ -473,8 +479,8 @@ th{
 /* ------ main search ---------- */
 
 #Search {
-    margin-top:2rem;
-    top:2rem;
+    margin-top:-2rem;
+    top:clamp(3vh,2rem,3vh);
     left:.2rem;
     position:sticky;
 
@@ -490,7 +496,7 @@ th{
     padding-top: var(--searchpad);
     overflow-y: auto;
     scrollbar-gutter: stable;
-    --bxsh-offset: 0px;
+    --bxsh-offset: 10px;
     text-align:initial;
 }
 

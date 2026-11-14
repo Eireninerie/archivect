@@ -96,7 +96,6 @@ echo "<h3>Size</h3><div id='SizesList'>";
 function Bands($y,$z){
 	rating("Sizes",$z);
 	echo '<fieldset><legend>'.$y.'</legend>';
-
 	echo "</fieldset></br>";
 }
 

@@ -92,18 +92,10 @@ echo '</div>';
 echo xList("EthosList",$ethosListTable);
 echo "</div>";
 
-echo "<h3>Size</h3><div id='SizesList'>";
-function Bands($y,$z){
-	rating("Sizes",$z);
-	echo '<fieldset><legend>'.$y.'</legend>';
-	echo "</fieldset></br>";
-}
 
-Bands("One Office","UK1");
-Bands("2-4 Offices: UK","UK2");
-Bands("5+ Offices: UK","UK3");
-Bands("2-4 Offices: International","IN2");
-Bands("5+ Offices: International","IN3");
+echo "<h3>Size</h3><div id='SizesList'>";
+
+echo xList("Size",$sizesListTable);
 
 echo "</div>";
 ?>

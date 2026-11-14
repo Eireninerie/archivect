@@ -144,21 +144,22 @@ $sizeTypeSQL = 'SELECT CompanyID, CONCAT(st.Location,st.Size) AS SizeID FROM
 
 //Set size ratings from input
 $sizeRatingSET=' SELECT 
-	Name, SUBSTRING('.$SizesListRatings.',ROW_NUMBER() OVER( ORDER BY ID),1) AS Rating 
-	FROM sizesList
-	';
+	ID_Name, SUBSTRING('.$SizesListRatings.',ROW_NUMBER() OVER( ORDER BY ID),1) AS Rating 
+	FROM '.$sizesListTable
+	;
+//print_r($sizeRatingSET);
 	// print query
-	$sizeRatingSETq = $conn->query($sizeRatingSET);
+//	$sizeRatingSETq = $conn->query($sizeRatingSET);
 //	while($row = $sizeRatingSETq->fetch_assoc()){
 //	echo $SizesListRatings;
-//	echo "<table><tr><td>".$row["ID"]."</td><td>".$row["Rating"]."</td></tr></table>";}
+//	echo "<table><tr><td>".$row["ID_Name"]."</td><td>".$row["Rating"]."</td></tr></table>";}
 	
 // Connect size ratings to weighting and company categorisation
 $sizeRatingsQuerySQL=
 	'SELECT s.Rating AS "OG", weighting.Rating, t.CompanyID
 		FROM ('.$sizeRatingSET.') AS s
 		LEFT JOIN weighting ON weighting.ID = s.Rating
-		RIGHT JOIN ('.$sizeTypeSQL.') as t ON t.SizeID = s.Name
+		RIGHT JOIN ('.$sizeTypeSQL.') as t ON t.SizeID = s.ID_Name
 	';
 	// print query
 //	$sizeRatingsQuery = $conn->query($sizeRatingsQuerySQL);

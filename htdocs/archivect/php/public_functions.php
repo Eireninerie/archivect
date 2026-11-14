@@ -12,6 +12,7 @@ $ethosTable = "ethos";
 $sectorListTable = "sectorsList";
 $ethosListTable = "ethosList";
 $socialsListTable = "socialsList";
+$sizesListTable= "sizesList";
 $conn = new mysqli($fhost,$fusername,$fpassword,$fdbname);
 if (!$conn) {
 	die('Connection failed: '.mysqli_connect_error());

@@ -38,9 +38,7 @@ FROM
 global $sectorListTable;
 ?>
 
-<script src=<?php 
-if(isset($pos)){}else{$pos='';} 
-echo $pos.'./js/searchbar.js?v=0.1'; ?>></script>
+
 <form id='Search' class="boxed">
 <h3><b>Search Priorities</b></h3>
 <h3>Sectors
@@ -114,5 +112,8 @@ echo "</div>";
 <div id="testCont">test container</div>
 -->
 <button id="submitButton" type="button">SUBMIT</button>
-</form>
 <button id="pull" class="hiddenClass"></button>
+<script src=<?php 
+if(isset($pos)){}else{$pos='';} 
+echo $pos.'./js/searchbar.js?v=0.1'; ?>></script>
+</form>

@@ -390,7 +390,7 @@ th{
     height:min-content;
     container-type: inline-size;
 }
-.content>*:nth-child(n+2)>*{
+.content>*:nth-child(n+2)>*not:(.card){
     box-sizing: border-box;
     width: clamp(35rem,100%,50rem);
     padding: 2rem;

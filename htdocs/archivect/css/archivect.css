@@ -55,6 +55,7 @@ body{
     font-family:var(--font-text), sans-serif;
     scrollbar-color: var(--colour-03) var(--colour-01-light);
     margin:0;
+    transition: all ease-in-out 1s;
 }
 
 .lightmode{
@@ -65,7 +66,6 @@ body{
     --colour-03-dark:#a63;
     --colour-04:#314EFF;
     --colour-05:#aaa;
-    transition: all ease-in-out 1s;
 }
 .darkmode{
     --colour-05:#aaa;
@@ -75,7 +75,6 @@ body{
     --colour-03:#a63;
     --colour-03-dark:#F9BCA4;
     --colour-04:#F0F3F1;
-    transition: all ease-in-out 1s;
 }
 
 sup{
@@ -90,18 +89,24 @@ input{
     margin: 0.3rem 0;
     padding: 0.06rem 0.2rem 0.06rem 0.2rem;
     background: var(--colour-01-light);
-    border:1px solid var(--colour-border);
+    border:var(--bd) solid var(--colour-border);
     border-radius: 2px;
 }
 input[type=radio] {
     
-  cursor: pointer;
-  margin-right:0.12rem;
-  float:left;
-  border: 0px;
+    cursor: pointer;
+    margin-right:0.12rem;
+    float:left;
+    border: 0px;
     width: 1.1em;
     height: 1em;
+
+    @media screen and (min-resolution: 2x){
+        transform:scale(2,2);
+    }
 }
+
+
 input:checked::checkmark{
     content: "\2713";
 }
@@ -112,8 +117,9 @@ label {
 button {
     font-family: inherit;
     font-size:inherit;
+    color:inherit;
     background-color: var(--colour-03);
-    outline: 1px solid var(--colour-03-dark);
+    outline: var(--bd) solid var(--colour-03-dark);
     border: none;
     border-radius:2px;
     cursor: pointer;
@@ -137,25 +143,73 @@ button {
     transition: all ease .5s;
 }
 
-#header{
-    position:fixed;
-    top: 20px;
-    right:var(--righthead);
-    color:inherit;
-    z-index: 2;
-}
 h1 {
     font-family: var(--font-title), sans-serif;
     font-size: 2rem;
     text-transform: uppercase;
+    text-shadow:0.2rem 0.2rem var(--shadow);
+}  
+#header{
+    position:fixed;
+    inset: 1rem 1rem 1rem 1rem;
+    color:inherit;
+    z-index: 2;
+    border: var(--bd) solid var(--colour-border);
+    display:flex;
+    pointer-events: none;
+    flex-wrap: wrap;
+    flex-direction: row-reverse;
+    overflow: hidden;
+} 
+#nav, sup, #m{
+    pointer-events:all;
 
-        text-shadow:0.2rem 0.2rem var(--shadow);
-}   
-#header h1{
-    anchor-name: --title;
 }
-/* corner style applied by js*/
-
+#m{
+    position:absolute;
+    top:2rem;
+    right:2rem;
+    z-index:1;
+}
+#header h1{
+    position:absolute;
+    right:2rem;
+    bottom:2rem;
+    height:min-content;
+    width:max-content;
+    padding: 1rem;
+    border: var(--bd) solid var(--colour-border);
+    margin:0;
+    z-index:1;
+    overflow:hidden;
+    @media screen and (max-height:30rem){
+        transform: rotate(-90deg);
+        bottom: 7rem;
+        right:-6rem;
+    }
+}
+#nav{
+    width: 26rem;
+    box-sizing: border-box;
+    overflow: hidden;
+    position:relative;
+    border: var(--bd) solid var(--colour-border);
+    border-width: 0 0 0 1px;
+    right: -36rem;
+    height:100%;
+    background-color: var(--colour-03);
+    transition: all ease 1s;
+}
+#nav.open{
+    right:0;
+    flex-grow: 1;
+}
+#menupad{
+    flex-grow:300;
+    min-width:36rem;
+    pointer-events: none;
+    
+}
 .boxed {
     --borderimgsize:calc(var(--bxbdw) * 2 - var(--fauxbdw) );
     --bxbdw-sh: calc(var(--bxbdw) + var(--bxsh-offset));
@@ -240,7 +294,7 @@ h3:nth-child(n+2), #header a{
 	float: right;
   content: ".";
 }
-fieldset:not(legend), #header h1,legend,#footer{
+fieldset:not(legend), sub,h3,legend,#footer{
     anchor-scope: --info;
 }
 .info{
@@ -260,7 +314,7 @@ input[type=radio],legend,.info,#footer a{
 }
 .infobox{
     position:fixed;
-        max-height:0;
+    max-height:0;
     overflow:hidden;
     position-anchor: --info;
     text-transform: none;
@@ -271,7 +325,7 @@ input[type=radio],legend,.info,#footer a{
     z-index: 3;
     font-weight:normal;
     font-family: var(--font-headings);
-    font-size: 0.6rem;
+    font-size: 0.9rem;
 }
 #footer .infobox{
     position-area: top;
@@ -286,88 +340,8 @@ input[type=radio]+.infobox, legend>.infobox{
 
 }
 
-
 th{
     border-bottom:none;
-}
-
-#nav{
-    position-anchor: --title;
-    position: fixed;
-    right: calc(anchor(right) - 60px);
-    top: calc(anchor(bottom) - 60px);
-    z-index: -1;
-    height:min-content;
-    background: var(--colour-04);
-    padding:16px;
-    display: block;
-    width:min-content;
-    border-radius:calc(1em + 16px);
-}
-#nav button{
-    float:right;
-    background-color:transparent;
-    border: none;
-    border-radius:0;
-    color:var(--colour-01-light);
-    outline: none;
-}
-#nav ul{
-    width:min-content;
-    position:relative;
-    right:0px;
-    margin: 0 20px;
-    max-height:0;
-    overflow:hidden;
-    float:right;
-    border-width:0;
-    transition: all ease-in-out .5s;
-}
-#nav .menu{
-    max-height:90vh;
-    margin: 40px;
-    border-width:  var(--bxbdw) var(--bxbdw-sh) var(--bxbdw-sh) var(--bxbdw);
-    padding:0;
-}
-
-
-
-#header li {
-    list-style-type: none;
-    display:block;
-    float: right;
-    width:60%;
-    text-align:right;
-    padding: 10px 30px;
-    margin-left:5px;
-}
-
-
-
-#header a, .card a {
-    display:inline-block;
-    width: 100%;
-    text-decoration: none;
-    color:var(--colour-04);
-    font-weight: 400;
-}
-
-
-#footer{
-    visibility: hidden;
-    position:fixed;
-    bottom:0;
-    background: var(--colour-04);
-    color: #aaa;
-    left:0;
-    right:0;
-    padding:5px 10px;
-    font-weight: 900;
-    display:inline-block;
-}
-
-#footer a{
-    color: var(--colour-03);
 }
 
 .content{
@@ -376,7 +350,8 @@ th{
     display:flex;
     flex-wrap: wrap;
     padding:1rem;
-    margin:1rem;
+    margin:0rem 1rem;
+    
 }
 /* ------ Generic Content ---------- */
 .content>*:first-child{
@@ -478,7 +453,7 @@ th{
 
 /* ------ main search ---------- */
 
-#Search {
+#Search{
     margin-top:-2rem;
     top:clamp(3vh,2rem,3vh);
     left:.2rem;
@@ -498,12 +473,28 @@ th{
     scrollbar-gutter: stable;
     --bxsh-offset: 10px;
     text-align:initial;
+
+    @media screen and (max-height:30rem){
+        max-width: calc(100vw - 6rem);
+    } 
 }
 
 #Search >div:not(.cardDetails), .cardDetails >div{
     column-width:15rem;
     column-gap:0rem;
 }
+
+.collapse {
+    overflow-y:hidden;
+    max-height: 5.5rem;
+    padding-top: 0;
+}
+.collapse *{
+    margin-top:0;
+    padding-top:0;
+    anchor-scope: --pull;
+}
+
 .cardDetails >div li{
     text-align: left;
 }
@@ -563,7 +554,7 @@ cursor: default;
     grid-template-columns: repeat(auto-fit, minmax(var(--cardw),1fr));
     scrollbar-gutter: stable;
     scrollbar-color: var(--colour-border) var(--colour-01-light);
-    padding: 100px 100px 100vh 20px;
+    padding: 7rem 7rem 100vh 1rem;
     box-sizing: border-box;
     min-width: var(--cardw);
     flex-grow: 80;
@@ -654,18 +645,6 @@ legend{
 
 @media screen and (max-width:63rem){
 
-    #Search.collapse {
-        overflow-y:hidden;
-        max-height: 5.5rem;
-        padding-top: 0;
-    }
-    #Search.collapse *{
-        margin-top:0;
-        padding-top:0;
-        anchor-scope: --pull;
-
-    }
-
     #pull{
         --pullw:4rem;
         height:4rem;
@@ -679,13 +658,7 @@ legend{
 
 
 }
-@media screen and (min-resolution: 2x){
 
-    input[type=radio]{
-    width: 2.2em;
-    height:2em;
-    }
-}
 @media (hover:hover){
     
     input[type=radio]:hover {

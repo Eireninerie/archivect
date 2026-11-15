@@ -31,10 +31,10 @@ echo '
 			<p>Disclaimer: lots of this info may be inaccurate as it's just what I've found manually. There will be guaranteed gaps.</p>
 		</div>
 	</h1>
-	<div id="nav" >
-		<button>Menu</button>
-		<ul class="darkmode">
-			<?php
+	<button id='m'>Menu</button>
+	<div id="nav">
+		<ul>
+<?php
 	global $pos;
 	echo '
 		<li><a href="'.$pos.'./">Search</a></li>
@@ -43,8 +43,15 @@ echo '
 		<li><a href="'.$pos.'./about">about</a></li>
 		<li><a href="https://www.linkedin.com/in/eireni-m/" title="Sorry until I set up an email for this project send me a request with a note or something. Or just duck-duck-go my name">LinkedIn</a></li>
 		</ul>
-		'
-	?>
-	</div>
+	<div id="footer">
+	Enjoy this page? please get some <a href="'.$pos.'./soapboxes#sleep">sleep</a>, join a <a href="'.$pos.'./soapboxes#union">union</a> and maybe buy me a <a href="kofee">coffee</a>. Thanks!		'
+?>
+	
+	<button class='info'>COOKIES?</button>
+	<div class='infobox'><p>I'm not currently storing any cookies or other data. But the free host I'm using, Infinityfree, collects a few cookies. Sorry. If I upgrade m host I'll see if I can get something else. All data used by the site is just for retrieval and is not logged anywhere. This is partly because I can't stand the fact that sites track you everywhere and partly because I'd have to do a <i>lot</i> of work learning more about security before I was happy to do so.</p><p> I will update this when I've set up a Submissions page as that'll require some degree of basic logins.</p></div>
+	</div></div>
+	<span id='menupad'></span>
+
+	
 </div>
 <div class='content'>

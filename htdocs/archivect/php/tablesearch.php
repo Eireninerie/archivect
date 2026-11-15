@@ -1,9 +1,9 @@
 <?php
 global $distanceInputTable;
 
-function xList($type,$table){
+function xList($type,$table,$order){
 	global $conn;
-	$QuerySQL = "SELECT ID, Name, Description FROM ".$table." ORDER BY Name ASC";
+	$QuerySQL = "SELECT ID, Name, Description FROM ".$table." ORDER BY ".$order." ASC";
 //	echo $QuerySQL;
 	$Query = $conn->query($QuerySQL);
 	while($row = $Query->fetch_assoc()){
@@ -52,7 +52,7 @@ global $sectorListTable;
 
 <div id='SectorList'>
 <?php
-echo xList("Sector",$sectorListTable);
+echo xList("Sector",$sectorListTable,'Name');
 echo '</div>';
 ?>
 <table id="DistanceTable">
@@ -89,13 +89,13 @@ echo '</div>';
 </div>
 </h3><div id='EthosList'>
 <?php
-echo xList("EthosList",$ethosListTable);
+echo xList("EthosList",$ethosListTable,'Name');
 echo "</div>";
 
 
 echo "<h3>Size</h3><div id='SizesList'>";
 
-echo xList("Size",$sizesListTable);
+echo xList("Size",$sizesListTable,'ID_Name');
 
 echo "</div>";
 ?>

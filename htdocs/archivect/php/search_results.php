@@ -18,19 +18,25 @@ function cardDetails($tableName,$columnName,$row,$sub){
 	global $conn;
 	if ($sub == 1){
 		$joinclause = "LEFT JOIN ".$columnName."List ON ".$columnName."List.ID = ".$columnName."";
-		$rowvalue= "Name";}
+		$rowvalue= "Name";
+		$orderclause= null;}
 	else {
 		$joinclause = null; 
-		$rowvalue=$columnName;}
+		$rowvalue=$columnName;
+		$orderclause=' ORDER BY CASE WHEN Postcode IN ("Overseas") THEN 2 ELSE 1 END, '.$columnName;}
 
 	$whereclause = "WHERE ". $row ." = ".$tableName.".CompanyID";
 
-	$SQL = "SELECT CompanyID, ".$rowvalue." FROM ".$tableName." ".$joinclause." ".$whereclause." ";
+	$SQL = "SELECT CompanyID, "
+		.$rowvalue." FROM "
+		.$tableName." ".$joinclause.
+		" WHERE ". $row ." = ".$tableName.".CompanyID"
+		.$orderclause;
 		$result = $conn->query($SQL);
 			if ($result->num_rows > 0){
 			while($row = $result->fetch_assoc()){
 			echo "
-			<li>".$row["".$rowvalue.""]."</li>
+			<li>".$row[$rowvalue]."</li>
 			";}} else {echo "not yet listed/unknown";}
 	echo "
 	</ul>

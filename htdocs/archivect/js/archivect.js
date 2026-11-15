@@ -19,12 +19,11 @@ $(document).ready(function(){
     $('input[type="radio"]').click(function(){
         $(this).attr('checked','').siblings().removeAttr('checked');
     })
-    $('#nav').find('button').click(function(){
-        $(this).siblings('ul').toggleClass('menu');
+    $('#m').click(function(){
+        $('#nav').toggleClass('open');
     })
     $('#mode').click(function(){
-        $('body').toggleClass('darkmode');
-        $('#nav').find('.boxed').toggleClass('lightmode').toggleClass('darkmode');
+        $('.lightmode').toggleClass('darkmode');
     })
     
 });

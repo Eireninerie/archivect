@@ -503,9 +503,10 @@ th{
 #Search >div:not(.cardDetails), .cardDetails >div{
     column-width:15rem;
     column-gap:0rem;
-    
 }
-
+.cardDetails >div li{
+    text-align: left;
+}
 #DistanceTable input[type=text]{
     font-size:inherit;
     width: 4rem;

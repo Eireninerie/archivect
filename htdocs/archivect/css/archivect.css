@@ -385,7 +385,7 @@ th{
 }
 .content>*:nth-child(n+2){
 
-    padding: 100px 100px 100vh 20px;
+    padding: 100px 30rem 100vh 1rem;
     box-sizing: border-box;
     min-width: 35rem;
     flex-grow: 80;
@@ -520,18 +520,18 @@ cursor: default;
 
 
 #submitButton{
-    margin:12px 0 0 calc( 50% - 60px );
-    height:60px;
-    width:120px;
+    margin:2rem 0 2rem calc( 50% - 4em );
+    
     border-width: 0;
-    border-radius: 60px 60px 0 0;
-    padding: 5px 0 0 0;
+    border-radius: 2.5em;
+    padding: 0.75em 1.5em;
     transform-origin: bottom;
     text-transform: uppercase;
     font-family: var(--font-title);
     font-size: 1.6rem;
     white-space: nowrap;
     color: var(--colour-02);
+    box-shadow: 1em 0 0 0 var(--shadow);
 }
 
 
@@ -687,15 +687,14 @@ legend{
     }
 }
 @media (hover:hover){
-    #header li:hover{
-        margin-left:0;
-        margin-right: 0.3rem;
-    }
+    
     input[type=radio]:hover {
         transform: scale(1.2);
     }
     #submitButton:hover{
         text-shadow:3px 3px var(--shadow);
+        transform:translateX(1em);
+    box-shadow: -1em 0 0 0 var(--shadow);
     }
     button:hover{
         transform: scale(1.1);

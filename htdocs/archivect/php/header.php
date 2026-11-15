@@ -25,28 +25,26 @@ echo '
 
 <button id='mode'></button>
 <div id="header">
-	<h1 class="boxed">Archivect<sup class="info">.beta</sup>
-	<div class="infobox">
-		<p>I'm working on it. It's only a personal project and I'm doing it slowly, for fun. Head to the about page to see some goals.</p>
-		<p>Disclaimer: lots of this info may be inaccurate as it's just what I've found manually. There will be guaranteed gaps.</p>
+	<h1>Archivect<sup class="info">.beta</sup>
+		<div class="infobox">
+			<p>I'm working on it. It's only a personal project and I'm doing it slowly, for fun. Head to the about page to see some goals.</p>
+			<p>Disclaimer: lots of this info may be inaccurate as it's just what I've found manually. There will be guaranteed gaps.</p>
+		</div>
+	</h1>
+	<div id="nav" >
+		<button>Menu</button>
+		<ul class="darkmode">
+			<?php
+	global $pos;
+	echo '
+		<li><a href="'.$pos.'./">Search</a></li>
+		<li><a href="'.$pos.'./resources">Resources</a></li>
+		<li><a href="#"><s title="under construction">Diary</s></a></li>
+		<li><a href="'.$pos.'./about">about</a></li>
+		<li><a href="https://www.linkedin.com/in/eireni-m/" title="Sorry until I set up an email for this project send me a request with a note or something. Or just duck-duck-go my name">LinkedIn</a></li>
+		</ul>
+		'
+	?>
 	</div>
-</h1>
-
-<div id="nav" >
-	<button>Menu</button>
-	<ul class="boxed darkmode">
-		<?php
-global $pos;
-
-echo '
-	<li><a href="'.$pos.'./">Search</a></li>
-	<li><a href="'.$pos.'./resources">Resources</a></li>
-	<li><a href="#"><s title="under construction">Diary</s></a></li>
-	<li><a href="'.$pos.'./about">about</a></li>
-	<li><a href="https://www.linkedin.com/in/eireni-m/" title="Sorry until I set up an email for this project send me a request with a note or something. Or just duck-duck-go my name">LinkedIn</a></li>
-	</ul>
-	'
-?>
-</div>
 </div>
 <div class='content'>

@@ -88,7 +88,11 @@ $('#submitButton').click(function(){
    if (window.matchMedia("(min-width: 63rem)").matches) {
       $('#Search').height($searchheight);
    }else{
+      $('#Search').addClass('collapse');
       $('#pull').removeClass('hiddenClass');
+      $('#pull').click(function(){
+         $('#Search').toggleClass('collapse');
+      });
    }
    $("#errormsg").parent().remove();
    $results = $( "form" ).serialize();
@@ -99,12 +103,7 @@ $('#submitButton').click(function(){
    let DistanceListarray = tablevalues();
    $("#results").html("<div class='content'>...loading </div>").load('./php/search_results.php', {SectorList,EthosList,SizesList,DistanceList,DistanceListarray},
       function(){
-      $('#Search').addClass('collapse');
-//      $('.card').wrapInner('<div>').children('div').addcorners();
-      if (window.matchMedia("(max-width: 63rem").matches) {
-         $('#pull').click(function(){
-         $('#Search').toggleClass('collapse');
-         });
+      if (window.matchMedia("(max-width: 63rem)").matches) {
          $('.card').click(function(){
             $('#Search').removeClass('collapse');
             $('#Search').find('.cardDetails ').remove();

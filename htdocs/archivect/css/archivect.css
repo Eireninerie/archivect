@@ -12,7 +12,7 @@
 
     font-size: 1rem; 
 @media screen and (min-resolution: 2x){
-    font-size:2rem;
+    font-size:2.2rem;
 }
  
     --colour-border:green;
@@ -24,8 +24,8 @@
     --font-headings:'Playpen-Sans';
     --font-text:'Titillium';
 
-    --bxbdw:12px;
-    --bxmar:12px;
+    --bxbdw:0.8rem;
+    --bxmar:0.8rem;
     --bxsh-offset: 0px;
 
     --borderimg:url(../assets/corner.svg) no-repeat border-box;
@@ -102,7 +102,8 @@ input[type=radio] {
     height: 1em;
 
     @media screen and (min-resolution: 2x){
-        transform:scale(2,2);
+    width: 2.2em;
+    height: 2em;
     }
 }
 
@@ -167,9 +168,10 @@ h1 {
 }
 #m{
     position:absolute;
-    top:2rem;
-    right:2rem;
+    top:0rem;
+    right:0rem;
     z-index:1;
+    padding:1rem;
 }
 #header h1{
     position:absolute;
@@ -351,6 +353,7 @@ th{
     flex-wrap: wrap;
     padding:1rem;
     margin:0rem 1rem;
+    anchor-scope: --pull;
     
 }
 /* ------ Generic Content ---------- */
@@ -358,15 +361,16 @@ th{
     height:min-content;
 
 }
-.content>*:nth-child(n+2){
+.content>*:nth-child(n+2):not(#pull){
 
-    padding: 100px 30rem 100vh 1rem;
+    padding: 100px 5rem 100vh 1rem;
     box-sizing: border-box;
     min-width: 35rem;
     flex-grow: 80;
     height:min-content;
     container-type: inline-size;
 }
+
 .content>*:nth-child(n+2)>*:not(.card){
     box-sizing: border-box;
     width: clamp(35rem,100%,50rem);
@@ -459,11 +463,10 @@ th{
     left:.2rem;
     position:sticky;
 
-
     box-sizing: border-box;
-    max-height: calc(100vh - 3rem);
+    max-height: calc(100vh - 14rem);
 
-    min-width: 39rem;
+    min-width: clamp( 20rem, 39rem, calc(100vw - 6rem));
     flex-grow: 1;
 
     --searchpad: 2rem;
@@ -471,12 +474,15 @@ th{
     padding-top: var(--searchpad);
     overflow-y: auto;
     scrollbar-gutter: stable;
-    --bxsh-offset: 10px;
     text-align:initial;
+
+    transition:max-height ease 2s;
 
     @media screen and (max-height:30rem){
         max-width: calc(100vw - 6rem);
     } 
+    
+    anchor-name: --pull;
 }
 
 #Search >div:not(.cardDetails), .cardDetails >div{
@@ -484,15 +490,14 @@ th{
     column-gap:0rem;
 }
 
-.collapse {
+#Search.collapse {
     overflow-y:hidden;
     max-height: 5.5rem;
     padding-top: 0;
 }
-.collapse *{
+#Search.collapse *{
     margin-top:0;
     padding-top:0;
-    anchor-scope: --pull;
 }
 
 .cardDetails >div li{
@@ -559,6 +564,7 @@ cursor: default;
     min-width: var(--cardw);
     flex-grow: 80;
     container-type: inline-size;
+    z-index:0;
 }
 .card{
     --bxsh-offset: 3px;
@@ -641,22 +647,26 @@ legend{
     -webkit-user-select: none;
     margin-left:0.3rem;
 }
+#footer a:hover .infobox,
+.info:hover+.infobox, 
+input[type=radio]:hover+.infobox,
+legend:hover>.infobox{
+    max-height:100vh;
+    padding:5px 20px;
+}
 
 
-@media screen and (max-width:63rem){
-
-    #pull{
-        --pullw:4rem;
-        height:4rem;
-        width:var(--pullw);
-        overflow: hidden;
-        position-anchor: --pull;
-        position:absolute;
-        top: calc(anchor(bottom) - var(--bxbdw) - var(--bxsh-offset));
-        left: calc(anchor(center) - var(--pullw)/2);
-    }
-
-
+#pull{
+    --pullw:4rem;
+    height:2rem;
+    width:var(--pullw);
+    box-sizing: border-box;
+    overflow: hidden;
+    position-anchor: --pull;
+    position:absolute;
+    top: calc(anchor(bottom) - var(--bxbdw) - var(--bxsh-offset));
+    left: calc(anchor(center) - var(--pullw)/2);
+    
 }
 
 @media (hover:hover){
@@ -672,10 +682,7 @@ legend{
     button:hover{
         transform: scale(1.1);
     }
-    #footer a:hover .infobox,.info:hover+.infobox, input[type=radio]:hover+.infobox,legend:hover>.infobox{
-        max-height:100vh;
-        padding:5px 20px;
-    }
+
     #mode:hover::after{
     content: 'light/dark mode';
         }

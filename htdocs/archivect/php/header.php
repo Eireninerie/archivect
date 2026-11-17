@@ -33,15 +33,15 @@ echo '
 	</h1>
 	<button id='m'>Menu</button>
 	<div id="nav">
-		<ul>
 <?php
 	global $pos;
 	echo '
-		<li><a href="'.$pos.'./">Search</a></li>
-		<li><a href="'.$pos.'./resources">Resources</a></li>
-		<li><a href="#"><s title="under construction">Diary</s></a></li>
-		<li><a href="'.$pos.'./about">about</a></li>
-		<li><a href="https://www.linkedin.com/in/eireni-m/" title="Sorry until I set up an email for this project send me a request with a note or something. Or just duck-duck-go my name">LinkedIn</a></li>
+		<ul>
+		<a href="'.$pos.'./"><li>Search</li></a>
+		<a href="'.$pos.'./resources"><li>Resources</li></a>
+		<a href="#"><li><s title="under construction">Diary</s></li></a>
+		<a href="'.$pos.'./about"><li>about</li></a>
+		<a href="https://www.linkedin.com/in/eireni-m/" title="Sorry until I set up an email for this project send me a request with a note or something. Or just duck-duck-go my name"><li>LinkedIn</li></a>
 		</ul>
 	<div id="footer">
 	Enjoy this page? please get some <a href="'.$pos.'./soapboxes#sleep">sleep</a>, join a <a href="'.$pos.'./soapboxes#union">union</a> and maybe buy me a <a href="kofee">coffee</a>. Thanks!		'

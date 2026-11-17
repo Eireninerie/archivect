@@ -167,6 +167,7 @@ h1 {
 
 }
 #m{
+    font-family: var(--font-headings);
     position:absolute;
     top:0rem;
     right:0rem;
@@ -201,10 +202,41 @@ h1 {
     height:100%;
     background-color: var(--colour-03);
     transition: all ease 1s;
+    padding:2rem 2rem 12rem 2rem;
+    align-content: end;
 }
 #nav.open{
     right:0;
     flex-grow: 1;
+}
+
+
+#nav ul{
+    margin: 0;
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(9rem,1fr));
+
+    padding:0;
+    border: 1px solid var(--colour-03-dark)
+}
+#nav li{
+    list-style: none;
+    padding:0.5em;
+    background:var(--colour-03);
+    color: var(--colour-02);
+    border: 1px solid var(--colour-03-dark)
+
+}
+#nav a{
+    box-shadow: 0.5rem 0.5rem 0 0 var(--colour-03-dark);
+    border: none;
+    text-decoration: none;
+    position:relative;
+}
+#nav a:hover{
+    box-shadow: 1px 1px 0 0 var(--colour-03-dark);
+    left: 0.25rem;
+    top: 0.25rem;
 }
 #menupad{
     flex-grow:300;
@@ -279,18 +311,23 @@ h1 {
 }
 
 /* consistent styles*/
-th, h3, #header a{
+th, h3, #nav a{
     font-family: var(--font-headings);
     text-transform: uppercase;    
     padding: 0;
     font-weight: 300;
     color:var(--colour-04);
     font-size:1.1rem;
-    border-bottom: var(--bd) solid var(--colour-border);
 }
-h3:nth-child(n+2), #header a{
+h3{
+    border-bottom: var(--bd) dashed var(--colour-border);
+}
+h3:first-of-type{
+    border-bottom-style: solid;
 
-    border-bottom-style:dashed;
+}
+th{
+    border-bottom: 2pt solid var(--colour-01);
 }
 .card h2 ::after { 
 	float: right;
@@ -340,10 +377,6 @@ input[type=radio]+.infobox, legend>.infobox{
     top: anchor(bottom);
     left: anchor(left);
 
-}
-
-th{
-    border-bottom:none;
 }
 
 .content{
@@ -462,6 +495,7 @@ th{
     top:clamp(3vh,2rem,3vh);
     left:.2rem;
     position:sticky;
+    z-index:1;
 
     box-sizing: border-box;
     max-height: calc(100vh - 14rem);
@@ -666,6 +700,7 @@ legend:hover>.infobox{
     position:absolute;
     top: calc(anchor(bottom) - var(--bxbdw) - var(--bxsh-offset));
     left: calc(anchor(center) - var(--pullw)/2);
+    z-index:1;
     
 }
 

@@ -103,22 +103,8 @@ $('#submitButton').click(function(){
    let DistanceListarray = tablevalues();
    $("#results").html("<div class='content'>...loading </div>").load('./php/search_results.php', {SectorList,EthosList,SizesList,DistanceList,DistanceListarray},
       function(){
-      if (window.matchMedia("(max-width: 63rem)").matches) {
-         $('.card').click(function(){
+         $.fn.cdShow = function(){
             $('#Search').removeClass('collapse');
-            $('#Search').find('.cardDetails ').remove();
-            $content = $(this).find('.cardDetails').clone(); 
-            $('#Search').wrapInner('<div class="wrapped">').find('.wrapped').addClass('hiddenClass');
-            $('#Search').prepend($content);
-            $('#Search').find('.cardDetails').removeClass('hiddenClass');
-            $('.exitcard').click(function(){
-               $('#Search').find('.cardDetails ').remove();
-               $('#Search').find('.wrapped').children().unwrap();
-               $('#Search').removeClass('collapse');
-            });
-         });
-      }else{
-         $('.card').hover(function(){
             $('#Search').find('.cardDetails ').remove();
             $content = $(this).find('.cardDetails').clone(); 
             $('#Search').wrapInner('<div class="wrapped">').find('.wrapped').addClass('hiddenClass');
@@ -126,14 +112,21 @@ $('#submitButton').click(function(){
             $('#Search').find('.cardDetails').removeClass('hiddenClass');
             $('#Search').find('.cardDetails').animate({"max-height": "100%"},600);
             $('.exitcard').click(function(){
+               $('#Search').removeClass('collapse');
                $('#Search').find('.cardDetails ').remove();
                $('#Search').find('.wrapped').children().unwrap();
-
-            });
+         });}
+      
+         $('.card').click(function(){
+            $(this).cdShow();
+         });
+      
+         $('.card').hover(function(){
+            $(this).cdShow();
          },function(){
           
          }); 
-      }
+      
       }
    );
 });

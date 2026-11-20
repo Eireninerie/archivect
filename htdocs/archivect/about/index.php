@@ -1,5 +1,6 @@
 <?php
 $pos ='.';
+$title = 'About';
 
 //sudo /opt/lampp/manager-linux-x64.run
 include($pos.'./php/header.php');
@@ -12,6 +13,7 @@ include($pos.'./php/header.php');
 <div>
     <div class='boxed'>
         <h3>Hello!</h3>
+        <p>My name is Eireni (pronounced Ee-ree-nee). I don't have a formal email for this project yet, so until I do, to contact me just search my name (correctly spelt!) on your social media of choice and send me a request.</p>
         <p>When I was doing my BArch I made an Access database of the firms I could find because a word document wasn't cutting it. I've not had any luck on the P1 job hunt yet so this has been a way to keep my word that I would eventually share it and to try to keep myself sane.</p>
         <p><a href="">I'm still working on this.</a>
     </div>
@@ -47,10 +49,10 @@ include($pos.'./php/header.php');
     </div>
     <div class='boxed' id="ethos">
         <h3>Project Ethos</h3>
-        <p>all data is or has been publicly available somewhere else first</p>
-        <p>This is fully intended to be a tool for students. At any stage. I'm not intending to include any firms that don't offer anything to students (knowledge, placements, etc).</p>
+        <p>All data is or has been publicly available somewhere else first. I intend to start making sure every site I source I cache to archive.org for reference.</p>
+        <p>This is fully intended to be a tool for students. At any stage. </p>
         <p>I'm not looking to make any money from this, so I will only use this to share whatever I want. But hosting and domains do cost money so I wouldn't mind help if you this think project is worth anything.</p>
-        <p>I'm not using any AI because that kills the fun of it for me. It's a controversial topic, I may give my 2 cents on it in the soapbox page; but for now, in this specific project, that's the rules to play in this sandpit. Would love to bring others on board if they would like to join in the game, provided they also play nice.</p>
+        <p>I'm not using any AI because that kills the fun of it for me. It's a controversial topic, I may give my 2 cents on it in the soapbox page; but for now, unless I state otherwise, no ai has been used. Would love to bring others on board if they would like to join in.</p>
         <p>Regardless, I'm keeping this open source on Github. Please feel free to look at my code for a free horror story and tell me about my errors. This specific page is intended for firms in the UK but if someone wants to set one up for another country that would be fun.</p>
         <p>I miss old internet. I know the styling here is a touch old-fashioned.</p>
     </div>

@@ -13,8 +13,7 @@ function joinvalues ($table){
     });
     return $myArray.join("");
 }
-// redundant ): will delete if I give up on understanding why its wrong. Or if I understand it.
-
+//for web, not working in xampp vvv
 function tablevalues() { 
     return $('#DistanceTable .inputs')
     .get().map(function(row) { 
@@ -24,12 +23,10 @@ function tablevalues() {
             }).get(); 
         return { Start: vals[1], End: vals[2], Rating: vals[0] }; 
     }); 
-
-
-
 }
-//thank you John Rumpel! turning distance table into json
+//for web, not working in xampp ^^^
 
+//not in use!! vvv thank you John Rumpel! turning distance table into json
 function html2json() {
    $json = '{ "Distances": [';
    $otArr = [];
@@ -45,6 +42,9 @@ function html2json() {
 
    if(!$json){}else{return $json;}
 }
+//not in use!! ^^^
+
+//for local xampp  only vvv
 function html2insert() {
    
    $otArr = [];
@@ -60,7 +60,7 @@ function html2insert() {
    if(!$insert){return '("2","D45","D45")';}else{return $insert;}
    
 }
-
+//for local xampp only ^^^
 
 $(document).ready(function(){
 
@@ -74,6 +74,8 @@ $('#addPosts').click(        function() {
    $("#postStartInput").val("");
    $("#errormsg").parent().remove();
 });
+
+// not in use, to be removed vvv
 $('#testButton').click(function(){
     $results2 = '{'+joinvalues("#SectorList")+'}'
         ;
@@ -82,23 +84,22 @@ $('#testButton').click(function(){
     '&'+html2insert()
     );
 });
+// not in use, to be removed ^^^
 
 $('#submitButton').click(function(){
    $searchheight = $('#Search').height();
    if (window.matchMedia("(min-width: 63rem)").matches) {
       $('#Search').height($searchheight);
    }else{
-
       $('#Search').scrollTop( 0 ).addClass('collapse');
       $('#pull').removeClass('hiddenClass');
       $('#pull').click(function(){
          $('#Search').scrollTop( 0 );
          $('#Search').toggleClass('collapse');
-
       });
    }
    $("#errormsg").parent().remove();
-   $results = $( "form" ).serialize();
+   $results = $( "form" ).serialize(); //reduntant
    let SectorList = joinvalues("#SectorList");
    let EthosList = joinvalues("#EthosList");
    let SizesList = joinvalues("#SizesList");
@@ -118,14 +119,12 @@ $('#submitButton').click(function(){
                $('#Search').find('.cardDetails ').remove();
                $('#Search').find('.wrapped').children().unwrap();
          });}
-      
-            $('.card').click(function(){
-               
-               $(this).cdShow();
+         $('.card').click(function(){
+            $(this).cdShow();
             $('#Search').find('.cardDetails').animate({"max-height": "100%"},600);
-            });
-            }
-   );
-});
-
+         });
+         } //end after-load functions
+   ); //end load
+}); // end submit button
+// end submit button
 });

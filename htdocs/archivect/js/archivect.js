@@ -22,7 +22,7 @@ $(document).ready(function(){
     $('#m').click(function(){
         $('#nav').toggleClass('open');
     })
-    $('#mode').click(function(){
+    $('.col').click(function(){
         $('.lightmode').toggleClass('darkmode');
     })
     

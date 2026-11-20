@@ -19,7 +19,7 @@
 
 
     --shadow:rgba(0,0,0,0.10);
-	--bd:1px;
+	--bd:0.5px;
     --font-title:'Rock Salt';
     --font-headings:'Playpen-Sans';
     --font-text:'Titillium';
@@ -65,6 +65,7 @@ body{
     --colour-03:#F9BCA4;
     --colour-03-dark:#a63;
     --colour-04:#314EFF;
+    --colour-04-light: hsl(211, 100%, 93%);
     --colour-05:#aaa;
 }
 .darkmode{
@@ -120,12 +121,13 @@ button {
     font-size:inherit;
     color:inherit;
     background-color: var(--colour-03);
-    outline: var(--bd) solid var(--colour-03-dark);
+    outline: var(--bd) solid var(--colour-05);
     border: none;
     border-radius:2px;
     cursor: pointer;
 }
 #mode{
+    display: none;
     position:fixed;
     box-sizing: border-box;
     max-width: 2rem;
@@ -143,7 +145,9 @@ button {
     white-space: nowrap;
     transition: all ease .5s;
 }
-
+.col{
+    cursor: pointer;
+}
 h1 {
     font-family: var(--font-title), sans-serif;
     font-size: 2rem;
@@ -173,16 +177,20 @@ h1 {
     right:0rem;
     z-index:1;
     padding:1rem;
+    background-color: var(--colour-01-light);
 }
 #header h1{
     position:absolute;
     right:2rem;
     bottom:2rem;
-    height:min-content;
-    width:max-content;
+    height:3.6em;
+    box-sizing:border-box;
+    width:22rem;
+    text-align: center;
     padding: 1rem;
     border: var(--bd) solid var(--colour-border);
-    margin:0;
+    outline: var(--bd) solid var(--colour-border);
+    margin:2rem 0 1rem 0;
     z-index:1;
     overflow:hidden;
     @media screen and (max-height:30rem){
@@ -190,6 +198,11 @@ h1 {
         bottom: 7rem;
         right:-6rem;
     }
+}
+#header #nav h1{
+    position:static;
+    border: 0px;
+    outline:0;
 }
 #nav{
     width: 26rem;
@@ -200,9 +213,10 @@ h1 {
     border-width: 0 0 0 1px;
     right: -36rem;
     height:100%;
-    background-color: var(--colour-03);
+    background-color: var(--colour-04-light);
+    background: var(--colour-01) url('../assets/dot.svg') repeat ;
     transition: all ease 1s;
-    padding:2rem 2rem 12rem 2rem;
+    padding:2rem 2rem 2rem 2rem;
     align-content: end;
 }
 #nav.open{
@@ -212,29 +226,39 @@ h1 {
 
 
 #nav ul{
-    margin: 0;
+    margin: 0 0 1em 0;
     display:grid;
     grid-template-columns: repeat(auto-fit, minmax(9rem,1fr));
-
     padding:0;
-    border: 1px solid var(--colour-03-dark)
+    border: 1px solid var(--colour-border);
+}
+#nav a ul{
+    box-shadow: inherit;
 }
 #nav li{
     list-style: none;
+    font-family: var(--font-headings);
     padding:0.5em;
-    background:var(--colour-03);
+    background:var(--colour-01-light);
     color: var(--colour-02);
-    border: 1px solid var(--colour-03-dark)
+    border: 1px solid var(--colour-border);
+    border-radius: 0;
+    text-align: initial;
 
 }
+#nav li p{
+    font-size: smaller;
+    padding: 0 2px;
+    margin: 0;
+}
 #nav a{
-    box-shadow: 0.5rem 0.5rem 0 0 var(--colour-03-dark);
+    box-shadow: 0.5rem 0.5rem 0 0 var(--colour-border);
     border: none;
     text-decoration: none;
     position:relative;
 }
 #nav a:hover{
-    box-shadow: 1px 1px 0 0 var(--colour-03-dark);
+    box-shadow: 1px 1px 0 0 var(--colour-border);
     left: 0.25rem;
     top: 0.25rem;
 }
@@ -311,29 +335,29 @@ h1 {
 }
 
 /* consistent styles*/
-th, h3, #nav a{
+th, h3 {
     font-family: var(--font-headings);
-    text-transform: uppercase;    
-    padding: 0;
+    text-transform: uppercase;
     font-weight: 300;
     color:var(--colour-04);
     font-size:1.1rem;
+    padding: 0;
 }
-h3{
+h3{    
     border-bottom: var(--bd) dashed var(--colour-border);
 }
 h3:first-of-type{
     border-bottom-style: solid;
 
 }
-th{
+th{    
     border-bottom: 2pt solid var(--colour-01);
 }
 .card h2 ::after { 
 	float: right;
   content: ".";
 }
-fieldset:not(legend), sub,h3,legend,#footer{
+fieldset:not(legend), sub,h3,legend,h1,ul{
     anchor-scope: --info;
 }
 .info{
@@ -365,8 +389,9 @@ input[type=radio],legend,.info,#footer a{
     font-weight:normal;
     font-family: var(--font-headings);
     font-size: 0.9rem;
+    text-align: initial;
 }
-#footer .infobox{
+#header .infobox{
     position-area: top;
 }
 .info+.infobox{
@@ -703,7 +728,7 @@ legend:hover>.infobox{
     top: calc(anchor(bottom) - var(--bxbdw) - var(--bxsh-offset));
     left: calc(anchor(center) - var(--pullw)/2);
     z-index:1;
-    
+    background-color: var(--colour-04);
 }
 
 @media (hover:hover){

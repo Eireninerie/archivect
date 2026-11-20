@@ -1,5 +1,6 @@
 <?php
 $pos ='.';
+$title = 'Resources';
 
 //sudo /opt/lampp/manager-linux-x64.run
 include($pos.'./php/header.php');

@@ -85,18 +85,19 @@ $('#testButton').click(function(){
     );
 });
 // not in use, to be removed ^^^
-
+if (window.matchMedia("(max-width: 63rem)").matches) {
+      $('#pull').removeClass('hiddenClass');
+      $('#pull').click(function(){
+         $('#Search').scrollTop( 0 );
+         $('#Search').toggleClass('collapse');
+      });
+   }
 $('#submitButton').click(function(){
    $searchheight = $('#Search').height();
    if (window.matchMedia("(min-width: 63rem)").matches) {
       $('#Search').height($searchheight);
    }else{
       $('#Search').scrollTop( 0 ).addClass('collapse');
-      $('#pull').removeClass('hiddenClass');
-      $('#pull').click(function(){
-         $('#Search').scrollTop( 0 );
-         $('#Search').toggleClass('collapse');
-      });
    }
    $("#errormsg").parent().remove();
    $results = $( "form" ).serialize(); //reduntant

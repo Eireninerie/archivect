@@ -9,11 +9,17 @@ include($pos.'./php/header.php');
 
 <div id='Search' class='boxed'>
     <h1>Soapboxes</h1>
+    <p>I did my BArch as a mature student so I have some feelings<sup>TM</sup> from seeing the dire straits of my coursemates. And also from the looks of the industry.</p>
+    <ol>
+        <a href='#union'><li>SAW</li></a>
+        <a href='#sleep'><li>Sleep. Please</li></a>
+    </ol>
 </div>
 <div>
-    <div class='boxed'>
-        <h3>Welp</h3>
-        <p>I did my BArch as a mature student so I have some feelings<sup>TM</sup> from seeing the dire straits of my coursemates. And also from the looks of the industry.</p>
+    <div class='boxed' id="union">
+        <h3>Join a union</h3>
+        <p>Did you know there's a <a href="https://www.sawtheunion.org/">UK union of architectural workers</a>?</p>
+        <p><i>boy</i> am I relieved it does exist. Our industry is very used to having a very individualistic culture. It's actually a little embarassing imo. You can be a student member, employed or unemployed; the only thing that disqualifies you is if you have a role involved in employing someone else.</p>
     </div>
     <div class='boxed' id="sleep">
         <h3>GO THE FUCK TO SLEEP</h3> (I'm not kidding)
@@ -35,11 +41,6 @@ include($pos.'./php/header.php');
         <p>Look, I get it, sometimes things happen and stuff slips away. But.</p>
         <p>The world won't end from one mark that's a bit lower than you'd like. If you're genuinely struggling to time manage on a regular basis, use this to figure out something that will actually work for you long-term. It's an investment. But if you keep crunching, all you're doing is developing a dependency on that and that dependency will hurt you.</p>
         If literally one student decides to reduce their all-nighters that will make this website entirely worth the work I've put into this entire project.
-    </div>
-    <div class='boxed' id="union">
-        <h3>Join a union</h3>
-        <p>Did you know there's a <a href="https://www.sawtheunion.org/">UK union of architectural workers</a>?</p>
-        <p><i>boy</i> am I relieved it does exist. Our industry is very used to having a very individualistic culture. It's actually a little embarassing imo. You can be a student member, employed or unemployed; the only thing that disqualifies you is if you have a role involved in employing someone else.</p>
     </div>
 </div>
 

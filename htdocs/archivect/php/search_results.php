@@ -51,11 +51,11 @@ function cardResults(){
 			if(!$row["logo"]){$row["logo"]='./assets/dot.svg';}
 			echo "
 				<div class='card boxed' id='".$row["ID"]." '>		
-				<h3> <a href='https://".$row["website"]."' alt='". $row["Company"]." website link' title='https://".$row["website"]."'>". $row["Company"]. "</a><span class='hiddenClass'>".$row["totalRating"]."</span></h3>
+				<h3> ". $row["Company"]. "<span class='hiddenClass'>".$row["totalRating"]."</span></h3>
 
 				<div class='cardDetails hiddenClass' id='".$row["ID"]."'>
 				
-				<h3><div class='logo'><img src='".$row["logo"]."'></div><b>". $row["Company"]. "</b><span></span><button type='button' class='exitcard'>x</button> </h3>
+				<h3><div class='logo'><img src='".$row["logo"]."'></div><b><a href='https://".$row["website"]."' alt='". $row["Company"]." website link' title='https://".$row["website"]."'>". $row["Company"]. "</a></b><span></span><button type='button' class='exitcard'>x</button> </h3>
 			";
 			if ($row["CompanySimple"] != NULL){echo "
 				<p>a.k.a.: ". $row["CompanySimple"]."</p>

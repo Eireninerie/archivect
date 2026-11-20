@@ -155,6 +155,7 @@ h1 {
     text-shadow:0.2rem 0.2rem var(--shadow);
     letter-spacing: 0.12em;
 }
+
 #header{
     position:fixed;
     inset: 1rem 1rem 1rem 1rem;
@@ -553,6 +554,7 @@ input[type=radio]+.infobox, legend>.infobox{
     column-gap:0rem;
 }
 
+
 #Search.collapse {
     overflow-y:hidden;
     max-height: 5.5rem;
@@ -561,6 +563,9 @@ input[type=radio]+.infobox, legend>.infobox{
 #Search.collapse *{
     margin-top:0;
     padding-top:0;
+}
+#Search *{
+    max-width:30rem;
 }
 
 .cardDetails >div li{

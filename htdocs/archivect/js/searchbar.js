@@ -88,10 +88,13 @@ $('#submitButton').click(function(){
    if (window.matchMedia("(min-width: 63rem)").matches) {
       $('#Search').height($searchheight);
    }else{
-      $('#Search').addClass('collapse');
+
+      $('#Search').scrollTop( 0 ).addClass('collapse');
       $('#pull').removeClass('hiddenClass');
       $('#pull').click(function(){
+         $('#Search').scrollTop( 0 );
          $('#Search').toggleClass('collapse');
+
       });
    }
    $("#errormsg").parent().remove();
@@ -110,24 +113,18 @@ $('#submitButton').click(function(){
             $('#Search').wrapInner('<div class="wrapped">').find('.wrapped').addClass('hiddenClass');
             $('#Search').prepend($content);
             $('#Search').find('.cardDetails').removeClass('hiddenClass');
-            $('#Search').find('.cardDetails').animate({"max-height": "100%"},600);
             $('.exitcard').click(function(){
                $('#Search').removeClass('collapse');
                $('#Search').find('.cardDetails ').remove();
                $('#Search').find('.wrapped').children().unwrap();
          });}
       
-         $('.card').click(function(){
-            $(this).cdShow();
-         });
-      
-         $('.card').hover(function(){
-            $(this).cdShow();
-         },function(){
-          
-         }); 
-      
-      }
+            $('.card').click(function(){
+               
+               $(this).cdShow();
+            $('#Search').find('.cardDetails').animate({"max-height": "100%"},600);
+            });
+            }
    );
 });
 

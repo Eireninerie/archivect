@@ -601,6 +601,7 @@ cursor: default;
     z-index:0;
 }
 .card{
+    cursor: pointer;
     --bxsh-offset: 3px;
     width:calc(var(--cardw) + var(--bxsh-offset));
     height:calc(5rem + var(--bxsh-offset));
@@ -635,6 +636,7 @@ cursor: default;
     left:-10px;
 }
 .card h3, .cardDetails h3{
+    position: sticky;
     width:99%;
     height: 2.2em;
   display: flex;
@@ -697,7 +699,7 @@ legend:hover>.infobox{
     box-sizing: border-box;
     overflow: hidden;
     position-anchor: --pull;
-    position:absolute;
+    position:fixed;
     top: calc(anchor(bottom) - var(--bxbdw) - var(--bxsh-offset));
     left: calc(anchor(center) - var(--pullw)/2);
     z-index:1;
